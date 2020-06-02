@@ -24,9 +24,6 @@ public class TheArena : MonoBehaviour {
     int Sword = 0;
     int Defend = 0;
     int Check = 0;
-    bool SwordTwoCheck = false;
-    bool DefendTwoCheck = false;
-    bool CheckTwoCheck = false;
     int kmjuyhghmgjhmgjuy = 0;
 
     void Awake () {

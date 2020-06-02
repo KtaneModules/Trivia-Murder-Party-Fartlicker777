@@ -147,6 +147,7 @@ public class Dictation : MonoBehaviour {
         AidsMongerer.color = new Color32(255,0,0,255);
         StartCoroutine(MustDetonate());
         StartCoroutine(Swan());
+        Debug.LogFormat("[Dictation #{0}] DETONATION SEQUENCE INITIATED!", moduleId);
         FuckAids = true;
       }
       else if (Aids[fuck][Ineedtopiss].ToLower() == CheckAids.ToLower()) {
@@ -156,6 +157,7 @@ public class Dictation : MonoBehaviour {
       }
       else {
         GetComponent<KMBombModule>().HandleStrike();
+        Debug.LogFormat("[Dictation #{0}] You submitted {1}. Strike, fasiofjnaldnfal.", moduleId, CheckAids);
         AidsMongerer.text = "Incorrect";
         TacoBell.text = "!";
         CheckAids = "";
@@ -199,6 +201,7 @@ public class Dictation : MonoBehaviour {
       Fanfare += 1f;
       if (Fanfare >= 150f) {
         Audio.PlaySoundAtTransform("Dick", transform);
+        Debug.LogFormat("[Dictation #{0}] You submitted the correct word. Module disarmed.", moduleId);
         GetComponent<KMBombModule>().HandlePass();
         TacoBell.text = "404";
         AidsMongerer.text = "System\nOverloaded";
@@ -213,6 +216,7 @@ public class Dictation : MonoBehaviour {
         Fanfare -= .5f;
       }
         GetComponent<KMBombModule>().HandleStrike();
+        Debug.LogFormat("[Dictation #{0}] SYSTEM FAILURE!", moduleId);
     }
     }
     IEnumerator Swan(){
