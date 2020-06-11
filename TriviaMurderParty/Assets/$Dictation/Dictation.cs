@@ -109,6 +109,8 @@ public class Dictation : MonoBehaviour {
     }
 
     void KeyPress (KMSelectable Key) {
+      Key.AddInteractionPunch();
+      Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Key.transform);
       if (moduleSolved == true || FuckAids == true) {
         return;
       }
@@ -129,6 +131,8 @@ public class Dictation : MonoBehaviour {
       }
     }
     void BackAssCrackPress(){
+      BackAssCrack.AddInteractionPunch();
+      Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, BackAssCrack.transform);
       if (moduleSolved == true || FuckAids == true) {
         return;
       }
@@ -138,6 +142,8 @@ public class Dictation : MonoBehaviour {
       }
     }
     void DowniePress(){
+      Lefttard.AddInteractionPunch();
+      Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Lefttard.transform);
       if (moduleSolved == true || FuckAids == true) {
         return;
       }

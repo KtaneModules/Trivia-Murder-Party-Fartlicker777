@@ -428,7 +428,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1202281066709202}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.0474, y: 0.016, z: 0.0315}
+  m_LocalPosition: {x: 0.0465, y: 0.016, z: 0.0299}
   m_LocalScale: {x: 0.00113, y: 0.001500001, z: 0.7500005}
   m_Children: []
   m_Father: {fileID: 4257340207950476}
@@ -533,7 +533,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 52f77f57b7e447e4781e5f16b593c7c8, type: 2}
+  - {fileID: 2100000, guid: ea7383a11cc28a24cbea15073b68bf56, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -959,7 +959,7 @@ TextMesh:
   m_FontSize: 144
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 8b541d6964558c647bb0055fbcdfc116, type: 3}
+  m_Font: {fileID: 12800000, guid: 1ebe1d96973a920409b439b3a0e2bb63, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - GUI/KT 3D Text Diffuse
+  - GUI/KT 3D Text
 --- !u!114 &114785160760959938
 MonoBehaviour:
   m_ObjectHideFlags: 1

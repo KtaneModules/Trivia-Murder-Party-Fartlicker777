@@ -39,6 +39,8 @@ public class TheArena : MonoBehaviour {
     }
 
     void ButtonPress(KMSelectable Button) {
+      Button.AddInteractionPunch();
+      Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Button.transform);
       for (int i = 0; i < 3; i++) {
         if (Button == Weed[i]) {
           if (Button == Weed[(kmjuyhghmgjhmgjuy + 1) % 3]) {
