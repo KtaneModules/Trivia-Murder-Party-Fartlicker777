@@ -25,6 +25,7 @@ public class TheArena : MonoBehaviour {
     int Defend = 0;
     int Check = 0;
     int kmjuyhghmgjhmgjuy = 0;
+    string[] Logass = {"attack","defend","grab"};
 
     void Awake () {
         moduleId = moduleIdCounter++;
@@ -45,9 +46,11 @@ public class TheArena : MonoBehaviour {
         if (Button == Weed[i]) {
           if (Button == Weed[(kmjuyhghmgjhmgjuy + 1) % 3]) {
             GetComponent<KMBombModule>().HandlePass();
+            Debug.LogFormat("[Mental Math #{0}] You pressed the {1} button. Module disarmed.", moduleId, Logass[i]);
           }
           else {
             GetComponent<KMBombModule>().HandleStrike();
+            Debug.LogFormat("[Mental Math #{0}] You pressed the {1} button. Storked.", moduleId, Logass[i]);
             StartCoroutine(Fuck());
           }
         }
@@ -136,32 +139,56 @@ public class TheArena : MonoBehaviour {
       }
       if (Sword > Defend && Sword > Check) { //Sword beats all
         kmjuyhghmgjhmgjuy = 0;
-        Debug.LogFormat("[Mental Math #{0}] The enemy is attacking.", moduleId);
+        Debug.LogFormat("[Mental Math #{0}] The enemy is attacking. You should defend.", moduleId);
       }
       else if (Defend > Sword && Defend > Check) { //Defend beats all
         kmjuyhghmgjhmgjuy = 1;
-        Debug.LogFormat("[Mental Math #{0}] The enemy is defending.", moduleId);
+        Debug.LogFormat("[Mental Math #{0}] The enemy is defending. You should grab loot.", moduleId);
       }
       else if (Check > Defend && Check > Sword) { //Check beats all
         kmjuyhghmgjhmgjuy = 2;
-        Debug.LogFormat("[Mental Math #{0}] The enemy is grabbing loot.", moduleId);
+        Debug.LogFormat("[Mental Math #{0}] The enemy is grabbing loot. You should attack.", moduleId);
       }
       else if (Sword >= Defend && Sword != Check) { //Sword is tied with defend
         kmjuyhghmgjhmgjuy = 2;
-        Debug.LogFormat("[Mental Math #{0}] The enemy is grabbing loot.", moduleId);
+        Debug.LogFormat("[Mental Math #{0}] The enemy is grabbing loot. You should attack.", moduleId);
       }
       else if (Sword >= Check && Defend != Check) { //Sword is tied with check
         kmjuyhghmgjhmgjuy = 1;
-        Debug.LogFormat("[Mental Math #{0}] The enemy is defending.", moduleId);
+        Debug.LogFormat("[Mental Math #{0}] The enemy is defending. You should grab loot.", moduleId);
       }
       else if (Defend >= Check && Sword != Check) { //Defend is tied with check
         kmjuyhghmgjhmgjuy = 0;
-        Debug.LogFormat("[Mental Math #{0}] The enemy is attacking.", moduleId);
+        Debug.LogFormat("[Mental Math #{0}] The enemy is attacking. You should defend.", moduleId);
       }
       else {
         kmjuyhghmgjhmgjuy = 1;
-        Debug.LogFormat("[Mental Math #{0}] There was a tie, you should grab the money.", moduleId);
+        Debug.LogFormat("[Mental Math #{0}] There was a three-way tie, you should grab the money.", moduleId);
       }
       yield return null;
+    }
+    #pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Use !{0} attack/defend/grab to press that corresponding button.";
+    #pragma warning restore 414
+    IEnumerator ProcessTwitchCommand(string command){
+      if (Regex.IsMatch(command, @"^\s*attack\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)){
+        yield return null;
+        Weed[0].OnInteract();
+        yield break;
+      }
+      else if (Regex.IsMatch(command, @"^\s*defend\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)){
+        yield return null;
+        Weed[1].OnInteract();
+        yield break;
+      }
+      else if (Regex.IsMatch(command, @"^\s*grab\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)){
+        yield return null;
+        Weed[2].OnInteract();
+        yield break;
+      }
+      else {
+        yield return "sendtochaterror The specified action could not be performed.";
+        yield break;
+      }
     }
 }

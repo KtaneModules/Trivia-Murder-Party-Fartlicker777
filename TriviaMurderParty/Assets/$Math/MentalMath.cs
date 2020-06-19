@@ -181,4 +181,38 @@ public class MentalMath : MonoBehaviour {
       yield return new WaitForSeconds(.00833333f);
       StartCoroutine(FuckerFuckingFuck());
     }
+    #pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Use !{0} crank to start. Use !{0} # to press the button from top to bottom.";
+    #pragma warning restore 414
+    IEnumerator ProcessTwitchCommand(string command){
+      if (Regex.IsMatch(command, @"^\s*crank\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)){
+        yield return null;
+        WeedChungis.OnInteract();
+        yield break;
+      }
+      else if (Regex.IsMatch(command, @"^\s*1\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
+        yield return null;
+        ModuleRicks[0].OnInteract();
+        yield break;
+      }
+      else if (Regex.IsMatch(command, @"^\s*2\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
+        yield return null;
+        ModuleRicks[1].OnInteract();
+        yield break;
+      }
+      else if (Regex.IsMatch(command, @"^\s*3\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
+        yield return null;
+        ModuleRicks[2].OnInteract();
+        yield break;
+      }
+      else if (Regex.IsMatch(command, @"^\s*4\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
+        yield return null;
+        ModuleRicks[3].OnInteract();
+        yield break;
+      }
+      else {
+        yield return "sendtochaterror I don't understand!";
+        yield break;
+      }
+    }
 }

@@ -71,7 +71,7 @@ public class Dictation : MonoBehaviour {
       new string[29]{"Ill" , "have" , "two" , "number" , "nines" , "a" , "number" , "nine" , "large" , "a" , "number" , "six" , "with" , "extra" , "dip" , "a" , "number" , "seven" , "two" , "number" , "forty" , "fives" , "one" , "with" , "cheese" , "and" , "a" , "large" , "soda"},
       new string[46]{"Use" , "water" , "Still" , "use" , "water" , "What" , "No" , "dont" , "put" , "your" , "hands" , "in" , "Dont" , "wash" , "ever" , "thirty" , "hot" , "Just" , "use" , "thirty" , "hot" , "Stop" , "Enough" , "Just" , "use" , "thirty" , "Why" , "Dont" , "wash" , "tennis" , "balls" , "Stop" , "it" , "NO" , "TENNIS" , "BALLS" , "Fucks" , "sake" , "Stupid" , "Too" , "many" , "tennis" , "balls" , "No" , "christmas" , "crackers"},
       new string[36]{"HI" , "IM" , "GUY" , "FIERI" , "I" , "AM" , "SHOUTING" , "FROM" , "A" , "CAR" , "ABOUT" , "A" , "NICE" , "RESTAURANT" , "Guy" , "drives" , "whilst" , "wearing" , "sunglasses" , "He" , "informs" , "you" , "that" , "he" , "is" , "rolling" , "out" , "to" , "find" , "Americas" , "best" , "Diners" , "Drive" , "ins" , "and" , "Dives"},
-      new string[100]{"Fuck" , "you" , "whore" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "like" , "Fortnite" , "We" , "fucking" , "LOVE" , "FORTNITE"},
+      new string[26]{"You","are","great","When","is","your","violin","concert","June","fifteenth","Whats","the","day","today","June","eleventh","Oh","this","Friday","Can","you","come","to","my","concert","Sure"},
       new string[26]{"Can" , "you" , "do" , "Red" , "Cipher" , "Can" , "you" , "do" , "Bamboozled" , "Again" , "Can" , "you" , "do" , "misery" , "squares" , "You" , "will" , "get" , "bamboozled" , "and" , "have" , "to" , "do" , "the" , "Luna" , "Platurion"},
       new string[44]{"THE" , "SECURITY" , "SYSTEM" , "TAKES" , "CONTROL" , "OF" , "SQUIDWARDS" , "HOUSE" , "AND" , "BEGINS" , "ATTACKING" , "THE" , "CITY" , "LEAVING" , "THE" , "MAYOR" , "TO" , "GIVE" , "SQUIDWARD" , "COMMUNITY" , "SERVICE" , "FOR" , "THE" , "DAMAGE" , "HE" , "CAUSED" , "EVEN" , "THOUGH" , "SPONGEBOB" , "AND" , "PATRICK" , "WERE" , "IN" , "HIS" , "HOUSE" , "THE" , "WHOLE" , "FUCKING" , "TIME" , "AND" , "WERE" , "RESPONSIBLE" , "FOR" , "EVERYTHING"},
       new string[74]{"Peter" , "is" , "refused" , "entry" , "to" , "a" , "roller" , "coaster" , "because" , "hes" , "too" , "overweight" , "After" , "Quagmire" , "and" , "Joe" , "convince" , "him" , "to" , "go" , "on" , "a" , "diet" , "Peter" , "agrees" , "and" , "begins" , "by" , "trying" , "a" , "rice" , "cake" , "because" , "somebody" , "told" , "me" , "this" , "is" , "a" , "really" , "good" , "way" , "to" , "start" , "your" , "diet" , "If" , "you" , "couldnt" , "guess" , "he" , "doesnt" , "really" , "like" , "it" , "We" , "dont" , "either" , "In" , "fact" , "rice" , "cakes" , "are" , "one" , "of" , "the" , "twenty" , "five" , "Worst" , "Healthy" , "Snacks" , "for" , "Weight" , "Loss"},
@@ -270,5 +270,64 @@ public class Dictation : MonoBehaviour {
       yield return new WaitForSeconds(.0765f);
       ineedanother += 1;
       StartCoroutine(Swan());
+    }
+    #pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Use (!{0} begin) to start the message. Use (!{0} submit XXXX) to submit the word.";
+    #pragma warning restore 414
+
+    IEnumerator ProcessTwitchCommand(string command){
+      int DumbassCheckass = 0;
+      if (Regex.IsMatch(command, @"^\s*begin\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
+        yield return null;
+        BackAssCrackPress();
+        yield break;
+      }
+      command = command.Trim();
+      string[] parameters = command.Split(' ');
+      if (Regex.IsMatch(parameters[0], @"^\s*submit\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
+        yield return null;
+        if (parameters.Length > 2) {
+          yield return "sendtochaterror Too many words!";
+        }
+        else if (parameters.Length == 2) {
+          if (parameters[0].ToLower() == "submit") {
+            for (int i = 0; i < parameters[1].Length; i++) {
+              for (int j = 0; j < 26; j++) {
+                if (parameters[1][i].ToString().ToUpper() == Namtar[j].ToString().ToUpper()) {
+                  DumbassCheckass += 1;
+                }
+              }
+            }
+            Debug.Log(DumbassCheckass);
+            Debug.Log(parameters[1].Length);
+            if (DumbassCheckass == parameters[1].Length) {
+              for (int i = 0; i < parameters[1].Length; i++) {
+                for (int j = 0; j < 26; j++) {
+                  if (parameters[1][i].ToString().ToUpper() == Namtar[j].ToString()) {
+                    SmallAssholes[j].OnInteract();
+                    yield return new WaitForSeconds(.1f);
+                  }
+                }
+              }
+            }
+            else {
+              yield return "sendtochaterror Invalid Character!";
+              CheckAids = "";
+              AidsMongerer.text = CheckAids;
+              yield break;
+            }
+            DowniePress();
+            if (Aids[fuck][Ineedtopiss].ToLower() == CheckAids.ToLower()) {
+              yield return "solve";
+            }
+          }
+          else {
+            yield return "sendtochaterror Invalid command!";
+          }
+        }
+        else if (parameters.Length < 2) {
+          yield return "sendtochaterror Too little words!";
+        }
+      }
     }
 }

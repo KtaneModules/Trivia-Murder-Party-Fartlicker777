@@ -48,12 +48,16 @@ public class Jailbreak : MonoBehaviour {
     }
 
     void PenisPress(KMSelectable Penis) {
+      Audio.PlaySoundAtTransform("Clack", Penis.transform);
       Penis.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Penis.transform);
       if (No == true) {
         return;
       }
       for (int i = 0; i < 27; i++) {
+        if (moduleSolved == true) {
+          return;
+        }
         if (IWillTimeYourDeath == false) {
           StartCoroutine(SoonThatAttitudeWillBeYourDoom());
           StartCoroutine(hgjymgjuyhkhgjymijuyhkhftjuyhjuymgfhjvmghgjmfhgjmfnhgjymfnhgjhgfnhgfjygfhhtjuyhmgfjyhjuymghgjymfhmgnbjmgnbjhnbhvmnFUCKWEEDhgfjyhcgnbhjymgfhmgnjhjymghmjgnhmgnj());
@@ -71,6 +75,7 @@ public class Jailbreak : MonoBehaviour {
         }
         else if (Penis == Lomp[i] && NuggetInABiscuit.Length < 4) {
           GetComponent<KMBombModule>().HandleStrike();
+          Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
           NotEmotiguy.text = "Query";
           NuggetInABiscuit = "";
           NotEmotiguy.text = NuggetInABiscuit;
@@ -92,7 +97,7 @@ public class Jailbreak : MonoBehaviour {
               Debug.LogFormat("[Jailbreak #{0}] You queried {1}, but that is not a word!", moduleId, NuggetInABiscuit);
             }
             else {
-              Debug.LogFormat("[Jailbreak #{0}] You queried {1}. It shows {2}{3}{4}{5}.", moduleId, NuggetInABiscuit, LogBullshit[0], LogBullshit[1], LogBullshit[2], LogBullshit[3]);
+              Debug.LogFormat("[Jailbreak #{0}] You queried {1}. It shows {2} {3} {4} {5}.", moduleId, NuggetInABiscuit, LogBullshit[0], LogBullshit[1], LogBullshit[2], LogBullshit[3]);
             }
             NuggetInABiscuit = "";
             NotEmotiguy.text = "Query";
@@ -125,6 +130,7 @@ public class Jailbreak : MonoBehaviour {
         yield return new WaitForSecondsRealtime(5f);
         No = false;
         GetComponent<KMBombModule>().HandleStrike();
+        Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
         StartCoroutine(IWillPurgeTheWeak());
         IWillTimeYourDeath = false;
         Cock = 90;
@@ -181,5 +187,51 @@ public class Jailbreak : MonoBehaviour {
       UselessShit.text = "?!";
       Debug.LogFormat("[Jailbreak #{0}] You guessed the word. Module disarmed.", moduleId);
       GetComponent<KMBombModule>().HandlePass();
+      Audio.PlaySoundAtTransform("DooDOodoodoodooDOoooooo", transform);
+      moduleSolved = true;
+    }
+    #pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Use !{0} XXXX to guess a word.";
+    #pragma warning restore 414
+    IEnumerator ProcessTwitchCommand(string command){
+      bool[] Dumbass = {false,false,false,false};
+      yield return null;
+      if (command.Length > 4) {
+        yield return "sendtochaterror Too big a word!";
+      }
+      else if (command.Length < 4) {
+        GetComponent<KMBombModule>().HandleStrike();
+        Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
+        yield break;
+      }
+      else {
+        for (int i = 0; i < command.Length; i++) {
+          for (int j = 0; j < 26; j++) {
+            if (command[i].ToString().ToUpper() == MyDickisSoLongitStretchesFromAtoZ[j].ToString().ToUpper()) {
+              Dumbass[i] = true;
+            }
+            Debug.Log(Dumbass[i]);
+            Debug.Log(i);
+          }
+        }
+        if (Dumbass[0] == true && Dumbass[1] == true && Dumbass[2] == true && Dumbass[3] == true) {
+          for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 26; j++) {
+              if (command[i].ToString().ToUpper() == MyDickisSoLongitStretchesFromAtoZ[j].ToString().ToUpper()) {
+                Lomp[j].OnInteract();
+                Dumbass[i] = false;
+              }
+            }
+          }
+          Lomp[26].OnInteract();
+          if (command.ToUpper() == Yanked.ToUpper()) {
+            yield return "solve";
+          }
+          }
+          else {
+            yield return "sendtochaterror Invalid Character!";
+            yield break;
+          }
+      }
     }
 }
