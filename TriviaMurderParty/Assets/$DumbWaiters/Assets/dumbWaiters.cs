@@ -310,11 +310,15 @@ public class dumbWaiters : MonoBehaviour
         if (cmd == "left")
         {
             yield return null;
+            yield return "strike";
+            yield return "solve";
             buttons[0].OnInteract();
         }
         else if (cmd == "right")
         {
             yield return null;
+            yield return "strike";
+            yield return "solve";
             buttons[1].OnInteract();
         }
         yield break;
