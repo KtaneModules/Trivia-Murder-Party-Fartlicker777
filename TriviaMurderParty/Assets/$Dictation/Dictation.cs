@@ -91,6 +91,9 @@ public class Dictation : MonoBehaviour {
     bool FuckAids = false;
     bool ineedabooleanname = false;
     int ineedanother = 0;
+#pragma warning disable 414
+    bool TwitchPlaysActive;
+#pragma warning restore 414
 
     void Awake () {
         moduleId = moduleIdCounter++;
@@ -221,7 +224,10 @@ public class Dictation : MonoBehaviour {
       if (Fanfare != .5f) {
         Fanfare -= .5f;
       }
-        GetComponent<KMBombModule>().HandleStrike();
+            if (!TwitchPlaysActive)
+            { 
+                GetComponent<KMBombModule>().HandleStrike();
+            }
         Debug.LogFormat("[Dictation #{0}] SYSTEM FAILURE!", moduleId);
     }
     }
@@ -292,7 +298,12 @@ public class Dictation : MonoBehaviour {
         else if (parameters.Length == 2) {
           if (parameters[0].ToLower() == "submit") {
             for (int i = 0; i < parameters[1].Length; i++) {
-              for (int j = 0; j < 26; j++) {
+                        if (parameters[1].ToString().EqualsIgnoreCase("detonate"))
+                        {
+                            yield return "antitroll Nice try, asshole.";
+                            yield return new string[] { "detonate" };
+                        }
+                        for (int j = 0; j < 26; j++) {
                 if (parameters[1][i].ToString().ToUpper() == Namtar[j].ToString().ToUpper()) {
                   DumbassCheckass += 1;
                 }
