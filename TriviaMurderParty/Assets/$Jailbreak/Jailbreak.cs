@@ -220,6 +220,7 @@ public class Jailbreak : MonoBehaviour {
               if (command[i].ToString().ToUpper() == MyDickisSoLongitStretchesFromAtoZ[j].ToString().ToUpper()) {
                 Lomp[j].OnInteract();
                 Dumbass[i] = false;
+                yield return new WaitForSeconds(.01f);
               }
             }
           }
