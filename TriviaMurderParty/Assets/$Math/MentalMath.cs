@@ -41,18 +41,15 @@ public class MentalMath : MonoBehaviour {
 
     }
 
-    void Start () {
-      Debug.LogFormat("[Mental Math #{0}] Ignore the first operation shown in the log, I have no idea why it happens but it's not shown on the mod. The rest are shown on the mod.", moduleId);
-    }
     void ChungusPress(){
       if (moduleSolved == true || poggers == true) {
         return;
       }
       Audio.PlaySoundAtTransform("Trivia Murder Party Math Weasel Timer", transform);
       PenisPress();
-      StartCoroutine(WeedChungus());
       StartCoroutine(FuckerFuckingFuck());
     }
+
     void ButtonPress(KMSelectable Button){
       for (int i = 0; i < 4; i++) {
         if (Button == ModuleRicks[i]) {
@@ -71,9 +68,8 @@ public class MentalMath : MonoBehaviour {
         }
       }
     }
+
     void PenisPress(){
-      Debug.Log(Weed);
-      Debug.Log(Weedtwo);
       if (poggers == true) {
         return;
       }
@@ -104,6 +100,7 @@ public class MentalMath : MonoBehaviour {
       Debug.LogFormat("[Mental Math #{0}] {1} module(s) need to be solved.", moduleId, ThresshyBoy);
       StartCoroutine(WeedChungus());
     }
+
     IEnumerator WeedChungus(){
       poggers = true;
       integer = UnityEngine.Random.Range(0,16);
@@ -137,6 +134,7 @@ public class MentalMath : MonoBehaviour {
       Fuckers[sugna[3]].text = (integer + z).ToString();
       yield return null;
     }
+
     void Update(){
       Weed = Bomb.GetSolvedModuleNames().Count;
       Weedtwo = Bomb.GetSolvableModuleNames().Count;
@@ -151,6 +149,7 @@ public class MentalMath : MonoBehaviour {
         }
       }
     }
+
     IEnumerator Check(){
       for (int i = 0; i < 4; i++) {
         Fuckers[i].text = "";
@@ -176,14 +175,17 @@ public class MentalMath : MonoBehaviour {
         fucker = 0;
       }
     }
+
     IEnumerator FuckerFuckingFuck(){
       Chungus.transform.Rotate(5.0f, 0.0f, 0.0f, Space.Self);
       yield return new WaitForSeconds(.00833333f);
       StartCoroutine(FuckerFuckingFuck());
     }
+
     #pragma warning disable 414
     private readonly string TwitchHelpMessage = @"Use !{0} crank to start. Use !{0} # to press the button from top to bottom.";
     #pragma warning restore 414
+
     IEnumerator ProcessTwitchCommand(string command){
       if (Regex.IsMatch(command, @"^\s*crank\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)){
         yield return null;
