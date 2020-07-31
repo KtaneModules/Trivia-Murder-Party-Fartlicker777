@@ -25,6 +25,9 @@ public class Jailbreak : MonoBehaviour {
     bool IWillTimeYourDeath = false;
     bool shutup = false;
     bool No = false;
+    #pragma warning disable 0649
+    bool TwitchPlaysActive;
+    #pragma warning restore 0649
 
     static int moduleIdCounter = 1;
     int moduleId;
@@ -36,10 +39,11 @@ public class Jailbreak : MonoBehaviour {
         foreach (KMSelectable Penis in Lomp) {
             Penis.OnInteract += delegate () { PenisPress(Penis); return false; };
         }
+        GetComponent<KMBombModule>().OnActivate += delegate () {Activate(); };
     }
 
     // Use this for initialization
-    void Start () {
+    void Activate () {
       for (int i = 0; i < 4; i++) {
         Aids[i].text = "_";
       }
@@ -51,11 +55,11 @@ public class Jailbreak : MonoBehaviour {
       Audio.PlaySoundAtTransform("Clack", Penis.transform);
       Penis.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Penis.transform);
-      if (No == true) {
+      if (No) {
         return;
       }
       for (int i = 0; i < 27; i++) {
-        if (moduleSolved == true) {
+        if (moduleSolved) {
           return;
         }
         if (IWillTimeYourDeath == false) {
@@ -88,7 +92,7 @@ public class Jailbreak : MonoBehaviour {
             }
           }
             for (int j = 0; j < 4; j++) {
-              if (NuggetInABiscuit[j].ToString().ToLower() == Yanked[j].ToString() && Check == true) {
+              if (NuggetInABiscuit[j].ToString().ToLower() == Yanked[j].ToString() && Check) {
                 Aids[j].text = NuggetInABiscuit[j].ToString();
               }
             }
@@ -108,6 +112,10 @@ public class Jailbreak : MonoBehaviour {
     IEnumerator IWillPurgeTheWeak(){
       Fuck = UnityEngine.Random.Range(0,AidsList.Phrases.Count());
       Yanked = AidsList.Phrases[Fuck];
+      while (TwitchPlaysActive && Yanked.ToUpper() == "HELP") {
+        Fuck = UnityEngine.Random.Range(0,AidsList.Phrases.Count());
+        Yanked = AidsList.Phrases[Fuck];
+      }
       Debug.LogFormat("[Jailbreak #{0}] The generated word is {1}.", moduleId, Yanked);
       yield return null;
     }
@@ -151,7 +159,7 @@ public class Jailbreak : MonoBehaviour {
     IEnumerator hgjymgjuyhkhgjymijuyhkhftjuyhjuymgfhjvmghgjmfhgjmfnhgjymfnhgjhgfnhgfjygfhhtjuyhmgfjyhjuymghgjymfhmgnbjmgnbjhnbhvmnFUCKWEEDhgfjyhcgnbhjymgfhmgnjhjymghmjgnhmgnj(){
       yield return new WaitForSeconds(0.2f);
       Audio.PlaySoundAtTransform("tick", transform);
-      if (shutup == true) {
+      if (shutup) {
         yield return null;
       }
       else {
@@ -225,7 +233,7 @@ public class Jailbreak : MonoBehaviour {
             }
           }
         }
-        if (Dumbass[0] == true && Dumbass[1] == true && Dumbass[2] == true && Dumbass[3] == true) {
+        if (Dumbass[0] && Dumbass[1] && Dumbass[2] && Dumbass[3]) {
           for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 26; j++) {
               if (command[i].ToString().ToUpper() == MyDickisSoLongitStretchesFromAtoZ[j].ToString().ToUpper()) {

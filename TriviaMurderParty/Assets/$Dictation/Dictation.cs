@@ -112,7 +112,7 @@ public class Dictation : MonoBehaviour {
     void KeyPress (KMSelectable Key) {
       Key.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Key.transform);
-      if (moduleSolved == true || FuckAids == true) {
+      if (moduleSolved || FuckAids) {
         return;
       }
       Audio.PlaySoundAtTransform("Type3", transform);
@@ -134,7 +134,7 @@ public class Dictation : MonoBehaviour {
     void BackAssCrackPress(){
       BackAssCrack.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, BackAssCrack.transform);
-      if (moduleSolved == true || FuckAids == true) {
+      if (moduleSolved || FuckAids) {
         return;
       }
       if (AidsCheck == false) {
@@ -145,7 +145,7 @@ public class Dictation : MonoBehaviour {
     void DowniePress(){
       Lefttard.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Lefttard.transform);
-      if (moduleSolved == true || FuckAids == true) {
+      if (moduleSolved || FuckAids) {
         return;
       }
       if (CheckAids == "DETONATE") {

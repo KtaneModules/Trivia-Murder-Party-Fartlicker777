@@ -250,8 +250,8 @@ public class Chalices : MonoBehaviour {
         Conditions[19] = true;
         Debug.LogFormat("[Chalices #{0}] Z's condition is true.", moduleId);
       }
-      if (Conditions[0] == true && Conditions[1] == true && Conditions[2] == true &&
-      Conditions[3] == true && Conditions[4] == true && Conditions[5] == true && Conditions[6] == true && Conditions[7] == true && Conditions[8] == true && Conditions[9] == true) {
+      if (Conditions[0] && Conditions[1] && Conditions[2] &&
+      Conditions[3] && Conditions[4] && Conditions[5] && Conditions[6] && Conditions[7] && Conditions[8] && Conditions[9]) {
         AnswerToIsAmazing[0] = true;
         Debug.LogFormat("[Chalices #{0}] There has been a gridlock, select the first cup.", moduleId);
         return;
@@ -293,12 +293,12 @@ public class Chalices : MonoBehaviour {
     }
 
     void SlendermanPress(KMSelectable Slenderman) {
-      if (Active == true) {
+      if (Active) {
         return;
       }
       for (int i = 0; i < 8; i++) {
         if (Slenderman == LittleHerobrineIAmCummingInYourMom[i]) {
-          if (AnswerToIsAmazing[i] == true) {
+          if (AnswerToIsAmazing[i]) {
             Active = true;
             StartCoroutine(Good());
             StartCoroutine(JustLikeDad(i));
@@ -376,11 +376,11 @@ public class Chalices : MonoBehaviour {
     }
 
     void InnerA(){
-      if (Conditions[0] == true) {
+      if (Conditions[0]) {
         InnerB();
         Debug.LogFormat("[Chalices #{0}] Going to Inner B.", moduleId);
       }
-      else if (BlackConditions[0] == true) {
+      else if (BlackConditions[0]) {
         OuterA();
         Debug.LogFormat("[Chalices #{0}] Going to Outer A.", moduleId);
       }
@@ -391,11 +391,11 @@ public class Chalices : MonoBehaviour {
     }
 
     void InnerB(){
-      if (Conditions[1] == true) {
+      if (Conditions[1]) {
         InnerG();
         Debug.LogFormat("[Chalices #{0}] Going to Inner G.", moduleId);
       }
-      else if (BlackConditions[1] == true) {
+      else if (BlackConditions[1]) {
         OuterB();
         Debug.LogFormat("[Chalices #{0}] Going to Outer B.", moduleId);
       }
@@ -406,11 +406,11 @@ public class Chalices : MonoBehaviour {
     }
 
     void InnerC(){
-      if (Conditions[2] == true) {
+      if (Conditions[2]) {
         InnerA();
         Debug.LogFormat("[Chalices #{0}] Going to Inner A.", moduleId);
       }
-      else if (BlackConditions[2] == true) {
+      else if (BlackConditions[2]) {
         OuterE();
         Debug.LogFormat("[Chalices #{0}] Going to Outer E.", moduleId);
       }
@@ -421,11 +421,11 @@ public class Chalices : MonoBehaviour {
     }
 
     void InnerD(){
-      if (Conditions[3] == true) {
+      if (Conditions[3]) {
         InnerF();
         Debug.LogFormat("[Chalices #{0}] Going to Inner F.", moduleId);
       }
-      else if (BlackConditions[3] == true) {
+      else if (BlackConditions[3]) {
         OuterD();
         Debug.LogFormat("[Chalices #{0}] Going to Outer D.", moduleId);
       }
@@ -436,11 +436,11 @@ public class Chalices : MonoBehaviour {
     }
 
     void InnerE(){
-      if (Conditions[4] == true) {
+      if (Conditions[4]) {
         InnerH();
         Debug.LogFormat("[Chalices #{0}] Going to Inner H.", moduleId);
       }
-      else if (BlackConditions[4] == true) {
+      else if (BlackConditions[4]) {
         OuterH();
         Debug.LogFormat("[Chalices #{0}] Going to Outer H.", moduleId);
       }
@@ -451,11 +451,11 @@ public class Chalices : MonoBehaviour {
     }
 
     void InnerF(){
-      if (Conditions[5] == true) {
+      if (Conditions[5]) {
         InnerE();
         Debug.LogFormat("[Chalices #{0}] Going to Inner E.", moduleId);
       }
-      else if (BlackConditions[5] == true) {
+      else if (BlackConditions[5]) {
         OuterF();
         Debug.LogFormat("[Chalices #{0}] Going to Outer F.", moduleId);
       }
@@ -466,11 +466,11 @@ public class Chalices : MonoBehaviour {
     }
 
     void InnerG(){
-      if (Conditions[6] == true) {
+      if (Conditions[6]) {
         InnerD();
         Debug.LogFormat("[Chalices #{0}] Going to Inner D.", moduleId);
       }
-      else if (BlackConditions[6] == true) {
+      else if (BlackConditions[6]) {
         OuterG();
         Debug.LogFormat("[Chalices #{0}] Going to Outer G.", moduleId);
       }
@@ -481,11 +481,11 @@ public class Chalices : MonoBehaviour {
     }
 
     void InnerH(){
-      if (Conditions[7] == true) {
+      if (Conditions[7]) {
         InnerC();
         Debug.LogFormat("[Chalices #{0}] Going to Inner C.", moduleId);
       }
-      else if (BlackConditions[7] == true) {
+      else if (BlackConditions[7]) {
         OuterC();
         Debug.LogFormat("[Chalices #{0}] Going to Outer C.", moduleId);
       }
@@ -496,7 +496,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void OuterA(){
-      if (Conditions[0] == true) {
+      if (Conditions[0]) {
         OuterB();
         Debug.LogFormat("[Chalices #{0}] Going to Outer B.", moduleId);
       }
@@ -507,7 +507,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void OuterB(){
-      if (Conditions[1] == true) {
+      if (Conditions[1]) {
         OuterG();
         Debug.LogFormat("[Chalices #{0}] Going to Outer G.", moduleId);
       }
@@ -518,7 +518,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void OuterC(){
-      if (Conditions[2] == true) {
+      if (Conditions[2]) {
         OuterE();
         Debug.LogFormat("[Chalices #{0}] Going to Outer E.", moduleId);
       }
@@ -529,7 +529,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void OuterD(){
-      if (Conditions[3] == true) {
+      if (Conditions[3]) {
         OuterF();
         Debug.LogFormat("[Chalices #{0}] Going to Outer F.", moduleId);
       }
@@ -540,7 +540,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void OuterE(){
-      if (Conditions[4] == true) {
+      if (Conditions[4]) {
         OuterA();
         Debug.LogFormat("[Chalices #{0}] Going to Outer A.", moduleId);
       }
@@ -551,7 +551,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void OuterF(){
-      if (Conditions[5] == true) {
+      if (Conditions[5]) {
         OuterH();
         Debug.LogFormat("[Chalices #{0}] Going to Outer H.", moduleId);
       }
@@ -562,7 +562,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void OuterG(){
-      if (Conditions[6] == true) {
+      if (Conditions[6]) {
         OuterD();
         Debug.LogFormat("[Chalices #{0}] Going to Outer D.", moduleId);
       }
@@ -573,7 +573,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void OuterH(){
-      if (Conditions[7] == true) {
+      if (Conditions[7]) {
         OuterC();
         Debug.LogFormat("[Chalices #{0}] Going to Outer C.", moduleId);
       }
@@ -628,7 +628,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void LetterI(){
-      if (Conditions[8] == true) {
+      if (Conditions[8]) {
         AnswerToIsAmazing[2] = true;
         Debug.LogFormat("[Chalices #{0}] You should drink from chalice 3.", moduleId);
       }
@@ -639,7 +639,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void LetterJ(){
-      if (Conditions[9] == true) {
+      if (Conditions[9]) {
         AnswerToIsAmazing[0] = true;
         Debug.LogFormat("[Chalices #{0}] You should drink from chalice 1.", moduleId);
       }
@@ -650,7 +650,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void LetterK(){
-      if (Conditions[10] == true) {
+      if (Conditions[10]) {
         AnswerToIsAmazing[3] = true;
         Debug.LogFormat("[Chalices #{0}] You should drink from chalice 4.", moduleId);
       }
@@ -661,7 +661,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void LetterL(){
-      if (Conditions[11] == true) {
+      if (Conditions[11]) {
         AnswerToIsAmazing[6] = true;
         Debug.LogFormat("[Chalices #{0}] You should drink from chalice 7.", moduleId);
       }
@@ -672,7 +672,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void LetterM(){
-      if (Conditions[12] == true) {
+      if (Conditions[12]) {
         AnswerToIsAmazing[5] = true;
         Debug.LogFormat("[Chalices #{0}] You should drink from chalice 6.", moduleId);
       }
@@ -683,7 +683,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void LetterN(){
-      if (Conditions[13] == true) {
+      if (Conditions[13]) {
         AnswerToIsAmazing[1] = true;
         Debug.LogFormat("[Chalices #{0}] You should drink from chalice 2.", moduleId);
       }
@@ -694,7 +694,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void LetterO(){
-      if (Conditions[14] == true) {
+      if (Conditions[14]) {
         AnswerToIsAmazing[4] = true;
         Debug.LogFormat("[Chalices #{0}] You should drink from chalice 5.", moduleId);
       }
@@ -705,7 +705,7 @@ public class Chalices : MonoBehaviour {
     }
 
     void LetterP(){
-      if (Conditions[14] == true) {
+      if (Conditions[14]) {
         AnswerToIsAmazing[7] = true;
         Debug.LogFormat("[Chalices #{0}] You should drink from chalice 8.", moduleId);
       }

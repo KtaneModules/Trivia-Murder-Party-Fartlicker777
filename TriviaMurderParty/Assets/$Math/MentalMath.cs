@@ -42,7 +42,7 @@ public class MentalMath : MonoBehaviour {
     }
 
     void ChungusPress(){
-      if (moduleSolved == true || poggers == true) {
+      if (moduleSolved || poggers) {
         return;
       }
       Audio.PlaySoundAtTransform("Trivia Murder Party Math Weasel Timer", transform);
@@ -53,7 +53,7 @@ public class MentalMath : MonoBehaviour {
     void ButtonPress(KMSelectable Button){
       for (int i = 0; i < 4; i++) {
         if (Button == ModuleRicks[i]) {
-          if (i == sugna[0] && poggers == true) {
+          if (i == sugna[0] && poggers) {
             Audio.PlaySoundAtTransform("BiggerDick", Button.transform);
             fucker += 1;
             StartCoroutine(WeedChungus());
@@ -70,7 +70,7 @@ public class MentalMath : MonoBehaviour {
     }
 
     void PenisPress(){
-      if (poggers == true) {
+      if (poggers) {
         return;
       }
       if (Weedtwo - Weed == 1) {
@@ -138,7 +138,7 @@ public class MentalMath : MonoBehaviour {
     void Update(){
       Weed = Bomb.GetSolvedModuleNames().Count;
       Weedtwo = Bomb.GetSolvableModuleNames().Count;
-      if (poggers == true) {
+      if (poggers) {
         nowineedatimerfuck += Time.deltaTime;
         if (nowineedatimerfuck >= 30f) {
           Debug.Log("fukc");
