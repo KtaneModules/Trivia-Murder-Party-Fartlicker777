@@ -1879,7 +1879,6 @@ public static string[] Phrases = {
 	"noes",
 	"nogs",
 	"noir",
-	"nolo",
 	"nome",
 	"noms",
 	"none",

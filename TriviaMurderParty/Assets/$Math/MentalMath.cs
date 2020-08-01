@@ -141,7 +141,6 @@ public class MentalMath : MonoBehaviour {
       if (poggers) {
         nowineedatimerfuck += Time.deltaTime;
         if (nowineedatimerfuck >= 30f) {
-          Debug.Log("fukc");
           poggers = false;
           StopAllCoroutines();
           Chungus.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);

@@ -14,8 +14,16 @@ MonoBehaviour:
   id: TriviaMurderPartyPack
   title: Trivia Murder Party Pack
   author: Me
-  description: Modules based on the Trivia Murder Party minigames from both packs
-    one and two. This pack is incomplete, but more modules will be added eventually.
+  description: "Modules based on the Trivia Murder Party minigames from both packs
+    one and two. This pack is incomplete, but more modules will be added eventually.\r\n\r\nThe
+    modules included (In chronological order of me adding them):\r\n\r\nMental Math:
+    The Math Minigame from games 1 and 2\r\n\r\nThe Arena: The Rock-Paper-Scissors
+    Minigame From games 1 and 2\r\n\r\nDictation: The Dictation Minigame from game
+    2\r\n\r\nJailbreak: The Password Minigame from game 2\r\n\r\nDumb Waiters (Implemented
+    by TasThing): The Dumb Waiters Minigame from game 2\r\n\nChalices: The minigame
+    of the same name from both games.\n\nPixel Art: The Memory minigame from games
+    1 and 2.\n\nRules: The Rules minigame from game 2.\n\r\nManuals can be found at
+    https://ktane.timwi.de/\r\n"
   version: 
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 4b859794b0a2a7243bff3c3db1600869, type: 3}
