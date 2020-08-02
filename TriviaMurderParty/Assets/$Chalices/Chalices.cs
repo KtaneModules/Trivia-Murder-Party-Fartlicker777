@@ -42,7 +42,7 @@ public class Chalices : MonoBehaviour {
     void Start () {//party mug tall skull exotic wine shot metal
       FuckYou = Bomb.GetSerialNumber();
       Cups.Shuffle();
-      Debug.LogFormat("[Chalices #{0}] The order of the chalices are: {1}{2}{3}{4}{5}{6}{7}{8}.", moduleId, Cups[0], Cups[1], Cups[2], Cups[3], Cups[4], Cups[5], Cups[6], Cups[7]);
+      Debug.LogFormat("[Chalices #{0}] The order of the chalices are: {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}.", moduleId, Cups[0], Cups[1], Cups[2], Cups[3], Cups[4], Cups[5], Cups[6], Cups[7]);
       switch (Cups[0]) {
         case "Party Cup": TopLeftAsshole[0].gameObject.SetActive(true); break;
         case "Mug": TopLeftAsshole[1].gameObject.SetActive(true); break;

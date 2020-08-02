@@ -51,7 +51,7 @@ public class MentalMath : MonoBehaviour {
         return;
       }
         if (TwitchPlaysActive)
-            Audio.PlaySoundAtTransform("deaf is an asshole", transform);
+            Audio.PlaySoundAtTransform("deaf_is_an_asshole", transform);
         else
             Audio.PlaySoundAtTransform("Trivia Murder Party Math Weasel Timer", transform);
       PenisPress();
@@ -173,6 +173,7 @@ public class MentalMath : MonoBehaviour {
         GetComponent<KMBombModule>().HandleStrike();
         Debug.LogFormat("[Mental Math #{0}] You answered {1} out of the required {2}. Strike.", moduleId, fucker, ThresshyBoy);
         nowineedatimerfuck = 0f;
+        suckmyMrsQuanAsshole = false;
         WeedFat.text = "";
         Fuck.text = "This is";
         Fuckers[0].text = "Your";
@@ -188,7 +189,7 @@ public class MentalMath : MonoBehaviour {
         yield return new WaitForSeconds(.00833333f);
         if (TwitchPlaysActive && !suckmyMrsQuanAsshole && nowineedatimerfuck >= 50f)
         {
-            Audio.PlaySoundAtTransform("deaf is an asshole", transform);
+            Audio.PlaySoundAtTransform("deaf_is_an_asshole", transform);
             suckmyMrsQuanAsshole = true; //hahahahahahahahahahahahahahahahahahahahahahahahahahahahahahaha
         }
         StartCoroutine(FuckerFuckingFuck());

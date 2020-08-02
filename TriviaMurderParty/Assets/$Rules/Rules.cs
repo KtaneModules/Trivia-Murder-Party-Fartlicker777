@@ -27,6 +27,7 @@ public class Rules : MonoBehaviour {
     bool[] Validity = {false, false, false, false};
     string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     string PossibilitiesForLetters = "";
+    string ForMrsKwan = "https://www.youtube.com/watch?v=7ExEXoTm4Dc";
 
     bool Activate = false;
     int Fatass = 0;
@@ -40,6 +41,9 @@ public class Rules : MonoBehaviour {
     float Weedtwo = 0f;
     int ThresshyBoy = 0;
     float NowINeedATimerFuck = 0f;
+    #pragma warning disable 0649
+        bool TwitchPlaysActive;
+    #pragma warning restore 0649
 
     void Awake () {
         moduleId = moduleIdCounter++;
@@ -86,7 +90,7 @@ public class Rules : MonoBehaviour {
         else {
           ThresshyBoy = 1;
         }
-        Debug.LogFormat("[Mental Math #{0}] {1} module(s) need to be solved.", moduleId, ThresshyBoy);
+        Debug.LogFormat("[Rules #{0}] {1} module(s) need to be solved.", moduleId, ThresshyBoy);
         RulePicker();
       }
     }
@@ -347,7 +351,11 @@ public class Rules : MonoBehaviour {
       Weedtwo = Bomb.GetTime();
       if (Activate) {
         NowINeedATimerFuck += Time.deltaTime;
-        if (NowINeedATimerFuck >= 30f) {
+        if (NowINeedATimerFuck >= 30f && !TwitchPlaysActive) {
+          Activate = false;
+          StartCoroutine(Check());
+        }
+        else if (NowINeedATimerFuck >= 100f && TwitchPlaysActive) {
           Activate = false;
           StartCoroutine(Check());
         }
@@ -362,11 +370,13 @@ public class Rules : MonoBehaviour {
       yield return new WaitForSecondsRealtime(3f);
       if (Counter >= ThresshyBoy) {
         GetComponent<KMBombModule>().HandlePass();
+        Debug.LogFormat("[Rules #{0}] You followed {1} rules correctly out of the required minimum of {2}. Module disarmed.", moduleId, Counter.ToString(), ThresshyBoy.ToString());
       }
       else {
         Counter = 0;
         ThresshyBoy = 0;
         GetComponent<KMBombModule>().HandleStrike();
+        Debug.LogFormat("[Rules #{0}] You followed {1} rules correctly out of the required minimum of {2}. Strike, Blan!", moduleId, Counter.ToString(), ThresshyBoy.ToString());
         UselessShit();
       }
     }
