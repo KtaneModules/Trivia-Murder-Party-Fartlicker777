@@ -30,6 +30,11 @@ public class MentalMath : MonoBehaviour {
     private List<int> sugna = new List<int>{0,1,2,3};
     bool poggers = false;
 
+#pragma warning disable 0649
+    bool TwitchPlaysActive;
+#pragma warning restore 0649
+    bool suckmyMrsQuanAsshole = false;
+
     void Awake () {
         moduleId = moduleIdCounter++;
 
@@ -45,7 +50,10 @@ public class MentalMath : MonoBehaviour {
       if (moduleSolved || poggers) {
         return;
       }
-      Audio.PlaySoundAtTransform("Trivia Murder Party Math Weasel Timer", transform);
+        if (TwitchPlaysActive)
+            Audio.PlaySoundAtTransform("deaf is an asshole", transform);
+        else
+            Audio.PlaySoundAtTransform("Trivia Murder Party Math Weasel Timer", transform);
       PenisPress();
       StartCoroutine(FuckerFuckingFuck());
     }
@@ -140,7 +148,7 @@ public class MentalMath : MonoBehaviour {
       Weedtwo = Bomb.GetSolvableModuleNames().Count;
       if (poggers) {
         nowineedatimerfuck += Time.deltaTime;
-        if (nowineedatimerfuck >= 30f) {
+        if ((nowineedatimerfuck >= 30f && !TwitchPlaysActive) || (nowineedatimerfuck >= 100f && TwitchPlaysActive)) {
           poggers = false;
           StopAllCoroutines();
           Chungus.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
@@ -176,9 +184,14 @@ public class MentalMath : MonoBehaviour {
     }
 
     IEnumerator FuckerFuckingFuck(){
-      Chungus.transform.Rotate(5.0f, 0.0f, 0.0f, Space.Self);
-      yield return new WaitForSeconds(.00833333f);
-      StartCoroutine(FuckerFuckingFuck());
+        Chungus.transform.Rotate(5.0f, 0.0f, 0.0f, Space.Self);
+        yield return new WaitForSeconds(.00833333f);
+        if (TwitchPlaysActive && !suckmyMrsQuanAsshole && nowineedatimerfuck >= 50f)
+        {
+            Audio.PlaySoundAtTransform("deaf is an asshole", transform);
+            suckmyMrsQuanAsshole = true; //hahahahahahahahahahahahahahahahahahahahahahahahahahahahahahaha
+        }
+        StartCoroutine(FuckerFuckingFuck());
     }
 
     #pragma warning disable 414
