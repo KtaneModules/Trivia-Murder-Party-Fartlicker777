@@ -51,11 +51,21 @@ public class TheArena : MonoBehaviour {
           else {
             GetComponent<KMBombModule>().HandleStrike();
             Debug.LogFormat("[The Arena #{0}] You pressed the {1} button. Storked.", moduleId, Logass[i]);
+            int Wonk = 0;
+            string fuck = "";
+            SwordCheck = 0;
+            DefendCheck = 0;
+            CheckCheck = 0;
+            Sword = 0;
+            Defend = 0;
+            Check = 0;
+            kmjuyhghmgjhmgjuy = 0;
             StartCoroutine(Fuck());
           }
         }
       }
     }
+
     IEnumerator Fuck(){
       Wonk = UnityEngine.Random.Range(1,10);
       Aids.text = Wonk.ToString();
