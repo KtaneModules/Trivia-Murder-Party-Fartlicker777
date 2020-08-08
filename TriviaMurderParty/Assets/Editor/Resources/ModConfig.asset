@@ -26,4 +26,4 @@ MonoBehaviour:
     https://ktane.timwi.de/\r\n"
   version: 
   outputFolder: build
-  previewImage: {fileID: 2800000, guid: 4b859794b0a2a7243bff3c3db1600869, type: 3}
+  previewImage: {fileID: 2800000, guid: fc5296ea9e8ddf743a927727c6a68038, type: 3}

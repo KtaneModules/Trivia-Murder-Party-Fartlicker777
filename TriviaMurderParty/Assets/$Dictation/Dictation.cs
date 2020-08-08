@@ -131,6 +131,7 @@ public class Dictation : MonoBehaviour {
         }
       }
     }
+
     void BackAssCrackPress(){
       BackAssCrack.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, BackAssCrack.transform);
@@ -142,6 +143,7 @@ public class Dictation : MonoBehaviour {
         CheckAids = "";
       }
     }
+
     void DowniePress(){
       Lefttard.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Lefttard.transform);
@@ -170,6 +172,7 @@ public class Dictation : MonoBehaviour {
         CheckAids = "";
       }
     }
+
     IEnumerator Uhhmm(){
       Penis.GetComponent<MeshRenderer>().material = Penises[1];
       AidsCheck = true;
@@ -199,6 +202,7 @@ public class Dictation : MonoBehaviour {
       Debug.LogFormat("[Dictation #{0}] The message is \"{1}\".", moduleId, Logmessage);
       Debug.LogFormat("[Dictation #{0}] It asks for word number {1}, which is \"{2}\".", moduleId, Ineedtopiss + 1, Logaids);
     }
+
     IEnumerator Fat(){
       Peepee = UnityEngine.Random.Range(0,Aids.Count());
       AidsMongerer.text = Aids[Peepee][UnityEngine.Random.Range(0,Aids[Peepee].Count())];
@@ -216,6 +220,7 @@ public class Dictation : MonoBehaviour {
       }
       StartCoroutine(Fat());
     }
+
     IEnumerator MustDetonate(){
       while (ineedabooleanname == false) {
       yield return new WaitForSeconds(Fanfare);
@@ -229,6 +234,7 @@ public class Dictation : MonoBehaviour {
         Debug.LogFormat("[Dictation #{0}] SYSTEM FAILURE!", moduleId);
     }
     }
+
     IEnumerator Swan(){
       if (ineedanother % 2 == 0) {
         Audio.PlaySoundAtTransform("Aids", transform);
@@ -275,6 +281,7 @@ public class Dictation : MonoBehaviour {
       ineedanother += 1;
       StartCoroutine(Swan());
     }
+
     #pragma warning disable 414
     private readonly string TwitchHelpMessage = @"Use (!{0} begin) to start the message. Use (!{0} submit XXXX) to submit the word.";
     #pragma warning restore 414
