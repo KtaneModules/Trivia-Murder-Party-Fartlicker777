@@ -189,12 +189,8 @@ public class dumbWaiters : MonoBehaviour
 
     IEnumerator HideElevatorNames(bool becauseStrike)
     {
-        var count = 0;
-        if (leftCount == 7 || rightCount == 7)
-            count = 8;
-        else
-            count = leftCount > rightCount ? leftCount : rightCount;
-        if (becauseStrike)
+        var count = leftCount > rightCount ? leftCount : rightCount;
+        if ((becauseStrike && count != 7) || (count == 7 && !becauseStrike)) // this is the easiest way to do an XOR gate in C#
             count++;
         for (int i = 0; i < count; i++)
         {
