@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using KModkit;
+//using System.Diagnostics; I have no clue why you have this, it breaks Jailbreak in Unity
 
 public class Jailbreak : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class Jailbreak : MonoBehaviour {
     string MyDickisSoLongitStretchesFromAtoZ = "QWERTYUIOPASDFGHJKLZXCVBNM";
     string Yanked = "";
     string NuggetInABiscuit = "";
-    int Fuck = 0;
+    string[] TPProtectedWords = new string[5] { "HELP", "VIEW", "SHOW", "ZOOM", "TILT" };
     int Cock = 90;
     bool Check = false;
     bool IWillTimeYourDeath = false;
@@ -110,12 +111,17 @@ public class Jailbreak : MonoBehaviour {
     }
 
     IEnumerator IWillPurgeTheWeak(){
-      Fuck = UnityEngine.Random.Range(0,AidsList.Phrases.Count());
-      Yanked = AidsList.Phrases[Fuck];
-      while (TwitchPlaysActive && Yanked.ToUpper() == "HELP") {
-        Fuck = UnityEngine.Random.Range(0,AidsList.Phrases.Count());
-        Yanked = AidsList.Phrases[Fuck];
-      }
+        Yanked = AidsList.Phrases[UnityEngine.Random.Range(0, AidsList.Phrases.Count())];
+        bool TPCheck = true;
+        while (TwitchPlaysActive && TPCheck)
+        {
+            TPCheck = false;
+            for (int myass = 0; myass < TPProtectedWords.Length; myass++)
+                if (Yanked.ToUpper() == TPProtectedWords[myass])
+                    TPCheck = true;
+            if (TPCheck)
+                Yanked = AidsList.Phrases[UnityEngine.Random.Range(0, AidsList.Phrases.Count())];
+        }
       Debug.LogFormat("[Jailbreak #{0}] The generated word is {1}.", moduleId, Yanked);
       yield return null;
     }
