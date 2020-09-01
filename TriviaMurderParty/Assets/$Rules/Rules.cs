@@ -353,6 +353,7 @@ public class Rules : MonoBehaviour {
         NowINeedATimerFuck += Time.deltaTime;
         if (NowINeedATimerFuck >= 30f && !TwitchPlaysActive) {
           Activate = false;
+          NowINeedATimerFuck = 0f;
           StartCoroutine(Check());
         }
         else if (NowINeedATimerFuck >= 100f && TwitchPlaysActive) {
