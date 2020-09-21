@@ -10,6 +10,9 @@ public class Chalices : MonoBehaviour {
 
     public KMBombInfo Bomb;
     public KMAudio Audio;
+
+    public KMSelectable[] LittleHerobrineIAmCummingInYourMom;
+
     public GameObject[] TopLeftAsshole;
     public GameObject[] TopMiddleAsshole;
     public GameObject[] MiddleLeftAsshole;
@@ -19,18 +22,19 @@ public class Chalices : MonoBehaviour {
     public GameObject[] BottomMiddleAsshole;
     public GameObject[] BottomRightAsshole;
     public GameObject[] AllTheAssholes;
-    public KMSelectable[] LittleHerobrineIAmCummingInYourMom;
+
+    string[] Cups = {"Party Cup", "Mug", "Tall Glass", "Skull Glass", "Exotic Cup", "Wine Glass", "Shot Glass", "Metal Chalice"};
+    string FuckYou = "";
+    string ChalicesButString = "CHALICES";
+
+    bool[] Conditions = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+    bool[] BlackConditions = {false, false, false, false, false, false, false, false};
+    bool[] AnswerToIsAmazing = {false, false, false, false, false, false, false, false};
+    bool Active = false;
 
     static int moduleIdCounter = 1;
     int moduleId;
     private bool moduleSolved;
-    string[] Cups = {"Party Cup", "Mug", "Tall Glass", "Skull Glass", "Exotic Cup", "Wine Glass", "Shot Glass", "Metal Chalice"};
-    bool[] Conditions = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
-    bool[] BlackConditions = {false, false, false, false, false, false, false, false};
-    bool[] AnswerToIsAmazing = {false, false, false, false, false, false, false, false};
-    string FuckYou = "";
-    string ChalicesButString = "CHALICES";
-    bool Active = false;
 
     void Awake () {
         moduleId = moduleIdCounter++;
@@ -43,86 +47,17 @@ public class Chalices : MonoBehaviour {
       FuckYou = Bomb.GetSerialNumber();
       Cups.Shuffle();
       Debug.LogFormat("[Chalices #{0}] The order of the chalices are: {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}.", moduleId, Cups[0], Cups[1], Cups[2], Cups[3], Cups[4], Cups[5], Cups[6], Cups[7]);
-      switch (Cups[0]) {
-        case "Party Cup": TopLeftAsshole[0].gameObject.SetActive(true); break;
-        case "Mug": TopLeftAsshole[1].gameObject.SetActive(true); break;
-        case "Tall Glass": TopLeftAsshole[2].gameObject.SetActive(true); break;
-        case "Skull Glass": TopLeftAsshole[3].gameObject.SetActive(true); break;
-        case "Exotic Cup": TopLeftAsshole[4].gameObject.SetActive(true); break;
-        case "Wine Glass": TopLeftAsshole[5].gameObject.SetActive(true); break;
-        case "Shot Glass": TopLeftAsshole[6].gameObject.SetActive(true); break;
-        case "Metal Chalice": TopLeftAsshole[7].gameObject.SetActive(true); break;
-      }
-      switch (Cups[1]) {
-        case "Party Cup": TopMiddleAsshole[0].gameObject.SetActive(true); break;
-        case "Mug": TopMiddleAsshole[1].gameObject.SetActive(true); break;
-        case "Tall Glass": TopMiddleAsshole[2].gameObject.SetActive(true); break;
-        case "Skull Glass": TopMiddleAsshole[3].gameObject.SetActive(true); break;
-        case "Exotic Cup": TopMiddleAsshole[4].gameObject.SetActive(true); break;
-        case "Wine Glass": TopMiddleAsshole[5].gameObject.SetActive(true); break;
-        case "Shot Glass": TopMiddleAsshole[6].gameObject.SetActive(true); break;
-        case "Metal Chalice": TopMiddleAsshole[7].gameObject.SetActive(true); break;
-      }
-      switch (Cups[2]) {
-        case "Party Cup": MiddleLeftAsshole[0].gameObject.SetActive(true); break;
-        case "Mug": MiddleLeftAsshole[1].gameObject.SetActive(true); break;
-        case "Tall Glass": MiddleLeftAsshole[2].gameObject.SetActive(true); break;
-        case "Skull Glass": MiddleLeftAsshole[3].gameObject.SetActive(true); break;
-        case "Exotic Cup": MiddleLeftAsshole[4].gameObject.SetActive(true); break;
-        case "Wine Glass": MiddleLeftAsshole[5].gameObject.SetActive(true); break;
-        case "Shot Glass": MiddleLeftAsshole[6].gameObject.SetActive(true); break;
-        case "Metal Chalice": MiddleLeftAsshole[7].gameObject.SetActive(true); break;
-      }
-      switch (Cups[3]) {
-        case "Party Cup": TheMainAss[0].gameObject.SetActive(true); break;
-        case "Mug": TheMainAss[1].gameObject.SetActive(true); break;
-        case "Tall Glass": TheMainAss[2].gameObject.SetActive(true); break;
-        case "Skull Glass": TheMainAss[3].gameObject.SetActive(true); break;
-        case "Exotic Cup": TheMainAss[4].gameObject.SetActive(true); break;
-        case "Wine Glass": TheMainAss[5].gameObject.SetActive(true); break;
-        case "Shot Glass": TheMainAss[6].gameObject.SetActive(true); break;
-        case "Metal Chalice": TheMainAss[7].gameObject.SetActive(true); break;
-      }
-      switch (Cups[4]) {
-        case "Party Cup": MiddleRightAsshole[0].gameObject.SetActive(true); break;
-        case "Mug": MiddleRightAsshole[1].gameObject.SetActive(true); break;
-        case "Tall Glass": MiddleRightAsshole[2].gameObject.SetActive(true); break;
-        case "Skull Glass": MiddleRightAsshole[3].gameObject.SetActive(true); break;
-        case "Exotic Cup": MiddleRightAsshole[4].gameObject.SetActive(true); break;
-        case "Wine Glass": MiddleRightAsshole[5].gameObject.SetActive(true); break;
-        case "Shot Glass": MiddleRightAsshole[6].gameObject.SetActive(true); break;
-        case "Metal Chalice": MiddleRightAsshole[7].gameObject.SetActive(true); break;
-      }
-      switch (Cups[5]) {
-        case "Party Cup": BottomLeftAsshole[0].gameObject.SetActive(true); break;
-        case "Mug": BottomLeftAsshole[1].gameObject.SetActive(true); break;
-        case "Tall Glass": BottomLeftAsshole[2].gameObject.SetActive(true); break;
-        case "Skull Glass": BottomLeftAsshole[3].gameObject.SetActive(true); break;
-        case "Exotic Cup": BottomLeftAsshole[4].gameObject.SetActive(true); break;
-        case "Wine Glass": BottomLeftAsshole[5].gameObject.SetActive(true); break;
-        case "Shot Glass": BottomLeftAsshole[6].gameObject.SetActive(true); break;
-        case "Metal Chalice": BottomLeftAsshole[7].gameObject.SetActive(true); break;
-      }
-      switch (Cups[6]) {
-        case "Party Cup": BottomMiddleAsshole[0].gameObject.SetActive(true); break;
-        case "Mug": BottomMiddleAsshole[1].gameObject.SetActive(true); break;
-        case "Tall Glass": BottomMiddleAsshole[2].gameObject.SetActive(true); break;
-        case "Skull Glass": BottomMiddleAsshole[3].gameObject.SetActive(true); break;
-        case "Exotic Cup": BottomMiddleAsshole[4].gameObject.SetActive(true); break;
-        case "Wine Glass": BottomMiddleAsshole[5].gameObject.SetActive(true); break;
-        case "Shot Glass": BottomMiddleAsshole[6].gameObject.SetActive(true); break;
-        case "Metal Chalice": BottomMiddleAsshole[7].gameObject.SetActive(true); break;
-      }
-      switch (Cups[7]) {
-        case "Party Cup": BottomRightAsshole[0].gameObject.SetActive(true); break;
-        case "Mug": BottomRightAsshole[1].gameObject.SetActive(true); break;
-        case "Tall Glass": BottomRightAsshole[2].gameObject.SetActive(true); break;
-        case "Skull Glass": BottomRightAsshole[3].gameObject.SetActive(true); break;
-        case "Exotic Cup": BottomRightAsshole[4].gameObject.SetActive(true); break;
-        case "Wine Glass": BottomRightAsshole[5].gameObject.SetActive(true); break;
-        case "Shot Glass": BottomRightAsshole[6].gameObject.SetActive(true); break;
-        case "Metal Chalice": BottomRightAsshole[7].gameObject.SetActive(true); break;
-      }
+      for (int i = 0; i < 8; i++)
+        switch (Cups[i]) {
+          case "Party Cup": TopLeftAsshole[0].gameObject.SetActive(true); break;
+          case "Mug": TopLeftAsshole[1].gameObject.SetActive(true); break;
+          case "Tall Glass": TopLeftAsshole[2].gameObject.SetActive(true); break;
+          case "Skull Glass": TopLeftAsshole[3].gameObject.SetActive(true); break;
+          case "Exotic Cup": TopLeftAsshole[4].gameObject.SetActive(true); break;
+          case "Wine Glass": TopLeftAsshole[5].gameObject.SetActive(true); break;
+          case "Shot Glass": TopLeftAsshole[6].gameObject.SetActive(true); break;
+          case "Metal Chalice": TopLeftAsshole[7].gameObject.SetActive(true); break;
+        }
       //a to h
       if (Array.IndexOf(Cups, "Skull Glass") < Array.IndexOf(Cups, "Wine Glass")) {//a
         Conditions[0] = true;
@@ -293,9 +228,8 @@ public class Chalices : MonoBehaviour {
     }
 
     void SlendermanPress(KMSelectable Slenderman) {
-      if (Active) {
+      if (Active)
         return;
-      }
       for (int i = 0; i < 8; i++) {
         if (Slenderman == LittleHerobrineIAmCummingInYourMom[i]) {
           if (AnswerToIsAmazing[i]) {
@@ -333,44 +267,36 @@ public class Chalices : MonoBehaviour {
       AllTheAssholes[weed].gameObject.SetActive(false);
       switch (weed) {
         case 0:
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
           TopLeftAsshole[i].gameObject.SetActive(false);
-        }
         break;
         case 1:
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
           TopMiddleAsshole[i].gameObject.SetActive(false);
-        }
         break;
         case 2:
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
           MiddleLeftAsshole[i].gameObject.SetActive(false);
-        }
         break;
         case 3:
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
           TheMainAss[i].gameObject.SetActive(false);
-        }
         break;
         case 4:
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
           MiddleRightAsshole[i].gameObject.SetActive(false);
-        }
         break;
         case 5:
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
           BottomLeftAsshole[i].gameObject.SetActive(false);
-        }
         break;
         case 6:
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
           BottomMiddleAsshole[i].gameObject.SetActive(false);
-        }
         break;
         case 7:
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++)
           BottomRightAsshole[i].gameObject.SetActive(false);
-        }
         break;
       }
     }
@@ -722,41 +648,23 @@ public class Chalices : MonoBehaviour {
     IEnumerator ProcessTwitchCommand(string command) {
       yield return null;
       command = command.Trim();
-      if (command == "1") {
+      if (command == "1")
         LittleHerobrineIAmCummingInYourMom[0].OnInteract();
-        yield break;
-      }
-      else if (command == "2") {
+      else if (command == "2")
         LittleHerobrineIAmCummingInYourMom[1].OnInteract();
-        yield break;
-      }
-      else if (command == "3") {
+      else if (command == "3")
         LittleHerobrineIAmCummingInYourMom[2].OnInteract();
-        yield break;
-      }
-      else if (command == "4") {
+      else if (command == "4")
         LittleHerobrineIAmCummingInYourMom[3].OnInteract();
-        yield break;
-      }
-      else if (command == "5") {
+      else if (command == "5")
         LittleHerobrineIAmCummingInYourMom[4].OnInteract();
-        yield break;
-      }
-      else if (command == "6") {
+      else if (command == "6")
         LittleHerobrineIAmCummingInYourMom[5].OnInteract();
-        yield break;
-      }
-      else if (command == "7") {
+      else if (command == "7")
         LittleHerobrineIAmCummingInYourMom[6].OnInteract();
-        yield break;
-      }
-      else if (command == "8") {
+      else if (command == "8")
         LittleHerobrineIAmCummingInYourMom[7].OnInteract();
-        yield break;
-      }
-      else {
+      else
         yield return "sendtochaterror Invalid command!";
-        yield break;
-      }
     }
 }
