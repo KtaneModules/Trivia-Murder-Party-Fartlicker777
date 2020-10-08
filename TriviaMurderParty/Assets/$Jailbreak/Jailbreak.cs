@@ -68,14 +68,14 @@ public class Jailbreak : MonoBehaviour {
           StartCoroutine(hgjymgjuyhkhgjymijuyhkhftjuyhjuymgfhjvmghgjmfhgjmfnhgjymfnhgjhgfnhgfjygfhhtjuyhmgfjyhjuymghgjymfhmgnbjmgnbjhnbhvmnFUCKWEEDhgfjyhcgnbhjymgfhmgnjhjymghmjgnhmgnj());
         }
         if (Penis == Lomp[i] && i != 26) {
-          if (NuggetInABiscuit.Length == 4) {
+          if (NuggetInABiscuit.Length == 4)
             return;
-          }
           NuggetInABiscuit += MyDickisSoLongitStretchesFromAtoZ[i].ToString();
           NotEmotiguy.text = NuggetInABiscuit;
         }
         else if (NuggetInABiscuit.ToLower() == Yanked && Penis == Lomp[i]) {
           StopAllCoroutines();
+          moduleSolved = true;
           StartCoroutine(SolveThing());
         }
         else if (Penis == Lomp[i] && NuggetInABiscuit.Length < 4) {
@@ -92,17 +92,13 @@ public class Jailbreak : MonoBehaviour {
               break;
             }
           }
-            for (int j = 0; j < 4; j++) {
-              if (NuggetInABiscuit[j].ToString().ToLower() == Yanked[j].ToString() && Check) {
+            for (int j = 0; j < 4; j++)
+              if (NuggetInABiscuit[j].ToString().ToLower() == Yanked[j].ToString() && Check)
                 Aids[j].text = NuggetInABiscuit[j].ToString();
-              }
-            }
-            if (Check == false) {
+            if (Check == false)
               Debug.LogFormat("[Jailbreak #{0}] You queried {1}, but that is not a word!", moduleId, NuggetInABiscuit);
-            }
-            else {
+            else
               Debug.LogFormat("[Jailbreak #{0}] You queried {1}. It shows {2} {3} {4} {5}.", moduleId, NuggetInABiscuit, Aids[0].text, Aids[1].text, Aids[2].text, Aids[3].text);
-            }
             NuggetInABiscuit = "";
             NotEmotiguy.text = "Query";
         }
@@ -143,7 +139,7 @@ public class Jailbreak : MonoBehaviour {
         for (int i = 0; i < 4; i++) {
           Aids[i].text = Yanked[i].ToString().ToUpper();
         }
-        Debug.LogFormat("[Jailbreak #{0}] You took to long!", moduleId);
+        Debug.LogFormat("[Jailbreak #{0}] You took too long!", moduleId);
         shutup = false;
         No = true;
         yield return new WaitForSecondsRealtime(5f);
@@ -221,43 +217,54 @@ public class Jailbreak : MonoBehaviour {
     #pragma warning restore 414
 
     IEnumerator ProcessTwitchCommand(string command){
-      bool[] Dumbass = {false,false,false,false};
+      bool[] Dumbass = {false, false, false, false};
       yield return null;
-      if (command.Length > 4) {
+      if (command.Length > 4)
         yield return "sendtochaterror Too big a word!";
-      }
       else if (command.Length < 4) {
         GetComponent<KMBombModule>().HandleStrike();
         Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
         yield break;
       }
       else {
-        for (int i = 0; i < command.Length; i++) {
-          for (int j = 0; j < 26; j++) {
-            if (command[i].ToString().ToUpper() == MyDickisSoLongitStretchesFromAtoZ[j].ToString().ToUpper()) {
+        for (int i = 0; i < command.Length; i++)
+          for (int j = 0; j < 26; j++)
+            if (command[i].ToString().ToUpper() == MyDickisSoLongitStretchesFromAtoZ[j].ToString().ToUpper())
               Dumbass[i] = true;
-            }
-          }
-        }
         if (Dumbass[0] && Dumbass[1] && Dumbass[2] && Dumbass[3]) {
-          for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 26; j++) {
+          for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 26; j++)
               if (command[i].ToString().ToUpper() == MyDickisSoLongitStretchesFromAtoZ[j].ToString().ToUpper()) {
                 Lomp[j].OnInteract();
                 Dumbass[i] = false;
                 yield return new WaitForSeconds(.01f);
               }
-            }
-          }
           Lomp[26].OnInteract();
-          if (command.ToUpper() == Yanked.ToUpper()) {
+          if (command.ToUpper() == Yanked.ToUpper())
             yield return "solve";
-          }
           }
           else {
             yield return "sendtochaterror Invalid Character!";
             yield break;
           }
+      }
+    }
+
+    IEnumerator TwitchHandleForcedSolve () {
+      while (!moduleSolved) {
+        string WhateverTheFuck = "";
+        int WhateverTheHell = 0;
+        WhateverTheFuck = AidsList.Phrases[UnityEngine.Random.Range(0, AidsList.Phrases.Count())];
+        for (int i = 0; i < 4; i++)
+          if (Aids[i].text != "_")
+            WhateverTheHell++;
+        if (WhateverTheHell >= 3)
+          WhateverTheFuck = Yanked;
+        for (int i = 0; i < 4; i++) {
+          Lomp[MyDickisSoLongitStretchesFromAtoZ.IndexOf(WhateverTheFuck[i].ToString().ToUpper())].OnInteract();
+          yield return new WaitForSecondsRealtime(.1f);
+        }
+        Lomp[26].OnInteract();
       }
     }
 }

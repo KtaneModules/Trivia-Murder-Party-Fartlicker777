@@ -25,7 +25,6 @@ public class Chalices : MonoBehaviour {
 
     string[] Cups = {"Party Cup", "Mug", "Tall Glass", "Skull Glass", "Exotic Cup", "Wine Glass", "Shot Glass", "Metal Chalice"};
     string FuckYou = "";
-    string ChalicesButString = "CHALICES";
 
     bool[] Conditions = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
     bool[] BlackConditions = {false, false, false, false, false, false, false, false};
@@ -47,17 +46,86 @@ public class Chalices : MonoBehaviour {
       FuckYou = Bomb.GetSerialNumber();
       Cups.Shuffle();
       Debug.LogFormat("[Chalices #{0}] The order of the chalices are: {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}.", moduleId, Cups[0], Cups[1], Cups[2], Cups[3], Cups[4], Cups[5], Cups[6], Cups[7]);
-      for (int i = 0; i < 8; i++)
-        switch (Cups[i]) {
-          case "Party Cup": TopLeftAsshole[0].gameObject.SetActive(true); break;
-          case "Mug": TopLeftAsshole[1].gameObject.SetActive(true); break;
-          case "Tall Glass": TopLeftAsshole[2].gameObject.SetActive(true); break;
-          case "Skull Glass": TopLeftAsshole[3].gameObject.SetActive(true); break;
-          case "Exotic Cup": TopLeftAsshole[4].gameObject.SetActive(true); break;
-          case "Wine Glass": TopLeftAsshole[5].gameObject.SetActive(true); break;
-          case "Shot Glass": TopLeftAsshole[6].gameObject.SetActive(true); break;
-          case "Metal Chalice": TopLeftAsshole[7].gameObject.SetActive(true); break;
-        }
+      switch (Cups[0]) {
+        case "Party Cup": TopLeftAsshole[0].gameObject.SetActive(true); break;
+        case "Mug": TopLeftAsshole[1].gameObject.SetActive(true); break;
+        case "Tall Glass": TopLeftAsshole[2].gameObject.SetActive(true); break;
+        case "Skull Glass": TopLeftAsshole[3].gameObject.SetActive(true); break;
+        case "Exotic Cup": TopLeftAsshole[4].gameObject.SetActive(true); break;
+        case "Wine Glass": TopLeftAsshole[5].gameObject.SetActive(true); break;
+        case "Shot Glass": TopLeftAsshole[6].gameObject.SetActive(true); break;
+        case "Metal Chalice": TopLeftAsshole[7].gameObject.SetActive(true); break;
+      }
+      switch (Cups[1]) {
+        case "Party Cup": TopMiddleAsshole[0].gameObject.SetActive(true); break;
+        case "Mug": TopMiddleAsshole[1].gameObject.SetActive(true); break;
+        case "Tall Glass": TopMiddleAsshole[2].gameObject.SetActive(true); break;
+        case "Skull Glass": TopMiddleAsshole[3].gameObject.SetActive(true); break;
+        case "Exotic Cup": TopMiddleAsshole[4].gameObject.SetActive(true); break;
+        case "Wine Glass": TopMiddleAsshole[5].gameObject.SetActive(true); break;
+        case "Shot Glass": TopMiddleAsshole[6].gameObject.SetActive(true); break;
+        case "Metal Chalice": TopMiddleAsshole[7].gameObject.SetActive(true); break;
+      }
+      switch (Cups[2]) {
+        case "Party Cup": MiddleLeftAsshole[0].gameObject.SetActive(true); break;
+        case "Mug": MiddleLeftAsshole[1].gameObject.SetActive(true); break;
+        case "Tall Glass": MiddleLeftAsshole[2].gameObject.SetActive(true); break;
+        case "Skull Glass": MiddleLeftAsshole[3].gameObject.SetActive(true); break;
+        case "Exotic Cup": MiddleLeftAsshole[4].gameObject.SetActive(true); break;
+        case "Wine Glass": MiddleLeftAsshole[5].gameObject.SetActive(true); break;
+        case "Shot Glass": MiddleLeftAsshole[6].gameObject.SetActive(true); break;
+        case "Metal Chalice": MiddleLeftAsshole[7].gameObject.SetActive(true); break;
+      }
+      switch (Cups[3]) {
+        case "Party Cup": TheMainAss[0].gameObject.SetActive(true); break;
+        case "Mug": TheMainAss[1].gameObject.SetActive(true); break;
+        case "Tall Glass": TheMainAss[2].gameObject.SetActive(true); break;
+        case "Skull Glass": TheMainAss[3].gameObject.SetActive(true); break;
+        case "Exotic Cup": TheMainAss[4].gameObject.SetActive(true); break;
+        case "Wine Glass": TheMainAss[5].gameObject.SetActive(true); break;
+        case "Shot Glass": TheMainAss[6].gameObject.SetActive(true); break;
+        case "Metal Chalice": TheMainAss[7].gameObject.SetActive(true); break;
+      }
+      switch (Cups[4]) {
+        case "Party Cup": MiddleRightAsshole[0].gameObject.SetActive(true); break;
+        case "Mug": MiddleRightAsshole[1].gameObject.SetActive(true); break;
+        case "Tall Glass": MiddleRightAsshole[2].gameObject.SetActive(true); break;
+        case "Skull Glass": MiddleRightAsshole[3].gameObject.SetActive(true); break;
+        case "Exotic Cup": MiddleRightAsshole[4].gameObject.SetActive(true); break;
+        case "Wine Glass": MiddleRightAsshole[5].gameObject.SetActive(true); break;
+        case "Shot Glass": MiddleRightAsshole[6].gameObject.SetActive(true); break;
+        case "Metal Chalice": MiddleRightAsshole[7].gameObject.SetActive(true); break;
+      }
+      switch (Cups[5]) {
+        case "Party Cup": BottomLeftAsshole[0].gameObject.SetActive(true); break;
+        case "Mug": BottomLeftAsshole[1].gameObject.SetActive(true); break;
+        case "Tall Glass": BottomLeftAsshole[2].gameObject.SetActive(true); break;
+        case "Skull Glass": BottomLeftAsshole[3].gameObject.SetActive(true); break;
+        case "Exotic Cup": BottomLeftAsshole[4].gameObject.SetActive(true); break;
+        case "Wine Glass": BottomLeftAsshole[5].gameObject.SetActive(true); break;
+        case "Shot Glass": BottomLeftAsshole[6].gameObject.SetActive(true); break;
+        case "Metal Chalice": BottomLeftAsshole[7].gameObject.SetActive(true); break;
+      }
+      switch (Cups[6]) {
+        case "Party Cup": BottomMiddleAsshole[0].gameObject.SetActive(true); break;
+        case "Mug": BottomMiddleAsshole[1].gameObject.SetActive(true); break;
+        case "Tall Glass": BottomMiddleAsshole[2].gameObject.SetActive(true); break;
+        case "Skull Glass": BottomMiddleAsshole[3].gameObject.SetActive(true); break;
+        case "Exotic Cup": BottomMiddleAsshole[4].gameObject.SetActive(true); break;
+        case "Wine Glass": BottomMiddleAsshole[5].gameObject.SetActive(true); break;
+        case "Shot Glass": BottomMiddleAsshole[6].gameObject.SetActive(true); break;
+        case "Metal Chalice": BottomMiddleAsshole[7].gameObject.SetActive(true); break;
+      }
+      switch (Cups[7]) {
+        case "Party Cup": BottomRightAsshole[0].gameObject.SetActive(true); break;
+        case "Mug": BottomRightAsshole[1].gameObject.SetActive(true); break;
+        case "Tall Glass": BottomRightAsshole[2].gameObject.SetActive(true); break;
+        case "Skull Glass": BottomRightAsshole[3].gameObject.SetActive(true); break;
+        case "Exotic Cup": BottomRightAsshole[4].gameObject.SetActive(true); break;
+        case "Wine Glass": BottomRightAsshole[5].gameObject.SetActive(true); break;
+        case "Shot Glass": BottomRightAsshole[6].gameObject.SetActive(true); break;
+        case "Metal Chalice": BottomRightAsshole[7].gameObject.SetActive(true); break;
+      }
       //a to h
       if (Array.IndexOf(Cups, "Skull Glass") < Array.IndexOf(Cups, "Wine Glass")) {//a
         Conditions[0] = true;
@@ -193,36 +261,36 @@ public class Chalices : MonoBehaviour {
       }
       switch (Bomb.GetPortCount() % 8) {
         case 0:
-        InnerC();
         Debug.LogFormat("[Chalices #{0}] 8n + 0 ports goes to inner C.", moduleId);
+        InnerC();
         break;
         case 1:
-        InnerH();
         Debug.LogFormat("[Chalices #{0}] 8n + 1 ports goes to inner H.", moduleId);
+        InnerH();
         break;
         case 2:
-        InnerE();
         Debug.LogFormat("[Chalices #{0}] 8n + 2 ports goes to inner E.", moduleId);
+        InnerE();
         break;
         case 3:
-        InnerF();
         Debug.LogFormat("[Chalices #{0}] 8n + 3 ports goes to inner F.", moduleId);
+        InnerF();
         break;
         case 4:
-        InnerD();
         Debug.LogFormat("[Chalices #{0}] 8n + 4 ports goes to inner d.", moduleId);
+        InnerD();
         break;
         case 5:
-        InnerG();
         Debug.LogFormat("[Chalices #{0}] 8n + 5 ports goes to inner G.", moduleId);
+        InnerG();
         break;
         case 6:
-        InnerB();
         Debug.LogFormat("[Chalices #{0}] 8n + 6 ports goes to inner B.", moduleId);
+        InnerB();
         break;
         case 7:
-        InnerA();
         Debug.LogFormat("[Chalices #{0}] 8n + 7 ports goes to inner A.", moduleId);
+        InnerA();
         break;
       }
     }
@@ -303,253 +371,253 @@ public class Chalices : MonoBehaviour {
 
     void InnerA(){
       if (Conditions[0]) {
-        InnerB();
         Debug.LogFormat("[Chalices #{0}] Going to Inner B.", moduleId);
+        InnerB();
       }
       else if (BlackConditions[0]) {
-        OuterA();
         Debug.LogFormat("[Chalices #{0}] Going to Outer A.", moduleId);
+        OuterA();
       }
       else {
-        OuterE();
         Debug.LogFormat("[Chalices #{0}] Going to Outer E.", moduleId);
+        OuterE();
       }
     }
 
     void InnerB(){
       if (Conditions[1]) {
-        InnerG();
         Debug.LogFormat("[Chalices #{0}] Going to Inner G.", moduleId);
+        InnerG();
       }
       else if (BlackConditions[1]) {
-        OuterB();
         Debug.LogFormat("[Chalices #{0}] Going to Outer B.", moduleId);
+        OuterB();
       }
       else {
-        OuterA();
         Debug.LogFormat("[Chalices #{0}] Going to Outer A.", moduleId);
+        OuterA();
       }
     }
 
     void InnerC(){
       if (Conditions[2]) {
-        InnerA();
         Debug.LogFormat("[Chalices #{0}] Going to Inner A.", moduleId);
+        InnerA();
       }
       else if (BlackConditions[2]) {
-        OuterE();
         Debug.LogFormat("[Chalices #{0}] Going to Outer E.", moduleId);
+        OuterE();
       }
       else {
-        OuterC();
         Debug.LogFormat("[Chalices #{0}] Going to Outer C.", moduleId);
+        OuterC();
       }
     }
 
     void InnerD(){
       if (Conditions[3]) {
-        InnerF();
         Debug.LogFormat("[Chalices #{0}] Going to Inner F.", moduleId);
+        InnerF();
       }
       else if (BlackConditions[3]) {
-        OuterD();
         Debug.LogFormat("[Chalices #{0}] Going to Outer D.", moduleId);
+        OuterD();
       }
       else {
-        OuterG();
         Debug.LogFormat("[Chalices #{0}] Going to Outer G.", moduleId);
+        OuterG();
       }
     }
 
     void InnerE(){
       if (Conditions[4]) {
-        InnerH();
         Debug.LogFormat("[Chalices #{0}] Going to Inner H.", moduleId);
+        InnerH();
       }
       else if (BlackConditions[4]) {
-        OuterH();
         Debug.LogFormat("[Chalices #{0}] Going to Outer H.", moduleId);
+        OuterH();
       }
       else {
-        OuterF();
         Debug.LogFormat("[Chalices #{0}] Going to Outer F.", moduleId);
+        OuterF();
       }
     }
 
     void InnerF(){
       if (Conditions[5]) {
-        InnerE();
         Debug.LogFormat("[Chalices #{0}] Going to Inner E.", moduleId);
+        InnerE();
       }
       else if (BlackConditions[5]) {
-        OuterF();
         Debug.LogFormat("[Chalices #{0}] Going to Outer F.", moduleId);
+        OuterF();
       }
       else {
-        OuterD();
         Debug.LogFormat("[Chalices #{0}] Going to Outer D.", moduleId);
+        OuterD();
       }
     }
 
     void InnerG(){
       if (Conditions[6]) {
-        InnerD();
         Debug.LogFormat("[Chalices #{0}] Going to Inner D.", moduleId);
+        InnerD();
       }
       else if (BlackConditions[6]) {
-        OuterG();
         Debug.LogFormat("[Chalices #{0}] Going to Outer G.", moduleId);
+        OuterG();
       }
       else {
-        OuterB();
         Debug.LogFormat("[Chalices #{0}] Going to Outer B.", moduleId);
+        OuterB();
       }
     }
 
     void InnerH(){
       if (Conditions[7]) {
-        InnerC();
         Debug.LogFormat("[Chalices #{0}] Going to Inner C.", moduleId);
+        InnerC();
       }
       else if (BlackConditions[7]) {
-        OuterC();
         Debug.LogFormat("[Chalices #{0}] Going to Outer C.", moduleId);
+        OuterC();
       }
       else {
-        OuterH();
         Debug.LogFormat("[Chalices #{0}] Going to Outer H.", moduleId);
+        OuterH();
       }
     }
 
     void OuterA(){
       if (Conditions[0]) {
-        OuterB();
         Debug.LogFormat("[Chalices #{0}] Going to Outer B.", moduleId);
+        OuterB();
       }
       else {
-        LetterX();
         Debug.LogFormat("[Chalices #{0}] Going to X.", moduleId);
+        LetterX();
       }
     }
 
     void OuterB(){
       if (Conditions[1]) {
-        OuterG();
         Debug.LogFormat("[Chalices #{0}] Going to Outer G.", moduleId);
+        OuterG();
       }
       else {
-        LetterX();
         Debug.LogFormat("[Chalices #{0}] Going to Outer X.", moduleId);
+        LetterX();
       }
     }
 
     void OuterC(){
       if (Conditions[2]) {
-        OuterE();
         Debug.LogFormat("[Chalices #{0}] Going to Outer E.", moduleId);
+        OuterE();
       }
       else {
-        LetterW();
         Debug.LogFormat("[Chalices #{0}] Going to W.", moduleId);
+        LetterW();
       }
     }
 
     void OuterD(){
       if (Conditions[3]) {
-        OuterF();
         Debug.LogFormat("[Chalices #{0}] Going to Outer F.", moduleId);
+        OuterF();
       }
       else {
-        LetterY();
         Debug.LogFormat("[Chalices #{0}] Going to Y.", moduleId);
+        LetterY();
       }
     }
 
     void OuterE(){
       if (Conditions[4]) {
-        OuterA();
         Debug.LogFormat("[Chalices #{0}] Going to Outer A.", moduleId);
+        OuterA();
       }
       else {
-        LetterW();
         Debug.LogFormat("[Chalices #{0}] Going to W.", moduleId);
+        LetterW();
       }
     }
 
     void OuterF(){
       if (Conditions[5]) {
-        OuterH();
         Debug.LogFormat("[Chalices #{0}] Going to Outer H.", moduleId);
+        OuterH();
       }
       else {
-        LetterZ();
         Debug.LogFormat("[Chalices #{0}] Going to Z.", moduleId);
+        LetterZ();
       }
     }
 
     void OuterG(){
       if (Conditions[6]) {
-        OuterD();
         Debug.LogFormat("[Chalices #{0}] Going to Outer D.", moduleId);
+        OuterD();
       }
       else {
-        LetterY();
         Debug.LogFormat("[Chalices #{0}] Going to Y.", moduleId);
+        LetterY();
       }
     }
 
     void OuterH(){
       if (Conditions[7]) {
-        OuterC();
         Debug.LogFormat("[Chalices #{0}] Going to Outer C.", moduleId);
+        OuterC();
       }
       else {
-        LetterZ();
         Debug.LogFormat("[Chalices #{0}] Going to Z.", moduleId);
+        LetterZ();
       }
     }
 
     void LetterW(){
       if (Conditions[16]) {
-        LetterN();
         Debug.LogFormat("[Chalices #{0}] Going to N.", moduleId);
+        LetterN();
       }
       else {
-        LetterI();
         Debug.LogFormat("[Chalices #{0}] Going to I.", moduleId);
+        LetterI();
       }
     }
 
     void LetterX(){
       if (Conditions[17]) {
-        LetterP();
         Debug.LogFormat("[Chalices #{0}] Going to P.", moduleId);
+        LetterP();
       }
       else {
-        LetterJ();
         Debug.LogFormat("[Chalices #{0}] Going to J.", moduleId);
+        LetterJ();
       }
     }
 
     void LetterY(){
       if (Conditions[18]) {
-        LetterM();
         Debug.LogFormat("[Chalices #{0}] Going to M.", moduleId);
+        LetterM();
       }
       else {
-        LetterL();
         Debug.LogFormat("[Chalices #{0}] Going to L.", moduleId);
+        LetterL();
       }
     }
 
     void LetterZ(){
       if (Conditions[19]) {
-        LetterK();
         Debug.LogFormat("[Chalices #{0}] Going to K.", moduleId);
+        LetterK();
       }
       else {
-        LetterO();
         Debug.LogFormat("[Chalices #{0}] Going to O.", moduleId);
+        LetterO();
       }
     }
 
@@ -666,5 +734,12 @@ public class Chalices : MonoBehaviour {
         LittleHerobrineIAmCummingInYourMom[7].OnInteract();
       else
         yield return "sendtochaterror Invalid command!";
+    }
+
+    IEnumerator TwitchHandleForcedSolve () {
+      for (int i = 0; i < 8; i++)
+        if (AnswerToIsAmazing[i])
+          LittleHerobrineIAmCummingInYourMom[i].OnInteract();
+      yield return null;
     }
 }

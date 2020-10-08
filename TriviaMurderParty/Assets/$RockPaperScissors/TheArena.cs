@@ -51,8 +51,6 @@ public class TheArena : MonoBehaviour {
           else {
             GetComponent<KMBombModule>().HandleStrike();
             Debug.LogFormat("[The Arena #{0}] You pressed the {1} button. Storked.", moduleId, Logass[i]);
-            int Wonk = 0;
-            string fuck = "";
             SwordCheck = 0;
             DefendCheck = 0;
             CheckCheck = 0;
@@ -74,7 +72,7 @@ public class TheArena : MonoBehaviour {
         if (fuck[i] == 'S' || fuck[i] == 'W' || fuck[i] == '0' || fuck[i] == 'R' || fuck[i] == 'D') {
           SwordCheck += 1;
         }
-        if (fuck[i] == 'S' || fuck[i] == 'H' || fuck[i] == '1' || fuck[i] == 'E' || fuck[i] == 'L' || fuck[i] == 'D') {
+        if (fuck[i] == 'S' || fuck[i] == 'H' || fuck[i] == '1' || fuck[i] == '3' || fuck[i] == 'L' || fuck[i] == 'D') {
           DefendCheck += 1;
         }
         if (fuck[i] == 'C' || fuck[i] == 'A' || fuck[i] == '5' || fuck[i] == 'H') {
@@ -173,10 +171,12 @@ public class TheArena : MonoBehaviour {
       }
       yield return null;
     }
+
     #pragma warning disable 414
     private readonly string TwitchHelpMessage = @"Use !{0} attack/defend/grab to press that corresponding button.";
     #pragma warning restore 414
-    IEnumerator ProcessTwitchCommand(string command){
+
+    IEnumerator ProcessTwitchCommand(string command) {
       if (Regex.IsMatch(command, @"^\s*attack\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)){
         yield return null;
         Weed[0].OnInteract();
@@ -196,5 +196,10 @@ public class TheArena : MonoBehaviour {
         yield return "sendtochaterror The specified action could not be performed.";
         yield break;
       }
+    }
+
+    IEnumerator TwitchHandleForcedSolve () {
+      Weed[(kmjuyhghmgjhmgjuy + 1) % 3].OnInteract();
+      yield return null;
     }
 }

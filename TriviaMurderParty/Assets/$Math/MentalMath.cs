@@ -66,9 +66,8 @@ public class MentalMath : MonoBehaviour {
             fucker += 1;
             StartCoroutine(WeedChungus());
           }
-          else if (poggers == false) {
+          else if (poggers == false)
             return;
-          }
           else {
             GetComponent<KMBombModule>().HandleStrike();
             Debug.LogFormat("[Mental Math #{0}] You pressed the wrong number, strike numbnuts.", moduleId);
@@ -78,33 +77,24 @@ public class MentalMath : MonoBehaviour {
     }
 
     void PenisPress(){
-      if (poggers) {
+      if (poggers)
         return;
-      }
-      if (Weedtwo - Weed == 1) {
+      if (Weedtwo - Weed == 1)
         ThresshyBoy = 1;
-      }
-      else if (Weed / Weedtwo >= .81f) {
+      else if (Weed / Weedtwo >= .81f)
         ThresshyBoy = 5;
-      }
-      else if (Weed / Weedtwo >= .61f) {
+      else if (Weed / Weedtwo >= .61f)
         ThresshyBoy = 10;
-      }
-      else if (Weed / Weedtwo >= .41f) {
+      else if (Weed / Weedtwo >= .41f)
         ThresshyBoy = 15;
-      }
-      else if (Weed / Weedtwo >= .21f) {
+      else if (Weed / Weedtwo >= .21f)
         ThresshyBoy = 20;
-      }
-      else if (Weed / Weedtwo >= .01f) {
+      else if (Weed / Weedtwo >= .01f)
         ThresshyBoy = 25;
-      }
-      else if (Weed / Weedtwo == 0f) {
+      else if (Weed / Weedtwo == 0f)
         ThresshyBoy = 30;
-      }
-      else {
+      else
         ThresshyBoy = 1;
-      }
       Debug.LogFormat("[Mental Math #{0}] {1} module(s) need to be solved.", moduleId, ThresshyBoy);
       StartCoroutine(WeedChungus());
     }
@@ -199,7 +189,7 @@ public class MentalMath : MonoBehaviour {
     private readonly string TwitchHelpMessage = @"Use !{0} crank to start. Use !{0} # to press the button from top to bottom.";
     #pragma warning restore 414
 
-    IEnumerator ProcessTwitchCommand(string command){
+    IEnumerator ProcessTwitchCommand (string command){
       if (Regex.IsMatch(command, @"^\s*crank\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)){
         yield return null;
         WeedChungis.OnInteract();
@@ -228,6 +218,15 @@ public class MentalMath : MonoBehaviour {
       else {
         yield return "sendtochaterror I don't understand!";
         yield break;
+      }
+    }
+
+    IEnumerator TwitchHandleForcedSolve () {
+      if (!poggers)
+        WeedChungis.OnInteract();
+      while (fucker != ThresshyBoy) {
+        ModuleRicks[sugna[0]].OnInteract();
+        yield return new WaitForSecondsRealtime(.1f);
       }
     }
 }

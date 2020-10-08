@@ -20,6 +20,7 @@ public class Rules : MonoBehaviour {
     int Retard = 0;
     int Counter = 0;
     int ThresshyBoy = 0;
+    int ModulesSolved = 0;
 
     float Weed = 0f;
     float Weedtwo = 0f;
@@ -86,6 +87,8 @@ public class Rules : MonoBehaviour {
         else if (Weedtwo / Weed >= .01f)
           ThresshyBoy = 4;
         else
+          ThresshyBoy = 1;
+        if (ModulesSolved == 1)
           ThresshyBoy = 1;
         Debug.LogFormat("[Rules #{0}] {1} module(s) need to be solved.", moduleId, ThresshyBoy);
         RulePicker();
@@ -311,6 +314,7 @@ public class Rules : MonoBehaviour {
 
     void Update(){
       Weedtwo = Bomb.GetTime();
+      ModulesSolved = (Bomb.GetSolvableModuleNames().Count - Bomb.GetSolvedModuleNames().Count);
       if (Activate) {
         NowINeedATimerFuck += Time.deltaTime;
         if (NowINeedATimerFuck >= 30f && !TwitchPlaysActive) {
@@ -364,5 +368,19 @@ public class Rules : MonoBehaviour {
         yield return "sendtochaterror I don't understand!";
         yield break;
       }
+    }
+
+    IEnumerator TwitchHandleForcedSolve () {
+      if (!Activate) {
+        StartNowIGuessFuckYouImTerryDavis.OnInteract();
+        yield return new WaitForSecondsRealtime(.1f);
+      }
+      while (Counter != ThresshyBoy)
+        for (int i = 0; i < 4; i++)
+          if (Validity[i]) {
+            RuleButtons[i].OnInteract();
+            yield return new WaitForSecondsRealtime(.1f);
+            break;
+          }
     }
 }

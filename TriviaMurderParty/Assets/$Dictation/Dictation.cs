@@ -18,9 +18,15 @@ public class Dictation : MonoBehaviour {
     public GameObject Penis;
     public Material[] Penises;
 
-    static int moduleIdCounter = 1;
-    int moduleId;
-    private bool moduleSolved;
+    int fuck = 0;
+    int Ineedtopiss = 0;
+    int Peepee = 0;
+    int weed = 0;
+    int ineedanother = 0;
+
+    float Fanfare = 0f;
+    float NumAids = 0.05f;
+
     string Namtar = "QWERTYUIOPASDFGHJKLZXCVBNM<";
     private string[][] Aids = new string[52][]{
       new string[99]{"I" , "AM" , "SO" , "SORRY" , "FOR" , "BEING" , "AGGRESSIVE" , "ON" , "THE" , "TUTORIAL" , "I" , "dont" , "understand" , "how" , "it" , "worked" , "like" , "that" , "bus" , "was" , "way" , "too" , "scary" , "for" , "me" , "to" , "watch" , "and" , "I" , "just" , "felt" , "like" , "I" , "dont" , "know" , "what" , "I" , "am" , "watching" , "anymore" , "ACTUALLY" , "FUCK" , "IT" , "IM" , "MAD" , "I" , "GOT" , "GROUNDED" , "AFTER" , "I" , "PUNCHED" , "A" , "WHOLE" , "IN" , "MY" , "WALL" , "AFTER" , "WATCHING" , "YOUR" , "TUTORIALS" , "I" , "sorry" , "I" , "need" , "to" , "take" , "drugs" , "just" , "like" , "mom" , "says" , "and" , "no" , "more" , "Dr" , "Pepper" , "That" , "was" , "mean" , "and" , "I" , "dont" , "understand" , "it" , "please" , "make" , "sure" , "to" , "remake" , "this" , "tutorial" , "just" , "like" , "all" , "of" , "your" , "other" , "tutorials" , "Bye"},
@@ -76,22 +82,22 @@ public class Dictation : MonoBehaviour {
       new string[67]{"Yall" , "gone" , "pft" , "make" , "me" , "act" , "a" , "fool" , "pft" , "up" , "in" , "here" , "pft" , "up" , "in" , "here" , "pft" , "Yall" , "gone" , "pft" , "make" , "me" , "loose" , "my" , "pft" , "cool" , "up" , "in" , "here" , "pft" , "up" , "in" , "here" , "pft" , "Yall" , "gone" , "make" , "pft" , "me" , "bust" , "a" , "pft" , "smack" , "up" , "in" , "here" , "pft" , "up" , "in" , "here" , "pft" , "Yall" , "gone" , "make" , "pft" , "my" , "fingers" , "snap" , "pft" , "up" , "in" , "here" , "pft" , "up" , "in" , "here" , "pft"},
       new string[99]{"ADVANCED" , "ADVERTED" , "ADVOCATE" , "ADDITION" , "ALLOCATE" , "ALLOTYPE" , "ALLOTTED" , "ALTERING" , "PROGRESS" , "ZYGOTENE" , "QUARTICS" , "LINKAGES" , "QUICKEST" , "ORDERING" , "UNDOINGS" , "ZUGZWANG" , "BINARIES" , "BINORMAL" , "BINOMIAL" , "BILLIONS" , "BULKHEAD" , "BULLHORN" , "BULLETED" , "BULWARKS" , "YOKOZUNA" , "COMMANDO" , "GLOOMING" , "TRICKIER" , "GATEWAYS" , "INCOMING" , "ZYGOMATA" , "FORMULAE" , "CIPHERED" , "CIRCUITS" , "CONNECTS" , "CONQUERS" , "COMMANDO" , "COMPILER" , "COMPUTER" , "CONTINUE" , "BULKHEAD" , "RELATION" , "LINKWORK" , "NANOTUBE" , "MONOTONE" , "YIELDING" , "ILLUMINE" , "KILOBYTE" , "DECRYPTS" , "DECEIVED" , "DECIMATE" , "DIVISION" , "DISCOVER" , "DISCRETE" , "DISPATCH" , "DISPOSAL" , "NANOBOTS" , "QUINTICS" , "ZIGZAGGY" , "MONOMIAL" , "ULTERIOR" , "KNUCKLED" , "UNDERWAY" , "ULTRARED" , "ENCIPHER" , "ENCRYPTS" , "ENCODING" , "ENTRANCE" , "EQUALISE" , "EQUATORS" , "EQUATION" , "EQUIPPED" , "JUNKYARD" , "QUADRANT" , "TRIANGLE" , "RELAYING" , "NANOGRAM" , "CONNECTS" , "INDICATE" , "BINORMAL" , "FINALISE" , "FINISHED" , "FINDINGS" , "FINNICKY" , "FORMULAE" , "FORTUNES" , "FORTRESS" , "FORWARDS" , "DISCRETE" , "JUNCTION" , "KILOWATT" , "ROTATION" , "POSITRON" , "DISPATCH" , "ENCIPHER" , "STANDOUT" , "GARRISON" , "GARNERED" , "GATEPOST"}
     };
-    int fuck = 0;
-    int Ineedtopiss = 0;
-    float Fanfare = 0f;
-    int Peepee = 0;
-    float NumAids = 0.05f;
-    bool AidsCheck = false;
     string CheckAids = "";
-    int weed = 0;
     string fucker = "";
     string AidsAids = ",./!?()*&^%@$#%-+=|[]{};:\"\'<>~";
+
+    bool AidsCheck = false;
     bool FuckAids = false;
     bool ineedabooleanname = false;
-    int ineedanother = 0;
-#pragma warning disable 414
+    bool HasBeenActivated = false;
+
+    #pragma warning disable 414
     bool TwitchPlaysActive;
-#pragma warning restore 414
+    #pragma warning restore 414
+
+    static int moduleIdCounter = 1;
+    int moduleId;
+    private bool moduleSolved;
 
     void Awake () {
         moduleId = moduleIdCounter++;
@@ -106,7 +112,7 @@ public class Dictation : MonoBehaviour {
     }
 
     void Start () {
-      fuck = UnityEngine.Random.Range(0,Aids.Count());
+      fuck = UnityEngine.Random.Range(0, Aids.Count());
     }
 
     void KeyPress (KMSelectable Key) {
@@ -132,7 +138,7 @@ public class Dictation : MonoBehaviour {
       }
     }
 
-    void BackAssCrackPress(){
+    void BackAssCrackPress () {
       BackAssCrack.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, BackAssCrack.transform);
       if (moduleSolved || FuckAids) {
@@ -144,7 +150,7 @@ public class Dictation : MonoBehaviour {
       }
     }
 
-    void DowniePress(){
+    void DowniePress () {
       Lefttard.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Lefttard.transform);
       if (moduleSolved || FuckAids) {
@@ -173,7 +179,8 @@ public class Dictation : MonoBehaviour {
       }
     }
 
-    IEnumerator Uhhmm(){
+    IEnumerator Uhhmm () {
+      HasBeenActivated = true;
       Penis.GetComponent<MeshRenderer>().material = Penises[1];
       AidsCheck = true;
       for (int i = 0; i < Aids[fuck].Count(); i++) {
@@ -191,7 +198,7 @@ public class Dictation : MonoBehaviour {
         fucker += "-";
       }
       AidsMongerer.text = fucker;
-      Ineedtopiss = UnityEngine.Random.Range(0,Aids[fuck].Count());
+      Ineedtopiss = UnityEngine.Random.Range(0, Aids[fuck].Count());
       TacoBell.text = (Ineedtopiss + 1).ToString();
       AidsCheck = false;
       string Logmessage = "";
@@ -203,7 +210,7 @@ public class Dictation : MonoBehaviour {
       Debug.LogFormat("[Dictation #{0}] It asks for word number {1}, which is \"{2}\".", moduleId, Ineedtopiss + 1, Logaids);
     }
 
-    IEnumerator Fat(){
+    IEnumerator Fat () {
       Peepee = UnityEngine.Random.Range(0,Aids.Count());
       AidsMongerer.text = Aids[Peepee][UnityEngine.Random.Range(0,Aids[Peepee].Count())];
       TacoBell.text = (UnityEngine.Random.Range(0,100)).ToString();
@@ -221,7 +228,7 @@ public class Dictation : MonoBehaviour {
       StartCoroutine(Fat());
     }
 
-    IEnumerator MustDetonate(){
+    IEnumerator MustDetonate () {
       while (ineedabooleanname == false) {
       yield return new WaitForSeconds(Fanfare);
       if (Fanfare != .5f) {
@@ -235,7 +242,7 @@ public class Dictation : MonoBehaviour {
     }
     }
 
-    IEnumerator Swan(){
+    IEnumerator Swan () {
       if (ineedanother % 2 == 0) {
         Audio.PlaySoundAtTransform("Aids", transform);
       }
@@ -345,5 +352,24 @@ public class Dictation : MonoBehaviour {
           yield return "sendtochaterror Too little words!";
         }
       }
+    }
+
+    IEnumerator TwitchHandleForcedSolve () {
+      if (!HasBeenActivated) {
+        BackAssCrack.OnInteract();
+      }
+      while (AidsCheck) {
+        yield return null;
+      }
+      int TemporaryForAutoSolver = CheckAids.Length;
+      for (int i = 0; i < TemporaryForAutoSolver; i++) {
+        SmallAssholes[26].OnInteract();
+        yield return new WaitForSecondsRealtime(.1f);
+      }
+      for (int i = 0; i < Aids[fuck][Ineedtopiss].Length; i++) {
+        SmallAssholes[Namtar.IndexOf(Aids[fuck][Ineedtopiss][i].ToString().ToUpper())].OnInteract();
+        yield return new WaitForSecondsRealtime(.1f);
+      }
+      Lefttard.OnInteract();
     }
 }

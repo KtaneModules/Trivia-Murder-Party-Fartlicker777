@@ -35,31 +35,24 @@ public class PixelArt : MonoBehaviour {
     void BurgerPress(KMSelectable Burger) {
       Burger.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Burger.transform);
-      if (Active[1] != true) {
+      if (Active[1] != true)
         return;
-      }
-      for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++) {
+      for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++)
         if (Burger == FastFoodChains[i]) {
-          if (ButtonTrueThing[i] == null) {
+          if (ButtonTrueThing[i] == null)
             ButtonTrueThing[i] = true;
-          }
-          else {
+          else
             ButtonTrueThing[i] = !ButtonTrueThing[i];
-          }
-          if (ButtonTrueThing[i] == true) {
+          if (ButtonTrueThing[i] == true)
             Weed[i].GetComponent<MeshRenderer>().material = Colores[1];
-          }
-          else {
+          else
             Weed[i].GetComponent<MeshRenderer>().material = Colores[0];
-          }
-        }
       }
     }
 
     void ChungusPress() {
-      if (Active[1] == true) {
+      if (Active[1] == true)
         StartCoroutine(FatmanInbound());
-      }
       else if (Active[0] != true) {
         Active[0] = true;
         StartCoroutine(ChungusGenerator());
@@ -80,39 +73,32 @@ public class PixelArt : MonoBehaviour {
         }
       }
       yield return new WaitForSeconds(10f);
-      for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++) {
+      for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++)
         Weed[i].GetComponent<MeshRenderer>().material = Colores[3];
-      }
       Active[1] = true;
     }
 
     IEnumerator FatmanInbound() {
-      //Debug.LogFormat("[Pixel Art #{0}] You submitted:", moduleId);
       Active[1] = false;
       for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++) {
-        if (ButtonTrueThing[i] == null) {
+        if (ButtonTrueThing[i] == null)
           Debug.LogFormat("[Pixel Art #{0}] Black", moduleId);
-        }
-        else if (ButtonTrueThing[i] == false) {
+        else if (ButtonTrueThing[i] == false)
           Debug.LogFormat("[Pixel Art #{0}] White", moduleId);
-        }
-        else {
+        else
           Debug.LogFormat("[Pixel Art #{0}] Red", moduleId);
-        }
       }
       for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++) {
-        if (eXishsTwoTruthsAndALieWillNeverBeFinished[i] == ButtonTrueThing[i]) {
+        if (eXishsTwoTruthsAndALieWillNeverBeFinished[i] == ButtonTrueThing[i])
           Weed[i].GetComponent<MeshRenderer>().material = Colores[2];
-        }
         else {
           Weed[i].GetComponent<MeshRenderer>().material = Colores[1];
           Active[2] = false;
         }
         yield return new WaitForSeconds(.1f);
       }
-      if (Active[2] == true) {
+      if (Active[2] == true)
         GetComponent<KMBombModule>().HandlePass();
-      }
       else {
         GetComponent<KMBombModule>().HandleStrike();
         for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++) {
@@ -139,9 +125,8 @@ public class PixelArt : MonoBehaviour {
         yield return "sendtochaterror Invalid command!";
         yield break;
       }
-      if (Parameters[0].ToString().ToLower() == "start" || Parameters[0].ToString().ToLower() == "submit") {
+      if (Parameters[0].ToString().ToLower() == "start" || Parameters[0].ToString().ToLower() == "submit")
         Chungus.OnInteract();
-      }
       else if (Parameters[0].ToString().ToLower() == "toggle") {
         for (int i = 1; i < Parameters.Length; i++) {
           if (Parameters[i].Length != 2) {
@@ -152,44 +137,47 @@ public class PixelArt : MonoBehaviour {
             yield return "sendtochaterror That does not exist!";
             yield break;
           }
-          else if (Parameters[i][1].ToString() == "1") {
+          else if (Parameters[i][1].ToString() == "1")
             Index += 0;
-          }
-          else if (Parameters[i][1].ToString() == "2") {
+          else if (Parameters[i][1].ToString() == "2")
             Index += 4;
-          }
-          else if (Parameters[i][1].ToString() == "3") {
+          else if (Parameters[i][1].ToString() == "3")
             Index += 9;
-          }
-          else if (Parameters[i][1].ToString() == "4") {
+          else if (Parameters[i][1].ToString() == "4")
             Index += 14;
-          }
-          else if (Parameters[i][1].ToString() == "5") {
+          else if (Parameters[i][1].ToString() == "5")
             Index += 19;
-          }
           else {
             yield return "sendtochaterror Invalid command!";
             yield break;
           }
-          if (Parameters[i][0].ToString().ToLower() == "a") {
+          if (Parameters[i][0].ToString().ToLower() == "a")
             Index += 1;
-          }
-          else if (Parameters[i][0].ToString().ToLower() == "b") {
+          else if (Parameters[i][0].ToString().ToLower() == "b")
             Index += 2;
-          }
-          else if (Parameters[i][0].ToString().ToLower() == "c") {
+          else if (Parameters[i][0].ToString().ToLower() == "c")
             Index += 3;
-          }
-          else if (Parameters[i][0].ToString().ToLower() == "d") {
+          else if (Parameters[i][0].ToString().ToLower() == "d")
             Index += 4;
-          }
-          else if (Parameters[i][0].ToString().ToLower() == "e") {
+          else if (Parameters[i][0].ToString().ToLower() == "e")
             Index += 5;
-          }
           Index -= 1;
           FastFoodChains[Index].OnInteract();
-          Index = 0;
+          Index &= 0;
         }
       }
+    }
+
+    IEnumerator TwitchHandleForcedSolve () {
+      if (!Active[0]) {
+        Chungus.OnInteract();
+        yield return new WaitForSecondsRealtime(.1f);
+      }
+      for (int i = 0; i < 24; i++)
+        while (ButtonTrueThing[i] != eXishsTwoTruthsAndALieWillNeverBeFinished[i]) {
+          FastFoodChains[i].OnInteract();
+          yield return new WaitForSecondsRealtime(.1f);
+        }
+      Chungus.OnInteract();
     }
 }
