@@ -228,5 +228,7 @@ public class MentalMath : MonoBehaviour {
         ModuleRicks[sugna[0]].OnInteract();
         yield return new WaitForSecondsRealtime(.1f);
       }
+      while (!moduleSolved)
+        yield return true; //Man I don't fucking care eXish
     }
 }

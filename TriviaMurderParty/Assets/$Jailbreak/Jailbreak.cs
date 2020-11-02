@@ -17,15 +17,18 @@ public class Jailbreak : MonoBehaviour {
     public TextMesh Emotiguy;
     public TextMesh NotEmotiguy;
     public TextMesh UselessShit;
+
+    int Cock = 90;
+
     string MyDickisSoLongitStretchesFromAtoZ = "QWERTYUIOPASDFGHJKLZXCVBNM";
     string Yanked = "";
     string NuggetInABiscuit = "";
     string[] TPProtectedWords = new string[5] { "HELP", "VIEW", "SHOW", "ZOOM", "TILT" };
-    int Cock = 90;
-    bool Check = false;
-    bool IWillTimeYourDeath = false;
-    bool shutup = false;
-    bool No = false;
+
+    bool Check;
+    bool IWillTimeYourDeath;
+    bool shutup;
+    bool No;
     #pragma warning disable 0649
     bool TwitchPlaysActive;
     #pragma warning restore 0649
@@ -45,25 +48,21 @@ public class Jailbreak : MonoBehaviour {
 
     // Use this for initialization
     void Activate () {
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < 4; i++)
         Aids[i].text = "_";
-      }
       NotEmotiguy.text = "Query";
       StartCoroutine(IWillPurgeTheWeak());
     }
 
     void PenisPress(KMSelectable Penis) {
       Audio.PlaySoundAtTransform("Clack", Penis.transform);
-      Penis.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Penis.transform);
-      if (No) {
+      if (No)
         return;
-      }
       for (int i = 0; i < 27; i++) {
-        if (moduleSolved) {
+        if (moduleSolved)
           return;
-        }
-        if (IWillTimeYourDeath == false) {
+        if (!IWillTimeYourDeath) {
           StartCoroutine(SoonThatAttitudeWillBeYourDoom());
           StartCoroutine(hgjymgjuyhkhgjymijuyhkhftjuyhjuymgfhjvmghgjmfhgjmfnhgjymfnhgjhgfnhgfjygfhhtjuyhmgfjyhjuymghgjymfhmgnbjmgnbjhnbhvmnFUCKWEEDhgfjyhcgnbhjymgfhmgnjhjymghmjgnhmgnj());
         }
@@ -86,12 +85,11 @@ public class Jailbreak : MonoBehaviour {
           NotEmotiguy.text = NuggetInABiscuit;
         }
         else if (Penis == Lomp[i] && i == 26 && NuggetInABiscuit.Length == 4) {
-          for (int j = 0; j < AidsList.Phrases.Count(); j++) {
+          for (int j = 0; j < AidsList.Phrases.Count(); j++)
             if (NuggetInABiscuit.ToLower() == AidsList.Phrases[j]) {
               Check = true;
               break;
             }
-          }
             for (int j = 0; j < 4; j++)
               if (NuggetInABiscuit[j].ToString().ToLower() == Yanked[j].ToString() && Check)
                 Aids[j].text = NuggetInABiscuit[j].ToString();
@@ -149,24 +147,20 @@ public class Jailbreak : MonoBehaviour {
         StartCoroutine(IWillPurgeTheWeak());
         IWillTimeYourDeath = false;
         Cock = 90;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++)
           Aids[i].text = "_";
-        }
       }
-      else {
+      else
         StartCoroutine(SoonThatAttitudeWillBeYourDoom());
-      }
     }
 
     IEnumerator hgjymgjuyhkhgjymijuyhkhftjuyhjuymgfhjvmghgjmfhgjmfnhgjymfnhgjhgfnhgfjygfhhtjuyhmgfjyhjuymghgjymfhmgnbjmgnbjhnbhvmnFUCKWEEDhgfjyhcgnbhjymgfhmgnjhjymghmjgnhmgnj(){
       yield return new WaitForSeconds(0.2f);
       Audio.PlaySoundAtTransform("tick", transform);
-      if (shutup) {
+      if (shutup)
         yield return null;
-      }
-      else {
+      else
         StartCoroutine(hgjymgjuyhkhgjymijuyhkhftjuyhjuymgfhjvmghgjmfhgjmfnhgjymfnhgjhgfnhgfjygfhhtjuyhmgfjyhjuymghgjymfhmgnbjmgnbjhnbhvmnFUCKWEEDhgfjyhcgnbhjymgfhmgnjhjymghmjgnhmgnj());
-      }
     }
 
     IEnumerator SolveThing(){
@@ -174,9 +168,8 @@ public class Jailbreak : MonoBehaviour {
         WeedChungus.StopSound();
         WeedChungus = null;
       }
-      for (int j = 0; j < 4; j++) {
+      for (int j = 0; j < 4; j++)
         Aids[j].text = Yanked[j].ToString().ToUpper();
-      }
       yield return new WaitForSeconds(3f);
       if (Aids[0].text.ToString() != "J") {
         Aids[0].text = "J";
@@ -194,16 +187,11 @@ public class Jailbreak : MonoBehaviour {
         Aids[3].text = "L";
         yield return new WaitForSeconds(1f);
       }
-      NotEmotiguy.text = "B";
-      yield return new WaitForSeconds(.2f);
-      NotEmotiguy.text = "BR";
-      yield return new WaitForSeconds(.2f);
-      NotEmotiguy.text = "BRO";
-      yield return new WaitForSeconds(.2f);
-      NotEmotiguy.text = "BROK";
-      yield return new WaitForSeconds(.2f);
-      NotEmotiguy.text = "BROKE";
-      yield return new WaitForSeconds(.2f);
+      NotEmotiguy.text = "";
+      for (int i = 0; i < 5; i++) {
+        NotEmotiguy.text += "BROKE"[i].ToString();
+        yield return new WaitForSeconds(.2f);
+      }
       Emotiguy.text = "";
       UselessShit.text = "?!";
       Debug.LogFormat("[Jailbreak #{0}] You guessed the word. Module disarmed.", moduleId);
