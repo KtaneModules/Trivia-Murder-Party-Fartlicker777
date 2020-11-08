@@ -23,7 +23,8 @@ MonoBehaviour:
     by TasThing): The Dumb Waiters Minigame from game 2\r\n\nChalices: The minigame
     of the same name from both games.\n\nPixel Art: The Memory minigame from games
     1 and 2.\n\nRules: The Rules minigame from game 2.\n\r\nManuals can be found at
-    https://ktane.timwi.de/\r\n"
+    https://ktane.timwi.de/\r\n\nIf there are any bugs, contact Fartlicker777#9169
+    on Discord.\n"
   version: 
   outputFolder: build
   previewImage: {fileID: 2800000, guid: fc5296ea9e8ddf743a927727c6a68038, type: 3}

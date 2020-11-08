@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 114949059805340958}
   - component: {fileID: 114019871628113558}
   m_Layer: 0
-  m_Name: Chalices
+  m_Name: PixelArt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
