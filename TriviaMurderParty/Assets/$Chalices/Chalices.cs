@@ -216,7 +216,7 @@ public class Chalices : MonoBehaviour {
           Debug.LogFormat("[Chalices #{0}] M's condition is true.", moduleId);
         }
       }
-      if (Bomb.IsIndicatorPresent("CAR") || Bomb.IsIndicatorPresent("CLR") || Bomb.IsIndicatorPresent("MSA") || Bomb.IsIndicatorPresent("NSA") || Bomb.IsIndicatorPresent("SIG") || Bomb.IsIndicatorPresent("SND")) { //n
+      if (Bomb.IsIndicatorPresent("CAR") || Bomb.IsIndicatorPresent("CLR") || Bomb.IsIndicatorPresent("IND") || Bomb.IsIndicatorPresent("MSA") || Bomb.IsIndicatorPresent("NSA") || Bomb.IsIndicatorPresent("SIG") || Bomb.IsIndicatorPresent("SND")) { //n
         Conditions[13] = true;
         Debug.LogFormat("[Chalices #{0}] N's condition is true.", moduleId);
       }
