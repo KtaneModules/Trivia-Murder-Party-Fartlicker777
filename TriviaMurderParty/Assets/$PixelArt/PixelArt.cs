@@ -171,7 +171,7 @@ public class PixelArt : MonoBehaviour {
     IEnumerator TwitchHandleForcedSolve () {
       if (!Active[0]) {
         Chungus.OnInteract();
-        yield return new WaitForSecondsRealtime(.1f);
+        yield return null;
       }
       for (int i = 0; i < 24; i++)
         while (ButtonTrueThing[i] != eXishsTwoTruthsAndALieWillNeverBeFinished[i]) {

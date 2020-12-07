@@ -73,8 +73,8 @@ public class Dictation : MonoBehaviour {
       new string[56]{"Do" , "you" , "ever" , "wonder" , "about" , "who" , "makes" , "these" , "bombs" , "I" , "mean" , "the" , "module" , "ideas" , "are" , "made" , "by" , "real" , "people" , "but" , "then" , "youre" , "given" , "the" , "bomb" , "right" , "Where" , "did" , "the" , "bomb" , "come" , "from" , "How" , "much" , "money" , "has" , "been" , "spent" , "on" , "creating" , "bombs" , "so" , "that" , "they" , "could" , "be" , "defused" , "for" , "fun" , "How" , "many" , "families" , "have" , "sued" , "this" , "company"},
       new string[49]{"Before" , "we" , "begin" , "this" , "message" , "was" , "sponsored" , "in" , "part" , "by" , "the" , "Colour" , "Talk" , "Pack" , "which" , "has" , "nothing" , "to" , "do" , "with" , "colours" , "It" , "was" , "also" , "sponsored" , "by" , "the" , "Trivia" , "Murder" , "Pack" , "which" , "is" , "sponsored" , "by" , "Jackbox" , "games" , "Thank" , "you" , "for" , "playing" , "Your" , "actual" , "message" , "will" , "begin" , "in" , "three" , "two" , "one"}
     };
-    string CheckAids;
-    string fucker;
+    string CheckAids = "";
+    string fucker = "";
     string AidsAids = ",./!?()*&^%@$#%-+=|[]{};:\"\'<>~\\";
     string SwanString = "SYSTEM FAILURE";
 
@@ -128,7 +128,7 @@ public class Dictation : MonoBehaviour {
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, BackAssCrack.transform);
       if (moduleSolved || FuckAids)
         return;
-      if (AidsCheck == false) {
+      if (!AidsCheck) {
         StartCoroutine(Uhhmm());
         CheckAids = "";
       }
@@ -210,7 +210,7 @@ public class Dictation : MonoBehaviour {
     }
 
     IEnumerator MustDetonate () {
-      while (ineedabooleanname == false) {
+      while (!ineedabooleanname) {
       yield return new WaitForSeconds(Fanfare);
       if (Fanfare != .5f)
         Fanfare -= .5f;
@@ -249,7 +249,7 @@ public class Dictation : MonoBehaviour {
       command = command.Trim().ToUpper();
       string[] parameters = command.Split(' ');
       yield return null;
-      if (Regex.IsMatch(parameters[0], @"^\s*submit\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
+      if (parameters[0].ToLower() == "submit") {
         if (parameters.Length > 2)
           yield return "sendtochaterror Too many words!";
         else if (parameters.Length == 2) {
@@ -265,15 +265,16 @@ public class Dictation : MonoBehaviour {
                   DumbassCheckass++;
               }
             }
-            Debug.Log(DumbassCheckass);
-            Debug.Log(parameters[1].Length);
-            if (DumbassCheckass == parameters[1].Length)
-              for (int i = 0; i < parameters[1].Length; i++)
-                for (int j = 0; j < 26; j++)
+            if (DumbassCheckass == parameters[1].Length) {
+              for (int i = 0; i < parameters[1].Length; i++) {
+                for (int j = 0; j < 26; j++) {
                   if (parameters[1][i].ToString().ToUpper() == Namtar[j].ToString()) {
                     SmallAssholes[j].OnInteract();
                     yield return new WaitForSeconds(.1f);
                   }
+                }
+              }
+            }
             else {
               yield return "sendtochaterror Invalid Character!";
               CheckAids = "";
@@ -293,9 +294,8 @@ public class Dictation : MonoBehaviour {
     }
 
     IEnumerator TwitchHandleForcedSolve () {
-      if (!HasBeenActivated) {
+      if (!HasBeenActivated)
         BackAssCrack.OnInteract();
-      }
       while (AidsCheck)
         yield return null;
       int TemporaryForAutoSolver = CheckAids.Length;

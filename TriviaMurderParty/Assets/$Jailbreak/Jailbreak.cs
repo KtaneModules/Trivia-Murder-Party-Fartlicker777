@@ -243,6 +243,8 @@ public class Jailbreak : MonoBehaviour {
         string WhateverTheFuck = "";
         int WhateverTheHell = 0;
         WhateverTheFuck = AidsList.Phrases[UnityEngine.Random.Range(0, AidsList.Phrases.Count())];
+        if (Cock <= 3)
+          WhateverTheFuck = Yanked;
         for (int i = 0; i < 4; i++)
           if (Aids[i].text != "_")
             WhateverTheHell++;
