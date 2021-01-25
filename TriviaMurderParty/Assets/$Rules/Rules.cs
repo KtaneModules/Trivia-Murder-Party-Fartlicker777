@@ -74,7 +74,7 @@ public class Rules : MonoBehaviour {
     void TerryPress () {
       if (!Activate) {
         Activate = true;
-        if (Weedtwo <= 1)
+        if (Weedtwo <= 1 || Weed == 0)
           ThresshyBoy = 1;
         else if (Weedtwo / Weed >= .81f)
           ThresshyBoy = 20;
@@ -145,9 +145,9 @@ public class Rules : MonoBehaviour {
         }
         if (PossibilitiesForLetters == "..........................")
           goto how;
-        LuckyLetter = PossibilitiesForLetters[UnityEngine.Random.Range(0,PossibilitiesForLetters.Length)];
-        while (LuckyLetter == '.' || LuckyLetter == ' ')
+        do {
           LuckyLetter = PossibilitiesForLetters[UnityEngine.Random.Range(0,PossibilitiesForLetters.Length)];
+        } while (LuckyLetter == '.' || LuckyLetter == ' ');
         for (int i = 0; i < 4; i++)
           if (Options[i].text.Contains(LuckyLetter))
             Validity[i] = true;
@@ -318,18 +318,17 @@ public class Rules : MonoBehaviour {
       if (Activate) {
         NowINeedATimerFuck += Time.deltaTime;
         if (NowINeedATimerFuck >= 30f && !TwitchPlaysActive) {
-          Activate = false;
-          NowINeedATimerFuck = 0f;
           StartCoroutine(Check());
         }
         else if (NowINeedATimerFuck >= 100f && TwitchPlaysActive) {
-          Activate = false;
           StartCoroutine(Check());
         }
       }
     }
 
     IEnumerator Check () {
+      NowINeedATimerFuck = 0f;
+      Activate = false;
       for (int i = 0; i < 4; i++)
         Options[i].text = "";
       TheRuleTM.text = Counter.ToString() + " out of " + ThresshyBoy.ToString();

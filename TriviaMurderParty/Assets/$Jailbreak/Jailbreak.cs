@@ -93,7 +93,7 @@ public class Jailbreak : MonoBehaviour {
             for (int j = 0; j < 4; j++)
               if (NuggetInABiscuit[j].ToString().ToLower() == Yanked[j].ToString() && Check)
                 Aids[j].text = NuggetInABiscuit[j].ToString();
-            if (Check == false)
+            if (!Check)
               Debug.LogFormat("[Jailbreak #{0}] You queried {1}, but that is not a word!", moduleId, NuggetInABiscuit);
             else
               Debug.LogFormat("[Jailbreak #{0}] You queried {1}. It shows {2} {3} {4} {5}.", moduleId, NuggetInABiscuit, Aids[0].text, Aids[1].text, Aids[2].text, Aids[3].text);
@@ -142,7 +142,7 @@ public class Jailbreak : MonoBehaviour {
         No = true;
         yield return new WaitForSecondsRealtime(5f);
         No = false;
-        GetComponent<KMBombModule>().HandleStrike();
+        //GetComponent<KMBombModule>().HandleStrike();
         Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
         StartCoroutine(IWillPurgeTheWeak());
         IWillTimeYourDeath = false;

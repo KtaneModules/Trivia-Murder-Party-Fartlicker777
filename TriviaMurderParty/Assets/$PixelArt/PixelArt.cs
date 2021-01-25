@@ -16,7 +16,7 @@ public class PixelArt : MonoBehaviour {
     public KMSelectable Chungus;
 
     bool[] eXishsTwoTruthsAndALieWillNeverBeFinished = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
-    bool?[] ButtonTrueThing = {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null};
+    bool[] ButtonTrueThing = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
     bool[] Active = {false, false, true};
 
     static int moduleIdCounter = 1;
@@ -35,15 +35,12 @@ public class PixelArt : MonoBehaviour {
     void BurgerPress(KMSelectable Burger) {
       Burger.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Burger.transform);
-      if (Active[1] != true)
+      if (!Active[1])
         return;
       for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++)
         if (Burger == FastFoodChains[i]) {
-          if (ButtonTrueThing[i] == null)
-            ButtonTrueThing[i] = true;
-          else
-            ButtonTrueThing[i] = !ButtonTrueThing[i];
-          if (ButtonTrueThing[i] == true)
+          ButtonTrueThing[i] = !ButtonTrueThing[i];
+          if (ButtonTrueThing[i])
             Weed[i].GetComponent<MeshRenderer>().material = Colores[1];
           else
             Weed[i].GetComponent<MeshRenderer>().material = Colores[0];
@@ -51,9 +48,9 @@ public class PixelArt : MonoBehaviour {
     }
 
     void ChungusPress() {
-      if (Active[1] == true)
+      if (Active[1])
         StartCoroutine(FatmanInbound());
-      else if (Active[0] != true) {
+      else if (!Active[0]) {
         Active[0] = true;
         StartCoroutine(ChungusGenerator());
       }
@@ -72,18 +69,16 @@ public class PixelArt : MonoBehaviour {
           Debug.LogFormat("[Pixel Art #{0}] White.", moduleId);
         }
       }
-      yield return new WaitForSeconds(10f);
+      yield return new WaitForSeconds(7f);
       for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++)
-        Weed[i].GetComponent<MeshRenderer>().material = Colores[3];
+        Weed[i].GetComponent<MeshRenderer>().material = Colores[0];
       Active[1] = true;
     }
 
     IEnumerator FatmanInbound() {
       Active[1] = false;
       for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++) {
-        if (ButtonTrueThing[i] == null)
-          Debug.LogFormat("[Pixel Art #{0}] Black", moduleId);
-        else if (ButtonTrueThing[i] == false)
+        if (!ButtonTrueThing[i])
           Debug.LogFormat("[Pixel Art #{0}] White", moduleId);
         else
           Debug.LogFormat("[Pixel Art #{0}] Red", moduleId);
@@ -97,13 +92,13 @@ public class PixelArt : MonoBehaviour {
         }
         yield return new WaitForSeconds(.1f);
       }
-      if (Active[2] == true)
+      if (Active[2])
         GetComponent<KMBombModule>().HandlePass();
       else {
         GetComponent<KMBombModule>().HandleStrike();
         for (int i = 0; i < eXishsTwoTruthsAndALieWillNeverBeFinished.Count(); i++) {
           eXishsTwoTruthsAndALieWillNeverBeFinished[i] = false;
-          ButtonTrueThing[i] = null;
+          ButtonTrueThing[i] = false;
           Weed[i].GetComponent<MeshRenderer>().material = Colores[3];
         }
         Active[0] = false;
