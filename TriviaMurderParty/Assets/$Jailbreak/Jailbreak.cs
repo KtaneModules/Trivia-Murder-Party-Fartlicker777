@@ -143,6 +143,7 @@ public class Jailbreak : MonoBehaviour {
         yield return new WaitForSecondsRealtime(5f);
         No = false;
         //GetComponent<KMBombModule>().HandleStrike();
+        NotEmotiguy.text = "Query";
         Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
         StartCoroutine(IWillPurgeTheWeak());
         IWillTimeYourDeath = false;
@@ -243,6 +244,8 @@ public class Jailbreak : MonoBehaviour {
         string WhateverTheFuck = "";
         int WhateverTheHell = 0;
         WhateverTheFuck = AidsList.Phrases[UnityEngine.Random.Range(0, AidsList.Phrases.Count())];
+        if (Cock <= 3)
+          WhateverTheFuck = Yanked;
         if (Cock <= 3)
           WhateverTheFuck = Yanked;
         for (int i = 0; i < 4; i++)

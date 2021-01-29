@@ -370,16 +370,19 @@ public class Rules : MonoBehaviour {
     }
 
     IEnumerator TwitchHandleForcedSolve () {
-      if (!Activate) {
-        StartNowIGuessFuckYouImTerryDavis.OnInteract();
-        yield return new WaitForSecondsRealtime(.1f);
+      while (!moduleSolved) {
+        if (!Activate) {
+          StartNowIGuessFuckYouImTerryDavis.OnInteract();
+          yield return new WaitForSecondsRealtime(.1f);
+        }
+        while (Counter != ThresshyBoy)
+          for (int i = 0; i < 4; i++)
+            if (Validity[i]) {
+              RuleButtons[i].OnInteract();
+              yield return new WaitForSecondsRealtime(.1f);
+              break;
+            }
+        yield return true;
       }
-      while (Counter != ThresshyBoy)
-        for (int i = 0; i < 4; i++)
-          if (Validity[i]) {
-            RuleButtons[i].OnInteract();
-            yield return new WaitForSecondsRealtime(.1f);
-            break;
-          }
     }
 }

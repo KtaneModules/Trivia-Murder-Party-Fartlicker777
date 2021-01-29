@@ -229,6 +229,6 @@ public class MentalMath : MonoBehaviour {
         yield return new WaitForSecondsRealtime(.1f);
       }
       while (!moduleSolved)
-        yield return null; //Man I don't fucking care eXish
+        yield return true; //Man I don't fucking care eXish
     }
 }

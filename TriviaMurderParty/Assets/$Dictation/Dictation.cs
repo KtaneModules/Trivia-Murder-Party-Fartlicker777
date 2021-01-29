@@ -297,7 +297,7 @@ public class Dictation : MonoBehaviour {
       if (!HasBeenActivated)
         BackAssCrack.OnInteract();
       while (AidsCheck)
-        yield return null;
+        yield return true;
       int TemporaryForAutoSolver = CheckAids.Length;
       for (int i = 0; i < TemporaryForAutoSolver; i++) {
         SmallAssholes[26].OnInteract();
