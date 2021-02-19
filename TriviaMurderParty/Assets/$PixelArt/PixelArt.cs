@@ -18,6 +18,7 @@ public class PixelArt : MonoBehaviour {
     bool[] eXishsTwoTruthsAndALieWillNeverBeFinished = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
     bool[] ButtonTrueThing = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
     bool[] Active = {false, false, true};
+    bool Retard = false;
 
     static int moduleIdCounter = 1;
     int moduleId;
@@ -164,8 +165,12 @@ public class PixelArt : MonoBehaviour {
     }
 
     IEnumerator TwitchHandleForcedSolve () {
-      if (!Active[0]) {
+      if (!Active[0] && !Retard) {
         Chungus.OnInteract();
+        Retard = true;
+        yield return true;
+      }
+      if (Retard) {
         yield return true;
       }
       for (int i = 0; i < 24; i++)

@@ -32,6 +32,7 @@ public class Rules : MonoBehaviour {
     string[] Introtexts = {"You will fail", "The timer is ticking", "It is inevitable", "Better flee", "Give up", "There is no hope"};
     string[] RulesIGuess = {"Press a word\nwith the letter\n", "Press the\nshortest word", "Press the\nlongest word", "Press an\neven number", "Press an\nodd number", "Press the\n{0} button"};
     string[] NotRulesIGuess = {"Don't press a\nword with the\nletter ", "Don't press\nthe shortest\nword", "Don't press\nthe longest\nword", "Don't press\nan even\nnumber", "Don't press\nan odd number", "Don't press\nthe {0}\nbutton"};
+    string[] Ignored = null;
     string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     string PossibilitiesForLetters = "";
     string ForMrsKwan = "https://www.youtube.com/watch?v=7ExEXoTm4Dc";
@@ -62,6 +63,30 @@ public class Rules : MonoBehaviour {
     void Start () {
       UselessShit();
       Weed = Bomb.GetTime();
+      if (Ignored == null)
+        {
+            Ignored = GetComponent<KMBossModule>().GetIgnoredModules("Rules", new string[]{
+                "Forget Me Not",     //Mandatory to prevent unsolvable bombs.
+                "Forget Everything", //Cruel FMN.
+                "Turn The Key",      //TTK is timer based, and stalls the bomb if only it and FI are left.
+                "Souvenir",          //Similar situation to TTK, stalls the bomb.
+                "The Time Keeper",   //Again, timilar to TTK.
+                "Forget This",
+                "Simon's Stages",
+                "Timing is Everything",
+                "Organization", //Also mandatory to prevent unsolvable bombs. Shit mod.
+                "The Swan",
+                "Hogwarts",
+                "Divided Squares",
+                "Cookie Jars",
+                "Turn The Keys",
+                "Forget Them All",
+                "Tallordered Keys",
+                "Purgatory",
+                "Forget Us Not",
+                "Forget Perspective"
+            });
+        }
     }
 
     void UselessShit () {
@@ -74,7 +99,7 @@ public class Rules : MonoBehaviour {
     void TerryPress () {
       if (!Activate) {
         Activate = true;
-        if (Weedtwo <= 1 || Weed == 0)
+        if (Weedtwo <= 60 || Weed == 0)
           ThresshyBoy = 1;
         else if (Weedtwo / Weed >= .81f)
           ThresshyBoy = 20;
@@ -88,7 +113,7 @@ public class Rules : MonoBehaviour {
           ThresshyBoy = 4;
         else
           ThresshyBoy = 1;
-        if (ModulesSolved == 1)
+        if (ModulesSolved <= 1)
           ThresshyBoy = 1;
         Debug.LogFormat("[Rules #{0}] {1} module(s) need to be solved.", moduleId, ThresshyBoy);
         RulePicker();
@@ -127,6 +152,7 @@ public class Rules : MonoBehaviour {
       switch (Fatass) {
         case 0:
         how:
+        PossibilitiesForLetters = "";
         for (int i = 0; i < 4; i++) {
           Options[i].text = WordsOfAids[UnityEngine.Random.Range(0, WordsOfAids.Length)];
           ShutTheFuckUp += Options[i].text;
@@ -314,7 +340,7 @@ public class Rules : MonoBehaviour {
 
     void Update(){
       Weedtwo = Bomb.GetTime();
-      ModulesSolved = (Bomb.GetSolvableModuleNames().Count - Bomb.GetSolvedModuleNames().Count);
+      ModulesSolved = ((Bomb.GetSolvableModuleNames().Count - Ignored.Length) - Bomb.GetSolvedModuleNames().Count);
       if (Activate) {
         NowINeedATimerFuck += Time.deltaTime;
         if (NowINeedATimerFuck >= 30f && !TwitchPlaysActive) {
@@ -335,6 +361,7 @@ public class Rules : MonoBehaviour {
       yield return new WaitForSecondsRealtime(3f);
       if (Counter >= ThresshyBoy) {
         GetComponent<KMBombModule>().HandlePass();
+        moduleSolved = true;
         Debug.LogFormat("[Rules #{0}] You followed {1} rules correctly out of the required minimum of {2}. Module disarmed.", moduleId, Counter.ToString(), ThresshyBoy.ToString());
       }
       else {
@@ -347,7 +374,7 @@ public class Rules : MonoBehaviour {
     }
 
     #pragma warning disable 414
-    private readonly string TwitchHelpMessage = @"Use !{0} use 1/2/3/4 to press the corresponding button from top to bottom.";
+    private readonly string TwitchHelpMessage = @"Use !{0} 1/2/3/4 to press the corresponding button from top to bottom. oh and use !{0} start to start it i guess";
     #pragma warning restore 414
 
     IEnumerator ProcessTwitchCommand (string Command) {
