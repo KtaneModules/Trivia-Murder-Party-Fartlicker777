@@ -167,6 +167,7 @@ public class Skewers : MonoBehaviour {
                Top.transform.Rotate(3.6f, 0, 0);
                yield return new WaitForSecondsRealtime(.01f);
             }
+            Audio.PlaySoundAtTransform("Close", transform);
             GemColors.Clear();
             ValidSpots.Clear();
             for (int i = 0; i < 16; i++) {
@@ -210,7 +211,7 @@ public class Skewers : MonoBehaviour {
          BottomSwords.transform.localPosition -= new Vector3(0, 0, .01f);
          LeftSwords.transform.localPosition -= new Vector3(.01f, 0, 0);
          RightSwords.transform.localPosition += new Vector3(.01f, 0, 0);
-         if (i == 1) {
+         if (i == 2) {
             Audio.PlaySoundAtTransform("Tearing", transform);
          }
          yield return new WaitForSecondsRealtime(.01f);
