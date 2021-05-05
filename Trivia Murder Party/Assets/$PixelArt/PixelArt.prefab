@@ -4788,8 +4788,8 @@ MonoBehaviour:
   Highlight: {fileID: 114570430299588062}
   SelectableColliders: []
   DefaultSelectableIndex: 0
-  AllowSelectionWrapX: 0
-  AllowSelectionWrapY: 0
+  AllowSelectionWrapX: 1
+  AllowSelectionWrapY: 1
   ForceSelectionHighlight: 0
   ForceInteractionHighlight: 0
 --- !u!114 &114988773359885756
