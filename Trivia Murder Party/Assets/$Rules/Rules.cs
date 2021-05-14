@@ -335,7 +335,7 @@ public class Rules : MonoBehaviour {
    IEnumerator Check () {
       for (int j = 0; j < 4; j++) {
          Options[j].font = Fonts[0];
-         //Options[j].fontSize = 144;
+         Options[j].fontSize = 144;
          Options[j].GetComponent<Renderer>().material = FontMats[0];
       }
       NowINeedATimerFuck = 0f;
