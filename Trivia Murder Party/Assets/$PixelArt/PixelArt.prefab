@@ -3473,7 +3473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bomb: {fileID: 114454383462897410}
   Audio: {fileID: 114915473299363512}
-  FastFoodChains:
+  Buttons:
   - {fileID: 114627185335087188}
   - {fileID: 114868712943413754}
   - {fileID: 114880135991804488}
@@ -3498,7 +3498,7 @@ MonoBehaviour:
   - {fileID: 114389224386475956}
   - {fileID: 114413710164420272}
   - {fileID: 114414368691665592}
-  Weed:
+  ColorOfButton:
   - {fileID: 1198055041023144}
   - {fileID: 1095925312475394}
   - {fileID: 1801495821506798}
@@ -3528,7 +3528,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 0b8345d6190d14013b825698a59f7759, type: 2}
   - {fileID: 2100000, guid: 786c3d31185014ac2b26f9fe3e2582af, type: 2}
   - {fileID: 2100000, guid: e6ddc669e9faa4dad93207caa5a7c773, type: 2}
-  Chungus: {fileID: 114351519528124762}
+  StatusLightButton: {fileID: 114351519528124762}
 --- !u!114 &114028580937237836
 MonoBehaviour:
   m_ObjectHideFlags: 1
