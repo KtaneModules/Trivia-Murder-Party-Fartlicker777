@@ -1,34 +1,36 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEngine;
-using KModkit;
 
 public class MentalMath : MonoBehaviour {
 
    public KMBombInfo Bomb;
    public KMAudio Audio;
-   public KMSelectable WeedChungis;
-   public TextMesh Fuck;
-   public TextMesh[] Fuckers;
-   public KMSelectable[] ModuleRicks;
-   public TextMesh WeedFat;
-   public GameObject Chungus;
+
+   public KMSelectable[] Buttons;
+   public KMSelectable Crank;
+   
+   public GameObject MobilePartOfCrank;
+
+   public TextMesh[] AnswerChoiceText;
+   public TextMesh Equation;
+   public TextMesh OutOfText;
 
    static int moduleIdCounter = 1;
    int moduleId;
    private bool moduleSolved;
-   float Weed = 0f;
-   float Weedtwo = 0f;
-   int ThresshyBoy = 0;
-   float nowineedatimerfuck = 0f;
-   int integer = 0;
-   int integertwo = 0;
-   int fucker = 0;
-   private List<int> sugna = new List<int> { 0, 1, 2, 3 };
-   bool poggers = false;
+
+   float SolvableMods;
+   float SolvedMods;
+   float Timer;
+
+   private List<int> OriginalButtonOrder = new List<int> { 0, 1, 2, 3 };
+   int FirstNumber;
+   int QuestionsAnswered;
+   int SecondNumber;
+   int Threshold;
+   
+   bool Activated;
 
 #pragma warning disable 0649
    bool TwitchPlaysActive;
@@ -38,35 +40,35 @@ public class MentalMath : MonoBehaviour {
    void Awake () {
       moduleId = moduleIdCounter++;
 
-      foreach (KMSelectable Button in ModuleRicks) {
+      foreach (KMSelectable Button in Buttons) {
          Button.OnInteract += delegate () { ButtonPress(Button); return false; };
       }
 
-      WeedChungis.OnInteract += delegate () { ChungusPress(); return false; };
+      Crank.OnInteract += delegate () { CrankPress(); return false; };
 
    }
 
-   void ChungusPress () {
-      if (moduleSolved || poggers) {
+   void CrankPress () {
+      if (moduleSolved || Activated) {
          return;
       }
       if (TwitchPlaysActive)
          Audio.PlaySoundAtTransform("deaf_is_an_asshole", transform);
       else
          Audio.PlaySoundAtTransform("Trivia Murder Party Math Weasel Timer", transform);
-      PenisPress();
-      StartCoroutine(FuckerFuckingFuck());
+      ThresholdCalculator();
+      StartCoroutine(CrankTurnAnimation());
    }
 
    void ButtonPress (KMSelectable Button) {
       for (int i = 0; i < 4; i++) {
-         if (Button == ModuleRicks[i]) {
-            if (i == sugna[0] && poggers) {
+         if (Button == Buttons[i]) {
+            if (i == OriginalButtonOrder[0] && Activated) {
                Audio.PlaySoundAtTransform("BiggerDick", Button.transform);
-               fucker += 1;
-               StartCoroutine(WeedChungus());
+               QuestionsAnswered++;
+               StartCoroutine(EquationGeneration());
             }
-            else if (poggers == false)
+            else if (!Activated)
                return;
             else {
                GetComponent<KMBombModule>().HandleStrike();
@@ -76,44 +78,44 @@ public class MentalMath : MonoBehaviour {
       }
    }
 
-   void PenisPress () {
-      if (poggers)
+   void ThresholdCalculator () {
+      if (Activated)
          return;
-      if (Weedtwo - Weed == 1)
-         ThresshyBoy = 1;
-      else if (Weed / Weedtwo >= .81f)
-         ThresshyBoy = 5;
-      else if (Weed / Weedtwo >= .61f)
-         ThresshyBoy = 10;
-      else if (Weed / Weedtwo >= .41f)
-         ThresshyBoy = 15;
-      else if (Weed / Weedtwo >= .21f)
-         ThresshyBoy = 20;
-      else if (Weed / Weedtwo >= .01f)
-         ThresshyBoy = 25;
-      else if (Weed / Weedtwo == 0f)
-         ThresshyBoy = 30;
+      if (SolvableMods - SolvedMods == 1)
+         Threshold = 1;
+      else if (SolvedMods / SolvableMods >= .81f)
+         Threshold = 5;
+      else if (SolvedMods / SolvableMods >= .61f)
+         Threshold = 10;
+      else if (SolvedMods / SolvableMods >= .41f)
+         Threshold = 15;
+      else if (SolvedMods / SolvableMods >= .21f)
+         Threshold = 20;
+      else if (SolvedMods / SolvableMods >= .01f)
+         Threshold = 25;
+      else if (SolvedMods / SolvableMods == 0f)
+         Threshold = 30;
       else
-         ThresshyBoy = 1;
-      Debug.LogFormat("[Mental Math #{0}] {1} module(s) need to be solved.", moduleId, ThresshyBoy);
-      StartCoroutine(WeedChungus());
+         Threshold = 1;
+      Debug.LogFormat("[Mental Math #{0}] {1} module(s) need to be solved.", moduleId, Threshold);
+      StartCoroutine(EquationGeneration());
    }
 
-   IEnumerator WeedChungus () {
-      poggers = true;
-      integer = UnityEngine.Random.Range(0, 16);
-      integertwo = UnityEngine.Random.Range(0, 16);
+   IEnumerator EquationGeneration () {
+      Activated = true;
+      FirstNumber = UnityEngine.Random.Range(0, 16);
+      SecondNumber = UnityEngine.Random.Range(0, 16);
       if (UnityEngine.Random.Range(0, 2) == 1) {
-         Fuck.text = integer.ToString() + " - " + integertwo.ToString();
-         Debug.LogFormat("[Mental Math #{0}] It shows {1} - {2}, the answer is {3}.", moduleId, integer, integertwo, integer - integertwo);
-         integer -= integertwo;
+         Equation.text = FirstNumber.ToString() + " - " + SecondNumber.ToString();
+         Debug.LogFormat("[Mental Math #{0}] It shows {1} - {2}, the answer is {3}.", moduleId, FirstNumber, SecondNumber, FirstNumber - SecondNumber);
+         FirstNumber -= SecondNumber;
       }
       else {
-         Fuck.text = integer.ToString() + " + " + integertwo.ToString();
-         Debug.LogFormat("[Mental Math #{0}] It shows {1} + {2}, the answer is {3}.", moduleId, integer, integertwo, integer + integertwo);
-         integer += integertwo;
+         Equation.text = FirstNumber.ToString() + " + " + SecondNumber.ToString();
+         Debug.LogFormat("[Mental Math #{0}] It shows {1} + {2}, the answer is {3}.", moduleId, FirstNumber, SecondNumber, FirstNumber + SecondNumber);
+         FirstNumber += SecondNumber;
       }
-      sugna.Shuffle();
+      OriginalButtonOrder.Shuffle();
       var x = UnityEngine.Random.Range(-5, 6);
       while (x == 0) {
          x = UnityEngine.Random.Range(-5, 6);
@@ -126,22 +128,22 @@ public class MentalMath : MonoBehaviour {
       while (z == 0 || z == x || z == y) {
          z = UnityEngine.Random.Range(-5, 6);
       }
-      Fuckers[sugna[0]].text = integer.ToString();
-      Fuckers[sugna[1]].text = (integer + x).ToString();
-      Fuckers[sugna[2]].text = (integer + y).ToString();
-      Fuckers[sugna[3]].text = (integer + z).ToString();
+      AnswerChoiceText[OriginalButtonOrder[0]].text = FirstNumber.ToString();
+      AnswerChoiceText[OriginalButtonOrder[1]].text = (FirstNumber + x).ToString();
+      AnswerChoiceText[OriginalButtonOrder[2]].text = (FirstNumber + y).ToString();
+      AnswerChoiceText[OriginalButtonOrder[3]].text = (FirstNumber + z).ToString();
       yield return null;
    }
 
    void Update () {
-      Weed = Bomb.GetSolvedModuleNames().Count;
-      Weedtwo = Bomb.GetSolvableModuleNames().Count;
-      if (poggers) {
-         nowineedatimerfuck += Time.deltaTime;
-         if ((nowineedatimerfuck >= 30f && !TwitchPlaysActive) || (nowineedatimerfuck >= 100f && TwitchPlaysActive)) {
-            poggers = false;
+      SolvedMods = Bomb.GetSolvedModuleNames().Count;
+      SolvableMods = Bomb.GetSolvableModuleNames().Count;
+      if (Activated) {
+         Timer += Time.deltaTime;
+         if ((Timer >= 30f && !TwitchPlaysActive) || (Timer >= 100f && TwitchPlaysActive)) {
+            Activated = false;
             StopAllCoroutines();
-            Chungus.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+            MobilePartOfCrank.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
             StartCoroutine(Check());
          }
       }
@@ -149,86 +151,73 @@ public class MentalMath : MonoBehaviour {
 
    IEnumerator Check () {
       for (int i = 0; i < 4; i++) {
-         Fuckers[i].text = "";
-         Fuck.text = "";
+         AnswerChoiceText[i].text = "";
+         Equation.text = "";
       }
-      WeedFat.text = fucker.ToString() + " out of " + ThresshyBoy.ToString();
+      OutOfText.text = QuestionsAnswered.ToString() + " out of " + Threshold.ToString();
       yield return new WaitForSeconds(5f);
-      if (fucker >= ThresshyBoy) {
+      if (QuestionsAnswered >= Threshold) {
          GetComponent<KMBombModule>().HandlePass();
          moduleSolved = true;
-         Debug.LogFormat("[Mental Math #{0}] You answered {1} out of the required {2}. Module disarmed.", moduleId, fucker, ThresshyBoy);
+         Debug.LogFormat("[Mental Math #{0}] You answered {1} out of the required {2}. Module disarmed.", moduleId, QuestionsAnswered, Threshold);
       }
       else {
          GetComponent<KMBombModule>().HandleStrike();
-         Debug.LogFormat("[Mental Math #{0}] You answered {1} out of the required {2}. Strike.", moduleId, fucker, ThresshyBoy);
-         nowineedatimerfuck = 0f;
+         Debug.LogFormat("[Mental Math #{0}] You answered {1} out of the required {2}. Strike.", moduleId, QuestionsAnswered, Threshold);
+         Timer = 0f;
          suckmyMrsQuanAsshole = false;
-         WeedFat.text = "";
-         Fuck.text = "This is";
-         Fuckers[0].text = "Your";
-         Fuckers[1].text = "Wakeup Call";
-         Fuckers[2].text = "Prepare";
-         Fuckers[3].text = "To die!";
-         fucker = 0;
+         OutOfText.text = "";
+         Equation.text = "This is";
+         AnswerChoiceText[0].text = "Your";
+         AnswerChoiceText[1].text = "Wakeup Call";
+         AnswerChoiceText[2].text = "Prepare";
+         AnswerChoiceText[3].text = "To die!";
+         QuestionsAnswered = 0;
       }
    }
 
-   IEnumerator FuckerFuckingFuck () {
-      Chungus.transform.Rotate(5.0f, 0.0f, 0.0f, Space.Self);
+   IEnumerator CrankTurnAnimation () {
+      MobilePartOfCrank.transform.Rotate(5.0f, 0.0f, 0.0f, Space.Self);
       yield return new WaitForSeconds(.00833333f);
-      if (TwitchPlaysActive && !suckmyMrsQuanAsshole && nowineedatimerfuck >= 50f) {
+      if (TwitchPlaysActive && !suckmyMrsQuanAsshole && Timer >= 50f) {
          Audio.PlaySoundAtTransform("deaf_is_an_asshole", transform);
          suckmyMrsQuanAsshole = true; //hahahahahahahahahahahahahahahahahahahahahahahahahahahahahahaha
       }
-      StartCoroutine(FuckerFuckingFuck());
+      StartCoroutine(CrankTurnAnimation());
    }
 
 #pragma warning disable 414
-   private readonly string TwitchHelpMessage = @"Use !{0} crank to start. Use !{0} # to press the button from top to bottom.";
+   private readonly string TwitchHelpMessage = @"Use !{0} crank to start. Use !{0} # to press the label that matches your command.";
 #pragma warning restore 414
 
-   IEnumerator ProcessTwitchCommand (string command) {
-      if (Regex.IsMatch(command, @"^\s*crank\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
+   IEnumerator ProcessTwitchCommand (string Command) {
+      Command = Command.Trim().ToUpper();
          yield return null;
-         WeedChungis.OnInteract();
+      if (Command == "CRANK") {
+         Crank.OnInteract();
+      }
+      else if (!Activated) {
+         yield return "sendtochaterror You haven't started!";
          yield break;
       }
-      else if (Regex.IsMatch(command, @"^\s*1\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
-         yield return null;
-         ModuleRicks[0].OnInteract();
-         yield break;
+      for (int i = 0; i < AnswerChoiceText.Length; i++) {
+         if (Command == AnswerChoiceText[i].text) {
+            Buttons[i].OnInteract();
+            yield break;
+         }
       }
-      else if (Regex.IsMatch(command, @"^\s*2\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
-         yield return null;
-         ModuleRicks[1].OnInteract();
-         yield break;
-      }
-      else if (Regex.IsMatch(command, @"^\s*3\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
-         yield return null;
-         ModuleRicks[2].OnInteract();
-         yield break;
-      }
-      else if (Regex.IsMatch(command, @"^\s*4\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)) {
-         yield return null;
-         ModuleRicks[3].OnInteract();
-         yield break;
-      }
-      else {
-         yield return "sendtochaterror I don't understand!";
-         yield break;
-      }
+      yield return "sendtochaterror I don't understand!";
    }
 
    IEnumerator TwitchHandleForcedSolve () {
-      if (!poggers)
-         WeedChungis.OnInteract();
-      while (fucker != ThresshyBoy) {
-         ModuleRicks[sugna[0]].OnInteract();
+      if (!Activated)
+         Crank.OnInteract();
+      while (QuestionsAnswered != Threshold) {
+         Buttons[OriginalButtonOrder[0]].OnInteract();
          yield return new WaitForSecondsRealtime(.1f);
       }
       while (!moduleSolved) {
-         ModuleRicks[sugna[0]].OnInteract();
+         Buttons[OriginalButtonOrder[0]].OnInteract();
          yield return new WaitForSecondsRealtime(.1f);
          yield return true;
       }

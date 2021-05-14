@@ -1,8 +1,6 @@
 public static class AidsList{
 public static string[] Phrases = {
-	"aahs",
 	"abbe",
-	"abbr",
 	"abed",
 	"abet",
 	"able",
@@ -122,7 +120,6 @@ public static string[] Phrases = {
 	"aunt",
 	"aura",
 	"auto",
-	"avdp",
 	"aver",
 	"aves",
 	"avid",
@@ -133,7 +130,6 @@ public static string[] Phrases = {
 	"awes",
 	"awls",
 	"awns",
-	"awol",
 	"awry",
 	"axed",
 	"axel",
@@ -2473,7 +2469,6 @@ public static string[] Phrases = {
 	"silt",
 	"sine",
 	"sing",
-	"sinh",
 	"sink",
 	"sins",
 	"sips",

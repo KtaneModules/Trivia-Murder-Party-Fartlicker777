@@ -17,14 +17,23 @@ MonoBehaviour:
   description: "Modules based on the Trivia Murder Party minigames from both packs
     one and two. This pack is incomplete, but more modules will be added eventually.\r\n\r\nThe
     modules included (In chronological order of me adding them):\r\n\r\nMental Math:
-    The Math Minigame from games 1 and 2\r\n\r\nThe Arena: The Rock-Paper-Scissors
-    Minigame From games 1 and 2\r\n\r\nDictation: The Dictation Minigame from game
-    2\r\n\r\nJailbreak: The Password Minigame from game 2\r\n\r\nDumb Waiters (Implemented
-    by TasThing): The Dumb Waiters Minigame from game 2\r\n\nChalices: The minigame
-    of the same name from both games.\n\nPixel Art: The Memory minigame from games
-    1 and 2.\n\nRules: The Rules minigame from game 2.\n\r\nManuals can be found at
-    https://ktane.timwi.de/\r\n\nIf there are any bugs, contact Fartlicker777#9169
-    on Discord.\n"
+    The Math Minigame from games 1 and 2.\r\nSolve simple math equations consecutively.
+    The amount you need to answer is based on your progress in the bomb.\r\n\r\nThe
+    Arena: The Rock-Paper-Scissors Minigame From games 1 and 2\r\nDetermine if you
+    should attack, defend, or grab based off of some edgework rules!\r\n\r\nDictation:
+    The Dictation Minigame from game 2\r\nWrite down the phrase as it's being read
+    out. Submit a specific word once the phrase is done.\r\n\r\nJailbreak: The Password
+    Minigame from game 2\r\nGuess the four letter password in 90 seconds, invalid
+    words will not give you any hints.\r\n\r\nDumb Waiters (Implemented by TasThing):
+    The Dumb Waiters Minigame from game 2\r\nChoose which elevator you should bunker
+    in, and try to live based on who chose what.\r\n\r\nChalices: The minigame of
+    the same name from both games.\r\nFollow a flow chart to determine which chalice
+    you should drink from.\r\n\r\nPixel Art: The Memory minigame from games 1 and
+    2.\r\nRecreate the pattern shown exactly when it was shown for 7 seconds.\r\n\r\nRules:
+    The Rules minigame from game 2.\r\nFollow the rules shown correctly, the amount
+    you need to follow corresponds to how much time is left on the bomb.\r\n\r\nManuals
+    can be found at https://ktane.timwi.de/ or in the manuals folder of your game.\r\n\r\nIf
+    there are any bugs, contact Fartlicker777#9169 on Discord.\r\n"
   version: 
   outputFolder: build
   previewImage: {fileID: 2800000, guid: fc5296ea9e8ddf743a927727c6a68038, type: 3}

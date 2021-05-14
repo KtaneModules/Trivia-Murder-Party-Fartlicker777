@@ -14,6 +14,8 @@ public class Rules : MonoBehaviour {
    public KMSelectable StartNowIGuessFuckYouImTerryDavis;
    public TextMesh[] Options;
    public TextMesh TheRuleTM;
+   public Font[] Fonts;
+   public Material[] FontMats;
 
    int[] NumbersForThing = { 0, 0, 0, 0 };
    int Fatass = 0;
@@ -71,6 +73,11 @@ public class Rules : MonoBehaviour {
    }
 
    void TerryPress () {
+      for (int i = 0; i < 4; i++) {
+         Options[i].font = Fonts[1];
+         Options[i].fontSize = 200;
+         Options[i].GetComponent<Renderer>().material = FontMats[1];
+      }
       if (!Activate) {
          Activate = true;
          if (Bomb.GetTime() <= 60 || Weed == 0)
@@ -102,13 +109,14 @@ public class Rules : MonoBehaviour {
             if (RuleButton == RuleButtons[i]) {
                if (Validity[i]) {
                   Audio.PlaySoundAtTransform("BiggerDick 1", RuleButton.transform);
-                  Counter += 1;
+                  Counter++;
                   for (int j = 0; j < 4; j++)
                      Validity[j] = false;
                   RulePicker();
                }
-               else
+               else {
                   GetComponent<KMBombModule>().HandleStrike();
+               }
             }
       }
    }
@@ -325,6 +333,11 @@ public class Rules : MonoBehaviour {
    }
 
    IEnumerator Check () {
+      for (int j = 0; j < 4; j++) {
+         Options[j].font = Fonts[0];
+         //Options[j].fontSize = 144;
+         Options[j].GetComponent<Renderer>().material = FontMats[0];
+      }
       NowINeedATimerFuck = 0f;
       Activate = false;
       for (int i = 0; i < 4; i++)

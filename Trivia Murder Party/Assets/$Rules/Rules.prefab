@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 114853960920223876}
   - component: {fileID: 114949059805340958}
   - component: {fileID: 114531009025033498}
+  - component: {fileID: 114292431022083162}
   m_Layer: 0
   m_Name: Rules
   m_TagString: Untagged
@@ -1326,6 +1327,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderNames:
   - GUI/KT 3D Text Diffuse
+--- !u!114 &114292431022083162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1676409040304040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a2fc4ae3e690a498a0d85a2b5e0b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114352773491852494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1432,6 +1444,12 @@ MonoBehaviour:
   - {fileID: 102151410440977704}
   - {fileID: 102038698174542236}
   TheRuleTM: {fileID: 102680933989418446}
+  Fonts:
+  - {fileID: 12800000, guid: f35321f8703e46843abc6ec68e58d3bb, type: 3}
+  - {fileID: 12800000, guid: 003f2c6454c45ec4e8da93867e387cff, type: 3}
+  FontMats:
+  - {fileID: 2100000, guid: 751c0420b9b116643a61e130c46b8acc, type: 2}
+  - {fileID: 2100000, guid: 68dd731436dd87842955f24258196d3f, type: 2}
 --- !u!114 &114544715428946248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1612,7 +1630,7 @@ MonoBehaviour:
   ChildRowLength: 0
   Highlight: {fileID: 114570430299588062}
   SelectableColliders: []
-  DefaultSelectableIndex: 0
+  DefaultSelectableIndex: 1
   AllowSelectionWrapX: 0
   AllowSelectionWrapY: 0
   ForceSelectionHighlight: 0

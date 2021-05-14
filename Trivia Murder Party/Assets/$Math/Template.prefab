@@ -2091,7 +2091,7 @@ MonoBehaviour:
   - {fileID: 114389541838786514}
   - {fileID: 114387697704370404}
   IsPassThrough: 0
-  ChildRowLength: 0
+  ChildRowLength: 1
   Highlight: {fileID: 114570430299588062}
   SelectableColliders: []
   DefaultSelectableIndex: 0
@@ -2304,20 +2304,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bomb: {fileID: 114454383462897410}
   Audio: {fileID: 114915473299363512}
-  WeedChungis: {fileID: 114297876429138858}
-  Fuck: {fileID: 102320393998431964}
-  Fuckers:
-  - {fileID: 102713975718708212}
-  - {fileID: 102270566836618218}
-  - {fileID: 102112010862560084}
-  - {fileID: 102268363775410146}
-  ModuleRicks:
+  Buttons:
   - {fileID: 114812738694685812}
   - {fileID: 114263176327823644}
   - {fileID: 114389541838786514}
   - {fileID: 114387697704370404}
-  WeedFat: {fileID: 102457193536510964}
-  Chungus: {fileID: 1853350339280470}
+  Crank: {fileID: 114297876429138858}
+  MobilePartOfCrank: {fileID: 1853350339280470}
+  AnswerChoiceText:
+  - {fileID: 102713975718708212}
+  - {fileID: 102270566836618218}
+  - {fileID: 102112010862560084}
+  - {fileID: 102268363775410146}
+  Equation: {fileID: 102320393998431964}
+  OutOfText: {fileID: 102457193536510964}
 --- !u!114 &114454383462897410
 MonoBehaviour:
   m_ObjectHideFlags: 1
