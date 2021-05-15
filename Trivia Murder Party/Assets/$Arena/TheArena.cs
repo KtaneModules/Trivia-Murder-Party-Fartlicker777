@@ -51,8 +51,7 @@ public class TheArena : MonoBehaviour {
    private int grbPresses = 0;
 
    string TPModeClarifier = "";
-
-   //Logging
+   
    static int moduleIdCounter = 1;
    int moduleId;
    private bool moduleSolved;
@@ -74,7 +73,6 @@ public class TheArena : MonoBehaviour {
       }
    }
 
-   // Use this for initialization
    void Start () {
       AtkObjects.SetActive(false);
       DefObjects.SetActive(false);
@@ -1030,7 +1028,61 @@ public class TheArena : MonoBehaviour {
       }
    }
 
-   /*IEnumerator TwitchHandleForcedSolve () {
-      yield return null;
-   }*/
+   IEnumerator TwitchHandleForcedSolve () {
+      while (!moduleSolved) {
+         switch (TPModeClarifier) {
+            case "ATT":
+               for (int i = 0; i < 5; i++) {
+                  while (atkShownWeapon != int.Parse(atkAnswers[0][i].ToString()) - 1) {
+                     AtkButtons[1].OnInteract();
+                     yield return new WaitForSecondsRealtime(.1f);
+                  }
+                  AtkButtons[2].OnInteract();
+                  yield return new WaitForSecondsRealtime(.1f);
+               }
+               break;
+            case "DEF":
+               while (defNum != 10) {
+                  if (defSeq[defNum] == 'A') {
+                     DefButtons[1].OnInteract();
+                     yield return new WaitForSecondsRealtime(.1f);
+                  }
+                  else {
+                     DefButtons[0].OnInteract();
+                     yield return new WaitForSecondsRealtime(.1f);
+                  }
+               }
+               break;
+            case "GRA":
+               for (int i = 0; i < grbTimes; i++) {
+                  for (int j = 0; j < 9; j++) {
+                     if (TPModeClarifier == "") {
+                        break;
+                     }
+                     if (grbSorted[8 - grbPresses] == grbFinal[j]) {
+                        GrbButtons[j].OnInteract();
+                        yield return new WaitForSecondsRealtime(.1f);
+                     }
+                  }
+               }
+               break;
+            default:
+               switch (Order[currentEvent]) {
+                  case 'A':
+                     EventButtons[0].OnInteract();
+                     yield return new WaitForSecondsRealtime(.1f);
+                     break;
+                  case 'D':
+                     EventButtons[1].OnInteract();
+                     yield return new WaitForSecondsRealtime(.1f);
+                     break;
+                  case 'G':
+                     EventButtons[2].OnInteract();
+                     yield return new WaitForSecondsRealtime(.1f);
+                     break;
+               }
+               break;
+         }
+      }
+   }
 }
