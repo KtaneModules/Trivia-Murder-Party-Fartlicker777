@@ -7102,7 +7102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bomb: {fileID: 114454383462897410}
   Audio: {fileID: 114915473299363512}
-  SmallAssholes:
+  TypableButtons:
   - {fileID: 114868050166617584}
   - {fileID: 114657306461127500}
   - {fileID: 114670362697632810}
@@ -7130,12 +7130,12 @@ MonoBehaviour:
   - {fileID: 114662300854746158}
   - {fileID: 114871362868943022}
   - {fileID: 114809246854197886}
-  BackAssCrack: {fileID: 114848352826925444}
-  Lefttard: {fileID: 114181304344142540}
-  TacoBell: {fileID: 102908756070575976}
-  AidsMongerer: {fileID: 102724047031800174}
-  Penis: {fileID: 1090134496924446}
-  Penises:
+  StartButton: {fileID: 114848352826925444}
+  ReturnButton: {fileID: 114181304344142540}
+  NumberDisplay: {fileID: 102908756070575976}
+  DisplayText: {fileID: 102724047031800174}
+  TVStatusSphere: {fileID: 1090134496924446}
+  StatusColors:
   - {fileID: 2100000, guid: 776e1f9a234a3254db4ba765c610e288, type: 2}
   - {fileID: 2100000, guid: 796a3c7f2617bc140aa39bb57945cc0d, type: 2}
 --- !u!114 &114181304344142540

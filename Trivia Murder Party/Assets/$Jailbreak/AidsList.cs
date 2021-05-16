@@ -3093,7 +3093,6 @@ public static string[] Phrases = {
 	"zeal",
 	"zebu",
 	"zeds",
-	"zees",
 	"zero",
 	"zest",
 	"zeta",

@@ -46,7 +46,7 @@ public class Words : MonoBehaviour {
    void ButtonPress (KMSelectable Button) {
       Button.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-      if (moduleSolved || Animating) {
+      if (Animating) {
          return;
       }
       for (int i = 0; i < 24; i++) {
@@ -81,7 +81,6 @@ public class Words : MonoBehaviour {
                if (TotalPoints >= 30) {
                   GetComponent<KMBombModule>().HandlePass();
                   moduleSolved = true;
-                  return;
                }
                IsAWord = false;
                CurrentSubmission = "";
@@ -116,12 +115,7 @@ public class Words : MonoBehaviour {
          Letters[20].text = "-";
       }
       yield return new WaitForSecondsRealtime(.1f);
-      if (TotalPoints / 10 != 0) {
-         Letters[21].text = Math.Abs(TotalPoints / 10).ToString();
-      }
-      else {
-         Letters[21].text = "0";
-      }
+      Letters[21].text = (Math.Abs(TotalPoints / 10) % 10).ToString();
       yield return new WaitForSecondsRealtime(.1f);
       Letters[22].text = Math.Abs(TotalPoints % 10).ToString();
       yield return new WaitForSecondsRealtime(1f);
