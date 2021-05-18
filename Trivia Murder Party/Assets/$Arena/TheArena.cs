@@ -36,7 +36,7 @@ public class TheArena : MonoBehaviour {
    private List<string> atkWeapons = new List<string> { };
    private List<string> atkAnswers = new List<string> { };
    private List<int> atkEx = new List<int> { };
-   private int atkMax = -1;
+   //private int atkMax = -1;
    private int atkShownWeapon = 0;
    private string atkSubmission = "";
    private bool atkGood = false;
@@ -450,11 +450,11 @@ public class TheArena : MonoBehaviour {
    int actualIndexes (int a, string p, int v, int w, int x, int y, int z) {
       char c = p[a];
       switch (c) {
-         case '1': return v; break;
-         case '2': return w; break;
-         case '3': return x; break;
-         case '4': return y; break;
-         default: return z; break;
+         case '1': return v;
+         case '2': return w;
+         case '3': return x;
+         case '4': return y;
+         default: return z;
       }
    }
 
@@ -908,15 +908,15 @@ public class TheArena : MonoBehaviour {
 
    string Pos (int k) {
       switch (k) {
-         case 0: return "top left"; break;
-         case 1: return "top middle"; break;
-         case 2: return "top right"; break;
-         case 3: return "middle left"; break;
-         case 4: return "middle center"; break;
-         case 5: return "middle right"; break;
-         case 6: return "bottom left"; break;
-         case 7: return "bottom middle"; break;
-         default: return "bottom right"; break;
+         case 0: return "top left";
+         case 1: return "top middle";
+         case 2: return "top right";
+         case 3: return "middle left";
+         case 4: return "middle center";
+         case 5: return "middle right";
+         case 6: return "bottom left";
+         case 7: return "bottom middle";
+         default: return "bottom right";
       }
    }
 

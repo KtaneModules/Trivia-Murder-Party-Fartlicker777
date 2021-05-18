@@ -43,8 +43,6 @@ public class Skewers : MonoBehaviour {
    bool Animating;
    bool Ran;
 
-   string logForBlanInParticular = "";
-
    //Logging
    static int moduleIdCounter = 1;
    int moduleId;

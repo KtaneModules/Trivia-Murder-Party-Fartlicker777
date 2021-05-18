@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEngine;
-using KModkit;
 
 public class Rules : MonoBehaviour {
 
@@ -17,27 +13,25 @@ public class Rules : MonoBehaviour {
    public Font[] Fonts;
    public Material[] FontMats;
 
-   int[] NumbersForThing = { 0, 0, 0, 0 };
-   int Fatass = 0;
-   int Retard = 0;
+   int[] OddOrEvenNumbers = { 0, 0, 0, 0 };
+   int RuleIndex = 0;
+   int DoOrDontRuleSet = 0;
    int Counter = 0;
-   int ThresshyBoy = 0;
-   int ModulesSolved = 0;
+   int Threshhold = 0;
 
-   float Weed = 0f;
-   float NowINeedATimerFuck = 0f;
+   float InitialTimer = 0f;
+   float Timer = 0f;
 
-   string[] WordsOfAids = {
+   readonly string[] WordList = {
 "ACID","BUST","CODE","DAZE","ECHO","FILM","GOLF","HUNT","ITCH","JURY","KING","LIME","MONK","NUMB","ONLY","PREY","QUIT","RAVE","SIZE","TOWN","URGE","VERY","WAXY","XYLO","YARD","ZERO","ABORT","BLEND","CRYPT","DWARF","EQUIP","FANCY","GIZMO","HELIX","IMPLY","JOWLS","KNIFE","LEMON","MAJOR","NIGHT","OVERT","POWER","QUILT","RUSTY","STOMP","TRASH","UNTIL","VIRUS","WHISK","XERIC","YACHT","ZEBRA","ADVICE","BUTLER","CAVITY","DIGEST","ELBOWS","FIXURE","GOBLET","HANDLE","INDUCT","JOKING","KNEADS","LENGTH","MOVIES","NIMBLE","OBTAIN","PERSON","QUIVER","RACHET","SAILOR","TRANCE","UPHELD","VANISH","WALNUT","XYLOSE","YANKED","ZODIAC","ALREADY","BROWSED","CAPITOL","DESTROY","ERASING","FLASHED","GRIMACE","HIDEOUT","INFUSED","JOYRIDE","KETCHUP","LOCKING","MAILBOX","NUMBERS","OBSCURE","PHANTOM","QUIETLY","REFUSAL","SUBJECT","TRAGEDY","UNKEMPT","VENISON","WARSHIP","XANTHIC","YOUNGER","ZEPHYRS","ADVOCATE","BACKFLIP","CHIMNEYS","DISTANCE","EXPLOITS","FOCALIZE","GIFTWRAP","HOVERING","INVENTOR","JEALOUSY","KINSFOLK","LOCKABLE","MERCIFUL","NOTECARD","OVERCAST","PERILOUS","QUESTION","RAINCOAT","STEALING","TREASURY","UPDATING","VERTICAL","WISHBONE","XENOLITH","YEARLONG","ZEALOTRY","ABHORRENT","BACCARATS","CULTIVATE","DAMNINGLY","EFFLUXION","FUTURISTS","GYROSCOPE","HAZARDOUS","ILLOGICAL","JUXTAPOSE","KILOBYTES","LANTHANUM","MATERIALS","NIHILISTS","OBSCENITY","PAINFULLY","QUEERNESS","RESTROOMS","SABOTAGED","TYRANNOUS","UMPTEENTH","VEXILLATE","WAYLAYERS","XENOBLAST","YTTERBIUM","ZIGZAGGER"
 };
    string[] Introtexts = { "You will fail", "The timer is ticking", "It is inevitable", "Better flee", "Give up", "There is no hope" };
-   string[] RulesIGuess = { "Press a word\nwith the letter\n", "Press the\nshortest word", "Press the\nlongest word", "Press an\neven number", "Press an\nodd number", "Press the\n{0} button" };
-   string[] NotRulesIGuess = { "Don't press a\nword with the\nletter ", "Don't press\nthe shortest\nword", "Don't press\nthe longest\nword", "Don't press\nan even\nnumber", "Don't press\nan odd number", "Don't press\nthe {0}\nbutton" };
+   string[] RuleList = { "Press a word\nwith the letter\n", "Press the\nshortest word", "Press the\nlongest word", "Press an\neven number", "Press an\nodd number", "Press the\n{0} button" };
+   string[] DontRuleList = { "Don't press a\nword with the\nletter ", "Don't press\nthe shortest\nword", "Don't press\nthe longest\nword", "Don't press\nan even\nnumber", "Don't press\nan odd number", "Don't press\nthe {0}\nbutton" };
    string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
    string PossibilitiesForLetters = "";
-   string ForMrsKwan = "https://www.youtube.com/watch?v=7ExEXoTm4Dc";
-   string ShutTheFuckUp = "";
-   string ShortestSlashLongest = "";
+   //string ForMrsKwan = "https://www.youtube.com/watch?v=7ExEXoTm4Dc";
+   string ShortestOrLongest = "";
 
    char LuckyLetter = ' ';
 
@@ -57,22 +51,23 @@ public class Rules : MonoBehaviour {
       foreach (KMSelectable RuleButton in RuleButtons) {
          RuleButton.OnInteract += delegate () { RuleButtonPress(RuleButton); return false; };
       }
-      StartNowIGuessFuckYouImTerryDavis.OnInteract += delegate () { TerryPress(); return false; };
+      StartNowIGuessFuckYouImTerryDavis.OnInteract += delegate () { StartPress(); return false; };
    }
 
    void Start () {
-      UselessShit();
-      Weed = Bomb.GetTime();
+      IntroTextGenerator();
+      InitialTimer = Bomb.GetTime();
    }
 
-   void UselessShit () {
+   void IntroTextGenerator () {
       Introtexts.Shuffle();
-      for (int i = 0; i < 4; i++)
+      for (int i = 0; i < 4; i++) {
          Options[i].text = Introtexts[i];
+      }
       TheRuleTM.text = "Don't Mess up.";
    }
 
-   void TerryPress () {
+   void StartPress () {
       for (int i = 0; i < 4; i++) {
          Options[i].font = Fonts[1];
          Options[i].fontSize = 200;
@@ -80,164 +75,198 @@ public class Rules : MonoBehaviour {
       }
       if (!Activate) {
          Activate = true;
-         if (Bomb.GetTime() <= 60 || Weed == 0)
-            ThresshyBoy = 1;
-         else if (Bomb.GetTime() / Weed >= .81f)
-            ThresshyBoy = 20;
-         else if (Bomb.GetTime() / Weed >= .61f)
-            ThresshyBoy = 16;
-         else if (Bomb.GetTime() / Weed >= .41f)
-            ThresshyBoy = 12;
-         else if (Bomb.GetTime() / Weed >= .21f)
-            ThresshyBoy = 8;
-         else if (Bomb.GetTime() / Weed >= .01f)
-            ThresshyBoy = 4;
-         else
-            ThresshyBoy = 1;
-         if (Bomb.GetSolvableModuleNames().Count - Bomb.GetSolvedModuleNames().Count <= 1)
-            ThresshyBoy = 1;
-         Debug.LogFormat("[Rules #{0}] {1} module(s) need to be solved.", moduleId, ThresshyBoy);
+         if (Bomb.GetTime() <= 60 || InitialTimer == 0) {
+            Threshhold = 1;
+         }
+         else if (Bomb.GetTime() / InitialTimer >= .81f) {
+            Threshhold = 20;
+         }
+         else if (Bomb.GetTime() / InitialTimer >= .61f) {
+            Threshhold = 16;
+         }
+         else if (Bomb.GetTime() / InitialTimer >= .41f) {
+            Threshhold = 12;
+         }
+         else if (Bomb.GetTime() / InitialTimer >= .21f) {
+            Threshhold = 8;
+         }
+         else if (Bomb.GetTime() / InitialTimer >= .01f) {
+            Threshhold = 4;
+         }
+         else {
+            Threshhold = 1;
+         }
+         if (Bomb.GetSolvableModuleNames().Count - Bomb.GetSolvedModuleNames().Count <= 1) {
+            Threshhold = 1;
+         }
+         Debug.LogFormat("[Rules #{0}] {1} module(s) need to be solved.", moduleId, Threshhold);
          RulePicker();
       }
    }
 
    void RuleButtonPress (KMSelectable RuleButton) {
-      if (!Activate)
+      if (!Activate) {
          return;
+      }
       else {
-         for (int i = 0; i < 4; i++)
+         for (int i = 0; i < 4; i++) {
             if (RuleButton == RuleButtons[i]) {
                if (Validity[i]) {
                   Audio.PlaySoundAtTransform("BiggerDick 1", RuleButton.transform);
                   Counter++;
-                  for (int j = 0; j < 4; j++)
+                  for (int j = 0; j < 4; j++) {
                      Validity[j] = false;
+                  }
                   RulePicker();
                }
                else {
                   GetComponent<KMBombModule>().HandleStrike();
                }
             }
+         }
       }
    }
 
    void RulePicker () {
-      Retard = UnityEngine.Random.Range(0, 2);
-      if (Retard == 0) {
-         Fatass = UnityEngine.Random.Range(0, RulesIGuess.Length);
-         TheRuleTM.text = RulesIGuess[Fatass];
+      DoOrDontRuleSet = UnityEngine.Random.Range(0, 2);
+      if (DoOrDontRuleSet == 0) {
+         RuleIndex = UnityEngine.Random.Range(0, RuleList.Length);
+         TheRuleTM.text = RuleList[RuleIndex];
       }
       else {
-         Fatass = UnityEngine.Random.Range(0, NotRulesIGuess.Length);
-         TheRuleTM.text = NotRulesIGuess[Fatass];
+         RuleIndex = UnityEngine.Random.Range(0, DontRuleList.Length);
+         TheRuleTM.text = DontRuleList[RuleIndex];
       }
-      switch (Fatass) {
+      switch (RuleIndex) {
          case 0:
-            how:
+            Rule0Reset:
             PossibilitiesForLetters = "";
             for (int i = 0; i < 4; i++) {
-               Options[i].text = WordsOfAids[UnityEngine.Random.Range(0, WordsOfAids.Length)];
-               ShutTheFuckUp += Options[i].text;
+               Options[i].text = WordList[UnityEngine.Random.Range(0, WordList.Length)];
             }
             for (int i = 0; i < Alphabet.Length; i++) {
-               int WeedChungus = 0;
-               for (int j = 0; j < 4; j++)
-                  if (Options[j].text.Contains(Alphabet[i]))
-                     WeedChungus += 1;
-               if (WeedChungus == 4)
+               int Rule0Temp = 0;
+               for (int j = 0; j < 4; j++) {
+                  if (Options[j].text.Contains(Alphabet[i])) {
+                     Rule0Temp += 1;
+                  }
+               }
+               if (Rule0Temp == 4) {
                   PossibilitiesForLetters += ".";
-               else if (WeedChungus == 0)
+               }
+               else if (Rule0Temp == 0) {
                   PossibilitiesForLetters += ".";
-               else
+               }
+               else {
                   PossibilitiesForLetters += Alphabet[i].ToString();
+               }
             }
-            if (PossibilitiesForLetters == "..........................")
-               goto how;
+            if (PossibilitiesForLetters == "..........................") {
+               goto Rule0Reset;
+            }
             do {
                LuckyLetter = PossibilitiesForLetters[UnityEngine.Random.Range(0, PossibilitiesForLetters.Length)];
             } while (LuckyLetter == '.' || LuckyLetter == ' ');
-            for (int i = 0; i < 4; i++)
-               if (Options[i].text.Contains(LuckyLetter))
+            for (int i = 0; i < 4; i++) {
+               if (Options[i].text.Contains(LuckyLetter)) {
                   Validity[i] = true;
-            if ((!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3]))
-               goto how;
+               }
+            }
+            if ((!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3])) {
+               goto Rule0Reset;
+            }
             Inverter();
             TheRuleTM.text += LuckyLetter;
             PossibilitiesForLetters = "";
-            ShutTheFuckUp = "";
             break;
          case 1:
-            Bitch:
-            for (int i = 0; i < 4; i++)
-               Options[i].text = WordsOfAids[UnityEngine.Random.Range(0, WordsOfAids.Length)];
-            if ((Options[0].text.Length == Options[1].text.Length || Options[0].text.Length == Options[2].text.Length || Options[0].text.Length == Options[3].text.Length)
-            || (Options[1].text.Length == Options[2].text.Length || Options[1].text.Length == Options[3].text.Length) || Options[2].text.Length == Options[3].text.Length)
-               goto Bitch;
-            ShortestSlashLongest = Options[0].text;
-            for (int i = 1; i < 4; i++)
-               if (ShortestSlashLongest.Length > Options[i].text.Length)
-                  ShortestSlashLongest = Options[i].text;
-            for (int i = 0; i < 4; i++)
-               if (Options[i].text == ShortestSlashLongest)
+            Rule1Reset:
+            for (int i = 0; i < 4; i++) {
+               Options[i].text = WordList[UnityEngine.Random.Range(0, WordList.Length)];
+            }
+            if ((Options[0].text.Length == Options[1].text.Length || Options[0].text.Length == Options[2].text.Length || Options[0].text.Length == Options[3].text.Length) || (Options[1].text.Length == Options[2].text.Length || Options[1].text.Length == Options[3].text.Length) || Options[2].text.Length == Options[3].text.Length) {
+               goto Rule1Reset;
+            }
+            ShortestOrLongest = Options[0].text;
+            for (int i = 1; i < 4; i++) {
+               if (ShortestOrLongest.Length > Options[i].text.Length) {
+                  ShortestOrLongest = Options[i].text;
+               }
+            }
+            for (int i = 0; i < 4; i++) {
+               if (Options[i].text == ShortestOrLongest) {
                   Validity[i] = true;
-            if ((!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3]))
-               goto Bitch;
+               }
+            }
+            if ((!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3])) {
+               goto Rule1Reset;
+            }
             Inverter();
             break;
          case 2:
-            BitchButLong:
-            for (int i = 0; i < 4; i++)
-               Options[i].text = WordsOfAids[UnityEngine.Random.Range(0, WordsOfAids.Length)];
-            if ((Options[0].text.Length == Options[1].text.Length || Options[0].text.Length == Options[2].text.Length || Options[0].text.Length == Options[3].text.Length)
-            || (Options[1].text.Length == Options[2].text.Length || Options[1].text.Length == Options[3].text.Length) || Options[2].text.Length == Options[3].text.Length)
-               goto BitchButLong;
-            ShortestSlashLongest = Options[0].text;
-            for (int i = 1; i < 4; i++)
-               if (ShortestSlashLongest.Length < Options[i].text.Length)
-                  ShortestSlashLongest = Options[i].text;
-            for (int i = 0; i < 4; i++)
-               if (Options[i].text == ShortestSlashLongest)
+            Rule2Reset:
+            for (int i = 0; i < 4; i++) {
+               Options[i].text = WordList[UnityEngine.Random.Range(0, WordList.Length)];
+            }
+            if ((Options[0].text.Length == Options[1].text.Length || Options[0].text.Length == Options[2].text.Length || Options[0].text.Length == Options[3].text.Length) || (Options[1].text.Length == Options[2].text.Length || Options[1].text.Length == Options[3].text.Length) || Options[2].text.Length == Options[3].text.Length) {
+               goto Rule2Reset;
+            }
+            ShortestOrLongest = Options[0].text;
+            for (int i = 1; i < 4; i++) {
+               if (ShortestOrLongest.Length < Options[i].text.Length) {
+                  ShortestOrLongest = Options[i].text;
+               }
+            }
+            for (int i = 0; i < 4; i++) {
+               if (Options[i].text == ShortestOrLongest) {
                   Validity[i] = true;
-            if ((!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3]))
-               goto BitchButLong;
+               }
+            }
+            if ((!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3])) {
+               goto Rule2Reset;
+            }
             Inverter();
             break;
          case 3:
-            Asswipe:
-            int FuckerDumbass = 0;
-            for (int i = 0; i < 4; i++)
-               Validity[i] = false;
+            Rule3Reset:
+            int Rule3Temp = 0;
             for (int i = 0; i < 4; i++) {
-               NumbersForThing[i] = UnityEngine.Random.Range(1, 50);
-               Options[i].text = NumbersForThing[i].ToString();
-               if (NumbersForThing[i] % 2 == 0) {
-                  FuckerDumbass += 1;
+               Validity[i] = false;
+            }
+            for (int i = 0; i < 4; i++) {
+               OddOrEvenNumbers[i] = UnityEngine.Random.Range(1, 50);
+               Options[i].text = OddOrEvenNumbers[i].ToString();
+               if (OddOrEvenNumbers[i] % 2 == 0) {
+                  Rule3Temp += 1;
                   Validity[i] = true;
                }
             }
-            if (FuckerDumbass == 4 || (!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3]))
-               goto Asswipe;
+            if (Rule3Temp == 4 || (!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3])) {
+               goto Rule3Reset;
+            }
             Inverter();
             break;
          case 4:
-            AsswipeButShutUp:
-            int PenileGland = 0;
-            for (int i = 0; i < 4; i++)
-               Validity[i] = false;
+            Rule4Reset:
+            int Rule4Temp = 0;
             for (int i = 0; i < 4; i++) {
-               NumbersForThing[i] = UnityEngine.Random.Range(1, 50);
-               Options[i].text = NumbersForThing[i].ToString();
-               if (NumbersForThing[i] % 2 == 1) {
-                  PenileGland += 1;
+               Validity[i] = false;
+            }
+            for (int i = 0; i < 4; i++) {
+               OddOrEvenNumbers[i] = UnityEngine.Random.Range(1, 50);
+               Options[i].text = OddOrEvenNumbers[i].ToString();
+               if (OddOrEvenNumbers[i] % 2 == 1) {
+                  Rule4Temp += 1;
                   Validity[i] = true;
                }
             }
-            if (PenileGland == 4 || (!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3]))
-               goto AsswipeButShutUp;
+            if (Rule4Temp == 4 || (!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3])) {
+               goto Rule4Reset;
+            }
             Inverter();
             break;
          case 5:
-            if (Retard == 0) {
+            if (DoOrDontRuleSet == 0) {
                for (int i = 0; i < 4; i++) {
                   Validity[i] = false;
                   Options[i].text = "Button";
@@ -310,23 +339,26 @@ public class Rules : MonoBehaviour {
             break;
       }
       Debug.LogFormat("[Rules #{0}] The current rule is \"{1}\".", moduleId, TheRuleTM.text.Replace("\n", " "));
-      if (Fatass != 5)
+      if (RuleIndex != 5) {
          Debug.LogFormat("[Rules #{0}] The options are {1}, {2}, {3}, and {4}.", moduleId, Options[0].text, Options[1].text, Options[2].text, Options[3].text);
+      }
    }
 
    void Inverter () {
-      if (Retard == 1)
-         for (int i = 0; i < 4; i++)
+      if (DoOrDontRuleSet == 1) {
+         for (int i = 0; i < 4; i++) {
             Validity[i] = !Validity[i];
+         }
+      }
    }
 
    void Update () {
       if (Activate) {
-         NowINeedATimerFuck += Time.deltaTime;
-         if (NowINeedATimerFuck >= 30f && !TwitchPlaysActive) {
+         Timer += Time.deltaTime;
+         if (Timer >= 30f && !TwitchPlaysActive) {
             StartCoroutine(Check());
          }
-         else if (NowINeedATimerFuck >= 100f && TwitchPlaysActive) {
+         else if (Timer >= 100f && TwitchPlaysActive) {
             StartCoroutine(Check());
          }
       }
@@ -338,23 +370,24 @@ public class Rules : MonoBehaviour {
          Options[j].fontSize = 144;
          Options[j].GetComponent<Renderer>().material = FontMats[0];
       }
-      NowINeedATimerFuck = 0f;
+      Timer = 0f;
       Activate = false;
-      for (int i = 0; i < 4; i++)
+      for (int i = 0; i < 4; i++) {
          Options[i].text = "";
-      TheRuleTM.text = Counter.ToString() + " out of " + ThresshyBoy.ToString();
+      }
+      TheRuleTM.text = Counter.ToString() + " out of " + Threshhold.ToString();
       yield return new WaitForSecondsRealtime(3f);
-      if (Counter >= ThresshyBoy) {
+      if (Counter >= Threshhold) {
          GetComponent<KMBombModule>().HandlePass();
          moduleSolved = true;
-         Debug.LogFormat("[Rules #{0}] You followed {1} rules correctly out of the required minimum of {2}. Module disarmed.", moduleId, Counter.ToString(), ThresshyBoy.ToString());
+         Debug.LogFormat("[Rules #{0}] You followed {1} rules correctly out of the required minimum of {2}. Module disarmed.", moduleId, Counter.ToString(), Threshhold.ToString());
       }
       else {
          Counter = 0;
-         ThresshyBoy = 0;
+         Threshhold = 0;
          GetComponent<KMBombModule>().HandleStrike();
-         Debug.LogFormat("[Rules #{0}] You followed {1} rules correctly out of the required minimum of {2}. Strike, Blan!", moduleId, Counter.ToString(), ThresshyBoy.ToString());
-         UselessShit();
+         Debug.LogFormat("[Rules #{0}] You followed {1} rules correctly out of the required minimum of {2}. Strike, Blan!", moduleId, Counter.ToString(), Threshhold.ToString());
+         IntroTextGenerator();
       }
    }
 
@@ -365,16 +398,26 @@ public class Rules : MonoBehaviour {
    IEnumerator ProcessTwitchCommand (string Command) {
       Command = Command.Trim().ToUpper();
       yield return null;
-      if (Command.ToString() == "START")
+      if (Command.ToString() == "START") {
          StartNowIGuessFuckYouImTerryDavis.OnInteract();
-      else if (Command.ToString() == "1")
+         yield return new WaitForSecondsRealtime(.1f);
+      }
+      else if (Command.ToString() == "1") {
          RuleButtons[0].OnInteract();
-      else if (Command.ToString() == "2")
+         yield return new WaitForSecondsRealtime(.1f);
+      }
+      else if (Command.ToString() == "2") {
          RuleButtons[1].OnInteract();
-      else if (Command.ToString() == "3")
+         yield return new WaitForSecondsRealtime(.1f);
+      }
+      else if (Command.ToString() == "3") {
          RuleButtons[2].OnInteract();
-      else if (Command.ToString() == "4")
+         yield return new WaitForSecondsRealtime(.1f);
+      }
+      else if (Command.ToString() == "4") {
          RuleButtons[3].OnInteract();
+         yield return new WaitForSecondsRealtime(.1f);
+      }
       else {
          yield return "sendtochaterror I don't understand!";
          yield break;
@@ -382,25 +425,28 @@ public class Rules : MonoBehaviour {
    }
 
    IEnumerator TwitchHandleForcedSolve () {
-         if (!Activate) {
-            StartNowIGuessFuckYouImTerryDavis.OnInteract();
-            yield return new WaitForSecondsRealtime(.1f);
-         }
-         while (Counter != ThresshyBoy)
-            for (int i = 0; i < 4; i++)
-               if (Validity[i]) {
-                  RuleButtons[i].OnInteract();
-                  yield return new WaitForSecondsRealtime(.1f);
-                  break;
-               }
-      while (!moduleSolved) {
-         for (int i = 0; i < 4; i++)
+      if (!Activate) {
+         StartNowIGuessFuckYouImTerryDavis.OnInteract();
+         yield return new WaitForSecondsRealtime(.1f);
+      }
+      while (Counter != Threshhold) {
+         for (int i = 0; i < 4; i++) {
             if (Validity[i]) {
                RuleButtons[i].OnInteract();
                yield return new WaitForSecondsRealtime(.1f);
                break;
             }
-         yield return true;
+         }
+      }
+      while (!moduleSolved) {
+         for (int i = 0; i < 4; i++) {
+            if (Validity[i]) {
+               RuleButtons[i].OnInteract();
+               yield return new WaitForSecondsRealtime(.1f);
+               break;
+            }
+            yield return true;
+         }
       }
    }
 }
