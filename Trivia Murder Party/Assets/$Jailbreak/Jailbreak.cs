@@ -1,263 +1,280 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEngine;
-using KModkit;
 //using System.Diagnostics; I have no clue why you have this, it breaks Jailbreak in Unity
+
+//oh
 
 public class Jailbreak : MonoBehaviour {
 
-    public KMBombInfo Bomb;
-    public KMAudio Audio;
-    private KMAudio.KMAudioRef WeedChungus;
-    public KMSelectable[] Lomp;
-    public TextMesh[] Aids;
-    public TextMesh Emotiguy;
-    public TextMesh NotEmotiguy;
-    public TextMesh UselessShit;
+   public KMBombInfo Bomb;
+   public KMAudio Audio;
+   private KMAudio.KMAudioRef ClockSoundForNoLooping;
+   public KMSelectable[] Buttons;
+   public TextMesh[] DisplayLetters;
+   public TextMesh TimerDisplay;
+   public TextMesh GuessDisplay;
 
-    int Cock = 90;
+   int Timer = 90;
 
-    string MyDickisSoLongitStretchesFromAtoZ = "QWERTYUIOPASDFGHJKLZXCVBNM";
-    string Yanked = "";
-    string NuggetInABiscuit = "";
-    string[] TPProtectedWords = new string[5] { "HELP", "VIEW", "SHOW", "ZOOM", "TILT" };
+   string QWERTYAlphabet = "QWERTYUIOPASDFGHJKLZXCVBNM";
+   string GoalWord = "";
+   string InputWord = "";
+   string[] TPProtectedWords = new string[5] { "HELP", "VIEW", "SHOW", "ZOOM", "TILT" };
 
-    bool Check;
-    bool IWillTimeYourDeath;
-    bool shutup;
-    bool No;
-    #pragma warning disable 0649
-    bool TwitchPlaysActive;
-    #pragma warning restore 0649
+   bool Check;
+   bool IsActive;
+   bool Last30Seconds;
+   bool CanType;
+#pragma warning disable 0649
+   bool TwitchPlaysActive;
+#pragma warning restore 0649
 
-    static int moduleIdCounter = 1;
-    int moduleId;
-    private bool moduleSolved;
+   static int moduleIdCounter = 1;
+   int moduleId;
+   private bool moduleSolved;
 
-    void Awake () {
-        moduleId = moduleIdCounter++;
+   void Awake () {
+      moduleId = moduleIdCounter++;
 
-        foreach (KMSelectable Penis in Lomp) {
-            Penis.OnInteract += delegate () { PenisPress(Penis); return false; };
-        }
-        GetComponent<KMBombModule>().OnActivate += delegate () {Activate(); };
-    }
+      foreach (KMSelectable Button in Buttons) {
+         Button.OnInteract += delegate () { ButtonPress(Button); return false; };
+      }
+      GetComponent<KMBombModule>().OnActivate += delegate () { Activate(); };
+   }
 
-    // Use this for initialization
-    void Activate () {
-      for (int i = 0; i < 4; i++)
-        Aids[i].text = "_";
-      NotEmotiguy.text = "Query";
-      StartCoroutine(IWillPurgeTheWeak());
-    }
+   void Activate () {
+      for (int i = 0; i < 4; i++) {
+         DisplayLetters[i].text = "_";
+      }
+      GuessDisplay.text = "Query";
+      StartCoroutine(WordGeneration());
+   }
 
-    void PenisPress(KMSelectable Penis) {
-      Audio.PlaySoundAtTransform("Clack", Penis.transform);
-      Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Penis.transform);
-      if (No)
-        return;
+   void ButtonPress (KMSelectable Button) {
+      Audio.PlaySoundAtTransform("Clack", Button.transform);
+      Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Button.transform);
+      if (CanType || moduleSolved) {
+         return;
+      }
       for (int i = 0; i < 27; i++) {
-        if (moduleSolved)
-          return;
-        if (!IWillTimeYourDeath) {
-          StartCoroutine(SoonThatAttitudeWillBeYourDoom());
-          StartCoroutine(hgjymgjuyhkhgjymijuyhkhftjuyhjuymgfhjvmghgjmfhgjmfnhgjymfnhgjhgfnhgfjygfhhtjuyhmgfjyhjuymghgjymfhmgnbjmgnbjhnbhvmnFUCKWEEDhgfjyhcgnbhjymgfhmgnjhjymghmjgnhmgnj());
-        }
-        if (Penis == Lomp[i] && i != 26) {
-          if (NuggetInABiscuit.Length == 4)
-            return;
-          NuggetInABiscuit += MyDickisSoLongitStretchesFromAtoZ[i].ToString();
-          NotEmotiguy.text = NuggetInABiscuit;
-        }
-        else if (NuggetInABiscuit.ToLower() == Yanked && Penis == Lomp[i]) {
-          StopAllCoroutines();
-          moduleSolved = true;
-          StartCoroutine(SolveThing());
-        }
-        else if (Penis == Lomp[i] && NuggetInABiscuit.Length < 4) {
-          GetComponent<KMBombModule>().HandleStrike();
-          Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
-          NotEmotiguy.text = "Query";
-          NuggetInABiscuit = "";
-          NotEmotiguy.text = NuggetInABiscuit;
-        }
-        else if (Penis == Lomp[i] && i == 26 && NuggetInABiscuit.Length == 4) {
-          for (int j = 0; j < AidsList.Phrases.Count(); j++)
-            if (NuggetInABiscuit.ToLower() == AidsList.Phrases[j]) {
-              Check = true;
-              break;
+         if (!IsActive) {
+            StartCoroutine(AllTimerFunctions());
+            StartCoroutine(TickingSound());
+         }
+         if (Button == Buttons[i] && i != 26) {
+            if (InputWord.Length == 4) {
+               return;
             }
-            for (int j = 0; j < 4; j++)
-              if (NuggetInABiscuit[j].ToString().ToLower() == Yanked[j].ToString() && Check)
-                Aids[j].text = NuggetInABiscuit[j].ToString();
-            if (!Check)
-              Debug.LogFormat("[Jailbreak #{0}] You queried {1}, but that is not a word!", moduleId, NuggetInABiscuit);
-            else
-              Debug.LogFormat("[Jailbreak #{0}] You queried {1}. It shows {2} {3} {4} {5}.", moduleId, NuggetInABiscuit, Aids[0].text, Aids[1].text, Aids[2].text, Aids[3].text);
-            NuggetInABiscuit = "";
-            NotEmotiguy.text = "Query";
-        }
-        Check = false;
+            InputWord += QWERTYAlphabet[i].ToString();
+            GuessDisplay.text = InputWord;
+         }
+         else if (InputWord.ToLower() == GoalWord && Button == Buttons[i]) {
+            StopAllCoroutines();
+            moduleSolved = true;
+            StartCoroutine(SolveAnimation());
+         }
+         else if (Button == Buttons[i] && InputWord.Length < 4) {
+            GetComponent<KMBombModule>().HandleStrike();
+            Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
+            GuessDisplay.text = "Query";
+            InputWord = "";
+            GuessDisplay.text = InputWord;
+         }
+         else if (Button == Buttons[i] && i == 26 && InputWord.Length == 4) {
+            for (int j = 0; j < WordList.Phrases.Count(); j++) {
+               if (InputWord.ToLower() == WordList.Phrases[j]) {
+                  Check = true;
+                  break;
+               }
+            }
+            for (int j = 0; j < 4; j++) {
+               if (InputWord[j].ToString().ToLower() == GoalWord[j].ToString() && Check) {
+                  DisplayLetters[j].text = InputWord[j].ToString();
+               }
+            }
+            if (!Check) {
+               Debug.LogFormat("[Jailbreak #{0}] You queried {1}, but that is not a word!", moduleId, InputWord);
+            }
+            else {
+               Debug.LogFormat("[Jailbreak #{0}] You queried {1}. It shows {2} {3} {4} {5}.", moduleId, InputWord, DisplayLetters[0].text, DisplayLetters[1].text, DisplayLetters[2].text, DisplayLetters[3].text);
+            }
+            InputWord = "";
+            GuessDisplay.text = "Query";
+         }
+         Check = false;
       }
-    }
+   }
 
-    IEnumerator IWillPurgeTheWeak(){
-        Yanked = AidsList.Phrases[UnityEngine.Random.Range(0, AidsList.Phrases.Count())];
-        bool TPCheck = true;
-        while (TwitchPlaysActive && TPCheck)
-        {
-            TPCheck = false;
-            for (int myass = 0; myass < TPProtectedWords.Length; myass++)
-                if (Yanked.ToUpper() == TPProtectedWords[myass])
-                    TPCheck = true;
-            if (TPCheck)
-                Yanked = AidsList.Phrases[UnityEngine.Random.Range(0, AidsList.Phrases.Count())];
-        }
-      Debug.LogFormat("[Jailbreak #{0}] The generated word is {1}.", moduleId, Yanked);
+   IEnumerator WordGeneration () {
+      GoalWord = WordList.Phrases[UnityEngine.Random.Range(0, WordList.Phrases.Count())];
+      bool TPCheck = true;
+      while (TwitchPlaysActive && TPCheck) {
+         TPCheck = false;
+         for (int myass = 0; myass < TPProtectedWords.Length; myass++) {
+            if (GoalWord.ToUpper() == TPProtectedWords[myass]) {
+               TPCheck = true;
+            }
+         }
+         if (TPCheck) {
+            GoalWord = WordList.Phrases[UnityEngine.Random.Range(0, WordList.Phrases.Count())];
+         }
+      }
+      Debug.LogFormat("[Jailbreak #{0}] The generated word is {1}.", moduleId, GoalWord);
       yield return null;
-    }
+   }
 
-    IEnumerator SoonThatAttitudeWillBeYourDoom(){
-      IWillTimeYourDeath = true;
+   IEnumerator AllTimerFunctions () {
+      IsActive = true;
       yield return new WaitForSecondsRealtime(1f);
-      Cock -= 1;
-      Emotiguy.text = Cock.ToString();
-      if (Cock == 30) {
-        shutup = true;
-        WeedChungus = Audio.PlaySoundAtTransformWithRef("clock", transform);
+      Timer--;
+      TimerDisplay.text = Timer.ToString();
+      if (Timer == 30) {
+         Last30Seconds = true;
+         ClockSoundForNoLooping = Audio.PlaySoundAtTransformWithRef("clock", transform);
       }
-      if (Cock == 0) {
-        if (WeedChungus != null) {
-          WeedChungus.StopSound();
-          WeedChungus = null;
-        }
-        for (int i = 0; i < 4; i++) {
-          Aids[i].text = Yanked[i].ToString().ToUpper();
-        }
-        Debug.LogFormat("[Jailbreak #{0}] You took too long!", moduleId);
-        shutup = false;
-        No = true;
-        yield return new WaitForSecondsRealtime(5f);
-        No = false;
-        //GetComponent<KMBombModule>().HandleStrike();
-        NotEmotiguy.text = "Query";
-        Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
-        StartCoroutine(IWillPurgeTheWeak());
-        IWillTimeYourDeath = false;
-        Cock = 90;
-        for (int i = 0; i < 4; i++)
-          Aids[i].text = "_";
+      if (Timer == 0) {
+         if (ClockSoundForNoLooping != null) {
+            ClockSoundForNoLooping.StopSound();
+            ClockSoundForNoLooping = null;
+         }
+         for (int i = 0; i < 4; i++) {
+            DisplayLetters[i].text = GoalWord[i].ToString().ToUpper();
+         }
+         Debug.LogFormat("[Jailbreak #{0}] You took too long!", moduleId);
+         Last30Seconds = false;
+         CanType = true;
+         yield return new WaitForSecondsRealtime(5f);
+         CanType = false;
+         //GetComponent<KMBombModule>().HandleStrike();
+         GuessDisplay.text = "Query";
+         Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
+         StartCoroutine(WordGeneration());
+         IsActive = false;
+         Timer = 90;
+         for (int i = 0; i < 4; i++) {
+            DisplayLetters[i].text = "_";
+         }
       }
-      else
-        StartCoroutine(SoonThatAttitudeWillBeYourDoom());
-    }
+      else {
+         StartCoroutine(AllTimerFunctions());
+      }
+   }
 
-    IEnumerator hgjymgjuyhkhgjymijuyhkhftjuyhjuymgfhjvmghgjmfhgjmfnhgjymfnhgjhgfnhgfjygfhhtjuyhmgfjyhjuymghgjymfhmgnbjmgnbjhnbhvmnFUCKWEEDhgfjyhcgnbhjymgfhmgnjhjymghmjgnhmgnj(){
+   IEnumerator TickingSound () {
       yield return new WaitForSeconds(0.2f);
       Audio.PlaySoundAtTransform("tick", transform);
-      if (shutup)
-        yield return null;
-      else
-        StartCoroutine(hgjymgjuyhkhgjymijuyhkhftjuyhjuymgfhjvmghgjmfhgjmfnhgjymfnhgjhgfnhgfjygfhhtjuyhmgfjyhjuymghgjymfhmgnbjmgnbjhnbhvmnFUCKWEEDhgfjyhcgnbhjymgfhmgnjhjymghmjgnhmgnj());
-    }
+      if (Last30Seconds) {
+         yield return null;
+      }
+      else {
+         StartCoroutine(TickingSound());
+      }
+   }
 
-    IEnumerator SolveThing(){
-      if (WeedChungus != null) {
-        WeedChungus.StopSound();
-        WeedChungus = null;
+   IEnumerator SolveAnimation () {
+      if (ClockSoundForNoLooping != null) {
+         ClockSoundForNoLooping.StopSound();
+         ClockSoundForNoLooping = null;
       }
-      for (int j = 0; j < 4; j++)
-        Aids[j].text = Yanked[j].ToString().ToUpper();
+      for (int j = 0; j < 4; j++) {
+         DisplayLetters[j].text = GoalWord[j].ToString().ToUpper();
+      }
       yield return new WaitForSeconds(3f);
-      if (Aids[0].text.ToString() != "J") {
-        Aids[0].text = "J";
-        yield return new WaitForSeconds(1f);
+      if (DisplayLetters[0].text.ToString() != "J") {
+         DisplayLetters[0].text = "J";
+         yield return new WaitForSeconds(1f);
       }
-      if (Aids[1].text.ToString() != "A") {
-        Aids[1].text = "A";
-        yield return new WaitForSeconds(1f);
+      if (DisplayLetters[1].text.ToString() != "A") {
+         DisplayLetters[1].text = "A";
+         yield return new WaitForSeconds(1f);
       }
-      if (Aids[2].text.ToString() != "I") {
-        Aids[2].text = "I";
-        yield return new WaitForSeconds(1f);
+      if (DisplayLetters[2].text.ToString() != "I") {
+         DisplayLetters[2].text = "I";
+         yield return new WaitForSeconds(1f);
       }
-      if (Aids[3].text.ToString() != "L") {
-        Aids[3].text = "L";
-        yield return new WaitForSeconds(1f);
+      if (DisplayLetters[3].text.ToString() != "L") {
+         DisplayLetters[3].text = "L";
+         yield return new WaitForSeconds(1f);
       }
-      NotEmotiguy.text = "";
+      GuessDisplay.text = "";
       for (int i = 0; i < 5; i++) {
-        NotEmotiguy.text += "BROKE"[i].ToString();
-        yield return new WaitForSeconds(.2f);
+         GuessDisplay.text += "BROKE"[i].ToString();
+         yield return new WaitForSeconds(.2f);
       }
-      Emotiguy.text = "";
-      UselessShit.text = "?!";
+      TimerDisplay.text = "";
       Debug.LogFormat("[Jailbreak #{0}] You guessed the word. Module disarmed.", moduleId);
       GetComponent<KMBombModule>().HandlePass();
       Audio.PlaySoundAtTransform("DooDOodoodoodooDOoooooo", transform);
       moduleSolved = true;
-    }
+   }
 
-    #pragma warning disable 414
-    private readonly string TwitchHelpMessage = @"Use !{0} XXXX to guess a word.";
-    #pragma warning restore 414
+#pragma warning disable 414
+   private readonly string TwitchHelpMessage = @"Use !{0} XXXX to guess a word.";
+#pragma warning restore 414
 
-    IEnumerator ProcessTwitchCommand(string command){
-      bool[] Dumbass = {false, false, false, false};
+   IEnumerator ProcessTwitchCommand (string command) {
+      bool[] TPWordValidity = { false, false, false, false };
       yield return null;
-      if (command.Length > 4)
-        yield return "sendtochaterror Too big a word!";
+      if (command.Length > 4) {
+         yield return "sendtochaterror Too big a word!";
+      }
       else if (command.Length < 4) {
-        GetComponent<KMBombModule>().HandleStrike();
-        Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
-        yield break;
+         GetComponent<KMBombModule>().HandleStrike();
+         Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
+         yield break;
       }
       else {
-        for (int i = 0; i < command.Length; i++)
-          for (int j = 0; j < 26; j++)
-            if (command[i].ToString().ToUpper() == MyDickisSoLongitStretchesFromAtoZ[j].ToString().ToUpper())
-              Dumbass[i] = true;
-        if (Dumbass[0] && Dumbass[1] && Dumbass[2] && Dumbass[3]) {
-          for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 26; j++)
-              if (command[i].ToString().ToUpper() == MyDickisSoLongitStretchesFromAtoZ[j].ToString().ToUpper()) {
-                Lomp[j].OnInteract();
-                Dumbass[i] = false;
-                yield return new WaitForSeconds(.01f);
-              }
-          Lomp[26].OnInteract();
-          if (command.ToUpper() == Yanked.ToUpper())
-            yield return "solve";
-          }
-          else {
+         for (int i = 0; i < command.Length; i++) {
+            for (int j = 0; j < 26; j++) {
+               if (command[i].ToString().ToUpper() == QWERTYAlphabet[j].ToString().ToUpper()) {
+                  TPWordValidity[i] = true;
+               }
+            }
+         }
+         if (TPWordValidity[0] && TPWordValidity[1] && TPWordValidity[2] && TPWordValidity[3]) {
+            for (int i = 0; i < 4; i++) {
+               for (int j = 0; j < 26; j++) {
+                  if (command[i].ToString().ToUpper() == QWERTYAlphabet[j].ToString().ToUpper()) {
+                     Buttons[j].OnInteract();
+                     TPWordValidity[i] = false;
+                     yield return new WaitForSeconds(.01f);
+                  }
+               }
+            }
+            Buttons[26].OnInteract();
+            if (command.ToUpper() == GoalWord.ToUpper()) {
+               yield return "solve";
+            }
+         }
+         else {
             yield return "sendtochaterror Invalid Character!";
             yield break;
-          }
+         }
       }
-    }
+   }
 
-    IEnumerator TwitchHandleForcedSolve () {
+   IEnumerator TwitchHandleForcedSolve () {
       while (!moduleSolved) {
-        string WhateverTheFuck = "";
-        int WhateverTheHell = 0;
-        WhateverTheFuck = AidsList.Phrases[UnityEngine.Random.Range(0, AidsList.Phrases.Count())];
-        if (Cock <= 3)
-          WhateverTheFuck = Yanked;
-        if (Cock <= 3)
-          WhateverTheFuck = Yanked;
-        for (int i = 0; i < 4; i++)
-          if (Aids[i].text != "_")
-            WhateverTheHell++;
-        if (WhateverTheHell >= 3)
-          WhateverTheFuck = Yanked;
-        for (int i = 0; i < 4; i++) {
-          Lomp[MyDickisSoLongitStretchesFromAtoZ.IndexOf(WhateverTheFuck[i].ToString().ToUpper())].OnInteract();
-          yield return new WaitForSecondsRealtime(.1f);
-        }
-        Lomp[26].OnInteract();
+         string AutoGuessWord = "";
+         int AutoGuessCorrectLetters = 0;
+         AutoGuessWord = WordList.Phrases[UnityEngine.Random.Range(0, WordList.Phrases.Count())];
+         if (Timer <= 3) {
+            AutoGuessWord = GoalWord;
+         }
+         for (int i = 0; i < 4; i++) {
+            if (DisplayLetters[i].text != "_") {
+               AutoGuessCorrectLetters++;
+            }
+         }
+         if (AutoGuessCorrectLetters >= 3) {
+            AutoGuessWord = GoalWord;
+         }
+         for (int i = 0; i < 4; i++) {
+            Buttons[QWERTYAlphabet.IndexOf(AutoGuessWord[i].ToString().ToUpper())].OnInteract();
+            yield return new WaitForSecondsRealtime(.1f);
+         }
+         Buttons[26].OnInteract();
       }
-    }
+   }
 }
