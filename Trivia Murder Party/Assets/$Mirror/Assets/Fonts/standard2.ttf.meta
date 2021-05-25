@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 770e3b17bf77c164eb5e5d1231a5d06e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Monofonto
+  fontNames:
+  - Monofonto
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 003f2c6454c45ec4e8da93867e387cff, type: 3}
+  - {fileID: 12800000, guid: 5ad418d6bb771c542aa14dd4d35e4ff3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
