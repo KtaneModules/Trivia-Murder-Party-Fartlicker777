@@ -32,6 +32,8 @@ public class mirror : MonoBehaviour
     private Font[] chosenFonts;
     private Material[] chosenMats;
 
+    public bool TwitchPlaysActive;
+
     private int fontCategory;
     private int fontIndex;
     private int fontPosition;
@@ -52,8 +54,7 @@ public class mirror : MonoBehaviour
     private void Awake()
     {
         moduleId = moduleIdCounter++;
-        module.OnActivate += delegate () { audio.PlaySoundAtTransform("m-start", transform); };
-        mainSelectable.OnFocus += delegate () { if (moduleSelected) { return; } moduleSelected = true; StartCoroutine(BeginModule()); };
+        module.OnActivate += delegate () { audio.PlaySoundAtTransform("m-start", transform); CheckForTP(); };
         foreach (KMSelectable word in textButtons)
             word.OnInteract += delegate () { PressWord(word); return false; };
     }
@@ -92,8 +93,12 @@ public class mirror : MonoBehaviour
         StartCoroutine(DisableThings()); // Unity doesn't like it if I don't let the other words exist for an extra frame
         mirrorTexts[1].font = chosenFonts[fontIndex];
         mirrorTexts[1].GetComponent<Renderer>().material = chosenMats[fontIndex];
-        if (Application.isEditor) // OnFocus doesn't get called in the TestHarness
+        if (false)
+//        if (Application.isEditor) // OnFocus doesn't get called in the TestHarness
+        {
+            moduleSelected = true;
             StartCoroutine(BeginModule());
+        }
     }
 
     private IEnumerator BeginModule()
@@ -195,6 +200,12 @@ public class mirror : MonoBehaviour
         }
     }
 
+    private void CheckForTP()
+    {
+        if (!TwitchPlaysActive)
+            mainSelectable.OnFocus += delegate () { if (moduleSelected) { return; } moduleSelected = true; StartCoroutine(BeginModule()); };
+    }
+
     private IEnumerator FadeAll()
     {
         var order = Enumerable.Range(0, 3).ToList().Shuffle().ToArray();
@@ -211,6 +222,56 @@ public class mirror : MonoBehaviour
         yield return null; // See Start()
         mirrorTexts[0].gameObject.SetActive(false);
         mirrorTexts[2].gameObject.SetActive(false);
+    }
+
+#pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Use <!{0} select> to select the module and cause the ghost to write a message. Use <!{0} word 2> To press that word from top to bottom.";
+#pragma warning restore 414
+
+
+    IEnumerator ProcessTwitchCommand(string command)
+    {
+        command = command.Trim().ToUpper();
+        if (command == "SELECT")
+        {
+            if (moduleSelected)
+            {
+                yield return "sendtochaterror Module has already been selected";
+                yield break;
+            }
+            else
+            {
+                yield return null;
+                moduleSelected = true;
+                StartCoroutine(BeginModule());
+            }
+        }
+        else if (Regex.IsMatch(command, @"^(SUBMIT)|(WORD)|(PRESS)\s+[1-3]$"))
+        {
+            if (!moduleReady)
+            {
+                yield return "sendtochaterror What words? There are no words here!";
+                yield break;
+            }
+            else
+            {
+                yield return null;
+                textButtons[command.Last() - '0' - 1].OnInteract();
+            }
+        }
+    }
+
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        if (!moduleSelected)
+        {
+            yield return null;
+            moduleSelected = true;
+            StartCoroutine(BeginModule());
+        }
+        while (!moduleReady)
+            yield return true;
+        textButtons[solution].OnInteract();
     }
 
 }

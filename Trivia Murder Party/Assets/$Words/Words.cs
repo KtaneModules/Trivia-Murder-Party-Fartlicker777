@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Linq;
 using UnityEngine;
 using Rnd = UnityEngine.Random;
@@ -167,67 +169,40 @@ public class Words : MonoBehaviour {
    }
 
 #pragma warning disable 414
-   private readonly string TwitchHelpMessage = @"Use !{0} ABCDE12345 to press a spot, chainable with spaces.";
+   private readonly string TwitchHelpMessage = @"Use !{0} submit APPLE to submit that word into the module.";
 #pragma warning restore 414
 
-   IEnumerator ProcessTwitchCommand (string Command) {
-      string[] Parameters = Command.Trim().ToUpper().Split(' ');
-      yield return null;
-      for (int i = 0; i < Parameters.Length; i++) {
-         if (Parameters[i].Length != 2 || !"ABCDE".Contains(Parameters[i][0])) {
-            //Debug.Log(Parameters[0]);
-            yield return "sendtochaterror I don't understand!";
+    IEnumerator ProcessTwitchCommand(string command)
+    {
+        List<string> parameters = command.Trim().ToUpper().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        if (parameters.Count != 2 || parameters[0] != "SUBMIT" || parameters[1].Any(x => !"ABCDEFGHIJKLMNOPQRSTUVWXYZ".Contains(x)))
             yield break;
-         }
-         if (!"12345".Contains(Parameters[i][1])) {
-            Debug.Log("2");
-            yield return "sendtochaterror I don't understand!";
-            yield break;
-         }
-         if (Parameters[i] == "E1") {
-            Debug.Log("3");
-            yield return "sendtochaterror I don't understand!";
-            yield break;
-         }
-      }
-      for (int i = 0; i < Parameters.Length; i++) {
-         switch (Parameters[i]) {
-            case "A1":
-               Buttons[0].OnInteract();
-               break;
-            case "B1":
-               Buttons[1].OnInteract();
-               break;
-            case "C1":
-               Buttons[2].OnInteract();
-               break;
-            case "D1":
-               Buttons[3].OnInteract();
-               break;
-            default:
-               int LetterTemp = 0;
-               switch (Parameters[i][0]) {
-                  case 'B':
-                     LetterTemp++;
-                     break;
-                  case 'C':
-                     LetterTemp += 2;
-                     break;
-                  case 'D':
-                     LetterTemp += 3;
-                     break;
-                  case 'E':
-                     LetterTemp += 4;
-                     break;
-               }
-               Buttons[4 + (int.Parse(Parameters[i][1].ToString()) - 2) * 5 + LetterTemp].OnInteract();
-               break;
-         }
-         yield return new WaitForSecondsRealtime(.1f);
-      }
-   }
+        string submitting = parameters[1];
+        List<char> availableLetters = ShownLetters.ToList();
+        List<int> submitSequence = new List<int>();
+        while (Animating) yield return "trycancel";
+        foreach (char letter in submitting)
+        {
+            if (!availableLetters.Contains(letter))
+            {
+                yield return "sendtochaterror The submitted word is unable to be made.";
+                yield break;
+            }
+            int index = Enumerable.Range(0, 25).First(ix => availableLetters[ix] == letter);
+            availableLetters[index] = '-';
+            submitSequence.Add(index);
+        }
+        submitSequence.Add(submitSequence.PickRandom());
+        yield return null;
+        foreach (int index in submitSequence)
+        {
+            Buttons[index].OnInteract();
+            yield return new WaitForSeconds(0.1f);
+        }
 
-   IEnumerator TwitchHandleForcedSolve () {
+    }
+
+    IEnumerator TwitchHandleForcedSolve () {
       if (CurrentSubmission != "") {
          for (int i = 0; i < 24; i++) {
             if (HaveBeenPressed[i]) {

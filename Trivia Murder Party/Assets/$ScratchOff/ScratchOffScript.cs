@@ -31,7 +31,7 @@ public class ScratchOffScript : MonoBehaviour
     int[] cash;
     int finalSkull;
 
-    int[] board = new int[9] { -1, -1, -1,  -1, -1, -1,  -1, -1, -1};
+    int[] board = new int[9].Select(x => x = -1).ToArray();
     int[] operations = new int[3];
     bool[] revealed = new bool[9];
     int revealedCount = 0;
@@ -40,13 +40,9 @@ public class ScratchOffScript : MonoBehaviour
     void Awake() 
     {
         moduleId = moduleIdCounter++;
-
-        
         foreach (KMSelectable button in buttons) 
             button.OnInteract += delegate () { RevealIcon(Array.IndexOf(buttons, button)); return false; };
         submit.OnInteract += delegate () { Submit(); return false; };
-        
-
     }
 
     void Start() 
@@ -80,9 +76,7 @@ public class ScratchOffScript : MonoBehaviour
         {
             finalSkull = ApplyMovement(finalSkull, operations[i]);
             for (int j = 0; j < 3; j++)
-            {
                 cash[j] = ApplyMovement(cash[j], operations[i]);
-            }
             Debug.LogFormat("[Scratch-Off #{0}] After the {1} operation, the skull is at position {2} and the cash are at positions {3}.",
                 moduleId, colors[operations[i]].name, coordinates[finalSkull], cash.Select(x => coordinates[x]).Join(", ")); 
         }
@@ -101,7 +95,6 @@ public class ScratchOffScript : MonoBehaviour
             board[empties[i]] = remaining[i];
         Debug.LogFormat("[Scratch-Off #{0}] The grid is as follows:", moduleId);
         LogGrid(board, 3, 3, "$☠");
-
     }
 
     void RevealIcon(int position)
@@ -110,7 +103,6 @@ public class ScratchOffScript : MonoBehaviour
         if (isAnimating || revealed[position]) return;
         Audio.PlaySoundAtTransform("scratch", buttons[position].transform);
         revealed[position] = true;
-        Debug.Log(board[position]);
         icons[position].sprite = iconChoices[board[position]];
         if (moduleSolved) return;
 
@@ -118,7 +110,6 @@ public class ScratchOffScript : MonoBehaviour
         {
             Debug.LogFormat("[Scratch-Off #{0}] Scratched off a skull. Strike incurred and grid reset.", moduleId);
             StartCoroutine(Strike());
-
         }
         else
         {
@@ -127,12 +118,12 @@ public class ScratchOffScript : MonoBehaviour
         }
     }
     
-    void LogGrid(int[] grid, int height, int length, string characterSet)
+    void LogGrid(int[] grid, int height, int length, string charSet, int shift = 0)
     {
         string logger = string.Empty;
         for (int i = 0; i < height*length; i++)
         {
-            logger += characterSet[grid[i]];
+            logger += charSet[grid[i] + shift];
             if (i % length == length - 1)
             {
                 Debug.LogFormat("[Scratch-Off #{0}] {1}", moduleId, logger);
