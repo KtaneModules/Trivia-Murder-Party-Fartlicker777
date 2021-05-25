@@ -425,6 +425,7 @@ public class Rules : MonoBehaviour {
    }
 
    IEnumerator TwitchHandleForcedSolve () {
+      Timer = 70f;
       if (!Activate) {
          StartNowIGuessFuckYouImTerryDavis.OnInteract();
          yield return new WaitForSecondsRealtime(.1f);

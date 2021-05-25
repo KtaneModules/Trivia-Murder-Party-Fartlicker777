@@ -210,8 +210,10 @@ public class MentalMath : MonoBehaviour {
    }
 
    IEnumerator TwitchHandleForcedSolve () {
-      if (!Activated)
+      Timer = 50f;
+      if (!Activated) {
          Crank.OnInteract();
+      }
       while (QuestionsAnswered != Threshold) {
          Buttons[OriginalButtonOrder[0]].OnInteract();
          yield return new WaitForSecondsRealtime(.1f);

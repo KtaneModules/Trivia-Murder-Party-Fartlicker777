@@ -87,7 +87,7 @@ public class Dictation : MonoBehaviour {
    void KeyPress (KMSelectable Key) {
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Key.transform);
       StartCoroutine(keyAnimation(Key));
-      if (moduleSolved || DetonationSequeunceInitiated || Solving) {
+      if (moduleSolved || DetonationSequeunceInitiated || Solving || IsDisplayingPhrase) {
          return;
       }
       Audio.PlaySoundAtTransform("Type3", transform);
@@ -124,7 +124,7 @@ public class Dictation : MonoBehaviour {
       ReturnButton.AddInteractionPunch();
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, ReturnButton.transform);
       StartCoroutine(keyAnimation(ReturnButton));
-      if (moduleSolved || DetonationSequeunceInitiated || Solving) {
+      if (moduleSolved || DetonationSequeunceInitiated || Solving || IsDisplayingPhrase) {
          return;
       }
       if (CurrentSubmission == "DETONATE") {
