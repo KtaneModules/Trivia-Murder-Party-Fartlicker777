@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using KModkit;
 
@@ -659,71 +658,47 @@ public class TheArena : MonoBehaviour {
       return ((q - 1) % 9) + 1;
    }
 
-   // <Danny's Lunar Arithmetic functions>
+    // <Danny's Lunar Arithmetic functions>
 
-   int lunA (int A, int B) {
-      string AString = Convert.ToString(A);
-      string BString = Convert.ToString(B);
-      string CString = String.Empty;
-      int maxLength = Math.Max(AString.Length, BString.Length);
-      while (AString.Length < maxLength) {
-         AString = "0" + AString;
-      }
-      while (BString.Length < maxLength)    // Makes sure that the sequences are the same length.
-      {
-         BString = "0" + BString;
-      }
-      for (int i = 0; i < maxLength; i++) {
-         CString += Convert.ToChar(Math.Max(AString[i], BString[i])); // Needs Convert.ToChar because chars are actually the same as ints, and I was too lazy to look up the number to subtract for it to work.
-      }
+    int lunA(int first, int second)
+    {
+        int maxLength = Math.Max(first.ToString().Length, second.ToString().Length);
+        string A = first.ToString().PadLeft(maxLength, '0');
+        string B = second.ToString().PadLeft(maxLength, '0');
+        int result = 0;
+        for (int i = 0; i < maxLength; i++)
+        {
+            result *= 10;
+            result += Math.Max(A[i], B[i]) - '0';
+        }
+        return result;
+    }
+    int lunM(int first, int second)
+    {
+        int maxLength = Math.Max(first.ToString().Length, second.ToString().Length);
+        string A = first.ToString().PadLeft(maxLength, '0');
+        string B = second.ToString().PadLeft(maxLength, '0');
+        int append = 0;
+        Stack<int> adders = new Stack<int>();
+        for (int i = A.Length - 1; i >= 0; i--)
+        {
+            string result = "";
+            for (int j = B.Length - 1; j >= 0; j--)
+                result = Math.Min(A[j], B[i]) - '0' + result;
+            for (int k = 0; k < append; k++)
+                result += '0';
+            append++;
+            adders.Push(int.Parse(result));
+        }
+        Debug.Log(adders.Join());
+        while (adders.Count > 1)
+            adders.Push(lunA(adders.Pop(), adders.Pop()));
+        return adders.First();
+    }
 
-      return Convert.ToInt32(CString);
-   }
+    // </Danny's Lunar Arithmetic functions>
 
-   int lunM (int A, int B) {
-      string AString = Convert.ToString(A);
-      string BString = Convert.ToString(B);
-      int maxLength = Math.Max(AString.Length, BString.Length);
-      int[] stringsToAdd = new int[maxLength];
-      while (AString.Length < maxLength) {
-         AString = "0" + AString;
-      }
-      while (BString.Length < maxLength)    //Makes sure sequences are same length, yada yada you know the drill.
-      {
-         BString = "0" + BString;
-      }
-      AString = Reverse(AString); //Reverses the strings so that the multiplication goes left-to right.
-      BString = Reverse(BString);
-      //Debug.Log(AString);
-      //Debug.Log(BString);
-
-      string temp;
-      for (int i = 0; i < maxLength; i++) {
-         temp = string.Empty;
-         for (int j = 0; j < maxLength; j++) {
-            temp += Math.Min(int.Parse(AString[j].ToString()), int.Parse(BString[i].ToString()));
-         }
-         for (int j = 0; j < i; j++) {
-            temp = "0" + temp;
-         }
-         temp = Reverse(temp); //Makes things left-to-right again.
-         stringsToAdd[i] = int.Parse(temp);
-      }
-      if (stringsToAdd.Length == 1) {
-         return stringsToAdd[0]; // If there's only one digit, return that. Otherwise lunar add them.
-      }
-      else return lunA(stringsToAdd[0], stringsToAdd[1]);
-
-   }
-
-   string Reverse (string input) //who didnt tell me that .Reverse didn't work with strings what
-   {
-      return input.ToCharArray().Reverse().Join("");
-   }
-
-   // </Danny's Lunar Arithmetic functions>
-
-   void EventButtonPress (KMSelectable evB) {
+    void EventButtonPress (KMSelectable evB) {
       evB.AddInteractionPunch();
       GetComponent<KMAudio>().PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.BigButtonPress, transform);
       for (int e = 0; e < 3; e++) {
@@ -916,7 +891,8 @@ public class TheArena : MonoBehaviour {
          case 5: return "middle right";
          case 6: return "bottom left";
          case 7: return "bottom middle";
-         default: return "bottom right";
+         case 8: return "bottom right";
+         default: throw new ArgumentOutOfRangeException("k");
       }
    }
 

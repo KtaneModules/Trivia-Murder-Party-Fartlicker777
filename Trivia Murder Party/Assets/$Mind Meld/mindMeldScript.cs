@@ -134,7 +134,7 @@ public class mindMeldScript : MonoBehaviour {
    void GenerateCards () {
       cards = new string[5] { "", "", "", "", "" };
       cardPositions = cardPositions.Shuffle().ToArray();
-      DebugMsg("The cards, in reading order, are " + cardNames[cardPositions[0]] + ", " + cardNames[cardPositions[1]] + ", " + cardNames[cardPositions[2]] + ", " + cardNames[cardPositions[3]] + ", and " + cardNames[cardPositions[0]] + ".");
+      DebugMsg("The cards, in reading order, are " + cardPositions.Select(x => cardNames[x]).Take(4).Join(", ") + ", and " + cardNames[cardPositions[4]] + ".");
       categoryNumber = cardPositions[4] * 5 + cardPositions[0];
       DebugMsg("The category is " + categoryNames[categoryNumber] + ".");
       StartCoroutine(Redeal());
@@ -334,9 +334,9 @@ public class mindMeldScript : MonoBehaviour {
       Audio.PlaySoundAtTransform("click", Module.transform);
       Audio.PlaySoundAtTransform("fuckyou", Module.transform);
 
-      yield return new WaitForSeconds(.7f);
+      yield return new WaitForSecondsRealtime(.7f);
       buttonRenderer.material = buttonMats[2];
-      yield return new WaitForSeconds(.4f);
+      yield return new WaitForSecondsRealtime(.4f);
       for (int i = 0; i < 5; i++)
          cardRenderers[i].material = blankMat;
       for (int i = 0; i < 4; i++) {
@@ -344,12 +344,12 @@ public class mindMeldScript : MonoBehaviour {
          spriteTransforms[playerPositions[i]].localPosition = originalPositions[playerCards[i]];
       }
 
-      yield return new WaitForSeconds(.9f);
-      yield return new WaitForSeconds(.25f);
+      yield return new WaitForSecondsRealtime(.9f);
+      yield return new WaitForSecondsRealtime(.25f);
       for (int i = 0; i < 4; i++)
          spriteTransforms[playerPositions[i]].gameObject.SetActive(false);
       GenerateCards();
-      yield return new WaitForSeconds(2f);
+      yield return new WaitForSecondsRealtime(2f);
       if (Random.Range(0, 20) == 0)
          Audio.PlaySoundAtTransform("blan", Module.transform);
       else
@@ -369,7 +369,7 @@ public class mindMeldScript : MonoBehaviour {
       Audio.PlaySoundAtTransform("click", Module.transform);
       Audio.PlaySoundAtTransform("fuckyeah", Module.transform);
 
-      yield return new WaitForSeconds(.6f);
+      yield return new WaitForSecondsRealtime(.6f);
       buttonRenderer.material = buttonMats[2];
       for (int i = 0; i < 5; i++)
          cardRenderers[i].material = blankMat;
@@ -377,13 +377,13 @@ public class mindMeldScript : MonoBehaviour {
          spriteTransforms[playerPositions[i]].gameObject.SetActive(true);
          spriteTransforms[playerPositions[i]].localPosition = originalPositions[playerCards[i]];
       }
-      yield return new WaitForSeconds(.6f);
+      yield return new WaitForSecondsRealtime(.6f);
       Module.HandlePass();
-      yield return new WaitForSeconds(1f);
+      yield return new WaitForSecondsRealtime(1f);
       for (int i = 0; i < 4; i++)
          spriteTransforms[playerPositions[i]].gameObject.SetActive(false);
 
-      yield return new WaitForSeconds(.5f);
+      yield return new WaitForSecondsRealtime(.5f);
       buttonRenderer.material = buttonMats[1];
       inSubmissionMode = false;
       DebugMsg("Exiting submission mode...");
@@ -396,7 +396,7 @@ public class mindMeldScript : MonoBehaviour {
          cardRenderers[i].material = blankMat;
 
       for (int i = 0; i < cardRenderers.Length; i++) {
-         yield return new WaitForSeconds(.1f);
+         yield return new WaitForSecondsRealtime(.1f);
          cardRenderers[i].material = cardMats[cardPositions[i]];
          cards[i] = categories[categoryNumber, cardPositions[i]];
          Audio.PlaySoundAtTransform("card" + Random.Range(1, 11).ToString(), Module.transform);
@@ -420,25 +420,31 @@ public class mindMeldScript : MonoBehaviour {
    }
 
 #pragma warning disable 414
-   private readonly string TwitchHelpMessage = @"Use !{0} 0/1/2/3/4 to press those cards. Use !{0} submit to toggle the submit button.";
+   private readonly string TwitchHelpMessage = @"Use !{0} square to press that card. Use !{0} submit to toggle the submit button.";
 #pragma warning restore 414
 
-   IEnumerator ProcessTwitchCommand (string Command) {
-      Command = Command.Trim().ToUpper();
-      yield return null;
-      if ("01234".Contains(Command)) {
-         cardSelectables[int.Parse(Command)].OnInteract();
-      }
-      else if (Command == "SUBMIT") {
-         buttonSelectable.OnInteract();
-      }
-      else if (Command == "BLAN") {
-         Audio.PlaySoundAtTransform("blan", Module.transform);
-      }
-      else {
-         yield return "sendtochaterror I DON'T UNDERSTAND I AM SORRY;";
-      }
-   }
+
+    IEnumerator ProcessTwitchCommand(string command)
+    {
+        command = command.Trim().ToUpperInvariant();
+        string[] names = cardNames.Select(x => x.ToUpper()).ToArray();
+        if (command == "SUBMIT")
+        {
+            yield return null;
+            buttonSelectable.OnInteract();
+        }
+        else if (new string[] { "BLAN", "BALN", "BEAT", "BEATING", "BEATING BLAN", "BEAT BLAN", "BEAT BALN", "FUCK YOU BLAN", "FUCK YOU BALN" }.Contains(command))
+        {
+            yield return null;
+            Audio.PlaySoundAtTransform("blan", transform);
+        }
+        else if (names.Contains(command))
+        {
+            yield return null;
+            cardSelectables[Enumerable.Range(0, 5).First(digit => cardPositions[digit] == Array.IndexOf(names, command))].OnInteract();
+        }
+        else yield return "sendtochaterror I DON'T UNDERSTAND I AM SORRY*";
+    }
 
    IEnumerator TwitchHandleForcedSolve () {
       if (!inSubmissionMode) {
@@ -447,6 +453,7 @@ public class mindMeldScript : MonoBehaviour {
       while (redealAnimationPlaying) {
          yield return true;
       }
-      yield return ProcessTwitchCommand(answerCard.ToString());
+        cardSelectables[answerCard].OnInteract();
+        yield return new WaitForSeconds(0.1f);
    }
 }
