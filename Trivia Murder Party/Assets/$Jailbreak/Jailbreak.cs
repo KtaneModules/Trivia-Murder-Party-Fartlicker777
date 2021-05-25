@@ -17,15 +17,16 @@ public class Jailbreak : MonoBehaviour {
 
    int Timer = 90;
 
-   string QWERTYAlphabet = "QWERTYUIOPASDFGHJKLZXCVBNM";
+   string[] TPProtectedWords = new string[5] { "HELP", "VIEW", "SHOW", "ZOOM", "TILT" };
    string GoalWord = "";
    string InputWord = "";
-   string[] TPProtectedWords = new string[5] { "HELP", "VIEW", "SHOW", "ZOOM", "TILT" };
+   string QWERTYAlphabet = "QWERTYUIOPASDFGHJKLZXCVBNM";
 
+   bool CanType;
    bool Check;
    bool IsActive;
    bool Last30Seconds;
-   bool CanType;
+
 #pragma warning disable 0649
    bool TwitchPlaysActive;
 #pragma warning restore 0649
