@@ -112,7 +112,7 @@ public class Rules : MonoBehaviour {
          for (int i = 0; i < 4; i++) {
             if (RuleButton == RuleButtons[i]) {
                if (Validity[i]) {
-                  Audio.PlaySoundAtTransform("BiggerDick 1", RuleButton.transform);
+                  Audio.PlaySoundAtTransform("BiggerDick", RuleButton.transform);
                   Counter++;
                   for (int j = 0; j < 4; j++) {
                      Validity[j] = false;
