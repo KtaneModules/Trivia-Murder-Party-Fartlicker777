@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using KModkit;
 using Random = UnityEngine.Random;
@@ -32,13 +31,13 @@ public class Skewers : MonoBehaviour {
       1, 2, 1, 4,
       4, 1, 4, 2
    };
+   int tempFifthSN;
 
    string[] ColorNamesForLog = { "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"};
 
    bool Red; //Need to declare these here for some reason.
    bool Green;
    bool Blue;
-   int tempFifthSN;
    bool willStrike;
    bool Animating;
    bool Ran;
@@ -402,13 +401,17 @@ public class Skewers : MonoBehaviour {
    }
 
 #pragma warning disable 414
-   private readonly string TwitchHelpMessage = @"Use !{0} X# to submit that coordinate.";
+   private readonly string TwitchHelpMessage = @"Use !{0} X# to submit that coordinate. Use !{0} anything to open the briefcase.";
 #pragma warning restore 414
 
    IEnumerator ProcessTwitchCommand (string Command) {
       Command = Command.ToUpper().Trim();
       int Index = 0;
       yield return null;
+      if (!Ran) {
+         Module.OnHighlight();
+         yield break;
+      }
       if (Command.Length != 2) {
          yield return "sendtochaterror I don't understand!";
       }

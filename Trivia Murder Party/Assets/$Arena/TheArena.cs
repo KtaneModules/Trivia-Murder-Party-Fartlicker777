@@ -952,6 +952,7 @@ public class TheArena : MonoBehaviour {
          case "GRA":
             if (Command.Length != 2) {
                yield return "sendtochaterror I don't understand!";
+               yield break;
             }
             int IndexOfTPButton = 0;
             switch (Command[0]) {

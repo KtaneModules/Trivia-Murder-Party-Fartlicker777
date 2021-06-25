@@ -210,7 +210,7 @@ public class MentalMath : MonoBehaviour {
    }
 
    IEnumerator TwitchHandleForcedSolve () {
-      Timer = 50f;
+      Timer += 50f;
       if (!Activated) {
          Crank.OnInteract();
       }

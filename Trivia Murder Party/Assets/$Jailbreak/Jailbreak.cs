@@ -256,7 +256,7 @@ public class Jailbreak : MonoBehaviour {
    }
 
    IEnumerator TwitchHandleForcedSolve () {
-      /*
+
       while (!moduleSolved) {
          string AutoGuessWord = "";
          int AutoGuessCorrectLetters = 0;
@@ -278,7 +278,7 @@ public class Jailbreak : MonoBehaviour {
          }
          Buttons[26].OnInteract();
       }
-      */
-      yield return ProcessTwitchCommand(GoalWord);
+
+      //yield return ProcessTwitchCommand(GoalWord);
    }
 }
