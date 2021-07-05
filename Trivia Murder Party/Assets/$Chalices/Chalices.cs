@@ -237,6 +237,7 @@ public class Chalices : MonoBehaviour {
       yield return new WaitForSeconds(4f);
       Audio.PlaySoundAtTransform("jnoneeofnw", transform);
       GetComponent<KMBombModule>().HandlePass();
+      moduleSolved = true;
       Debug.LogFormat("[Chalices #{0}] You selected the right chalice again.", moduleId);
    }
 
@@ -601,7 +602,7 @@ public class Chalices : MonoBehaviour {
    IEnumerator ProcessTwitchCommand (string Command) {
       yield return null;
       Command = Command.Trim();
-      for (int i = 0; i < 8; i++) {
+      for (int i = 1; i < 9; i++) {
          if (Command == i.ToString()) {
             Buttons[i - 1].OnInteract();
             yield break;
@@ -611,9 +612,13 @@ public class Chalices : MonoBehaviour {
    }
 
    IEnumerator TwitchHandleForcedSolve () {
-      for (int i = 0; i < 8; i++)
-         if (AnswerToIsAmazing[i])
+      for (int i = 0; i < 8; i++) {
+         if (AnswerToIsAmazing[i]) {
             Buttons[i].OnInteract();
-      yield return null;
+         }
+      }
+      while (!moduleSolved) {
+         yield return true;
+      }
    }
 }
