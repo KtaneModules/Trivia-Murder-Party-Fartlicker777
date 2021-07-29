@@ -3525,10 +3525,10 @@ MonoBehaviour:
   - {fileID: 1855280170231372}
   - {fileID: 1518470749700590}
   Colores:
-  - {fileID: 2100000, guid: a086244c976384801b25627d5d4b7a92, type: 2}
-  - {fileID: 2100000, guid: 0b8345d6190d14013b825698a59f7759, type: 2}
-  - {fileID: 2100000, guid: 786c3d31185014ac2b26f9fe3e2582af, type: 2}
-  - {fileID: 2100000, guid: e6ddc669e9faa4dad93207caa5a7c773, type: 2}
+  - {fileID: 2100000, guid: db4802682c861984fac8cf3693e85423, type: 2}
+  - {fileID: 2100000, guid: f8f95cfe636d5214796add290c4a5b63, type: 2}
+  - {fileID: 2100000, guid: dd481b57fe58fe843b4405f85397d101, type: 2}
+  - {fileID: 2100000, guid: e80b5be77e2189346a2dd50230d943c1, type: 2}
 --- !u!114 &114028580937237836
 MonoBehaviour:
   m_ObjectHideFlags: 1

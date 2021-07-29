@@ -50,7 +50,8 @@ public class TheArena : MonoBehaviour {
    private int grbPresses = 0;
 
    string TPModeClarifier = "";
-   
+   int TPStrikes;
+
    static int moduleIdCounter = 1;
    int moduleId;
    private bool moduleSolved;
@@ -658,47 +659,43 @@ public class TheArena : MonoBehaviour {
       return ((q - 1) % 9) + 1;
    }
 
-    // <Danny's Lunar Arithmetic functions>
+   // <Danny's Lunar Arithmetic functions>
 
-    int lunA(int first, int second)
-    {
-        int maxLength = Math.Max(first.ToString().Length, second.ToString().Length);
-        string A = first.ToString().PadLeft(maxLength, '0');
-        string B = second.ToString().PadLeft(maxLength, '0');
-        int result = 0;
-        for (int i = 0; i < maxLength; i++)
-        {
-            result *= 10;
-            result += Math.Max(A[i], B[i]) - '0';
-        }
-        return result;
-    }
-    int lunM(int first, int second)
-    {
-        int maxLength = Math.Max(first.ToString().Length, second.ToString().Length);
-        string A = first.ToString().PadLeft(maxLength, '0');
-        string B = second.ToString().PadLeft(maxLength, '0');
-        int append = 0;
-        Stack<int> adders = new Stack<int>();
-        for (int i = A.Length - 1; i >= 0; i--)
-        {
-            string result = "";
-            for (int j = B.Length - 1; j >= 0; j--)
-                result = Math.Min(A[j], B[i]) - '0' + result;
-            for (int k = 0; k < append; k++)
-                result += '0';
-            append++;
-            adders.Push(int.Parse(result));
-        }
-        Debug.Log(adders.Join());
-        while (adders.Count > 1)
-            adders.Push(lunA(adders.Pop(), adders.Pop()));
-        return adders.First();
-    }
+   int lunA (int first, int second) {
+      int maxLength = Math.Max(first.ToString().Length, second.ToString().Length);
+      string A = first.ToString().PadLeft(maxLength, '0');
+      string B = second.ToString().PadLeft(maxLength, '0');
+      int result = 0;
+      for (int i = 0; i < maxLength; i++) {
+         result *= 10;
+         result += Math.Max(A[i], B[i]) - '0';
+      }
+      return result;
+   }
+   int lunM (int first, int second) {
+      int maxLength = Math.Max(first.ToString().Length, second.ToString().Length);
+      string A = first.ToString().PadLeft(maxLength, '0');
+      string B = second.ToString().PadLeft(maxLength, '0');
+      int append = 0;
+      Stack<int> adders = new Stack<int>();
+      for (int i = A.Length - 1; i >= 0; i--) {
+         string result = "";
+         for (int j = B.Length - 1; j >= 0; j--)
+            result = Math.Min(A[j], B[i]) - '0' + result;
+         for (int k = 0; k < append; k++)
+            result += '0';
+         append++;
+         adders.Push(int.Parse(result));
+      }
+      Debug.Log(adders.Join());
+      while (adders.Count > 1)
+         adders.Push(lunA(adders.Pop(), adders.Pop()));
+      return adders.First();
+   }
 
-    // </Danny's Lunar Arithmetic functions>
+   // </Danny's Lunar Arithmetic functions>
 
-    void EventButtonPress (KMSelectable evB) {
+   void EventButtonPress (KMSelectable evB) {
       evB.AddInteractionPunch();
       GetComponent<KMAudio>().PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.BigButtonPress, transform);
       for (int e = 0; e < 3; e++) {
@@ -824,6 +821,7 @@ public class TheArena : MonoBehaviour {
          }
          else {
             Debug.LogFormat("[The Arena #{0}] You pressed Sword for turn {1}, this is incorrect. Strike!", moduleId, defNum + 1);
+            TPStrikes++;
             GetComponent<KMBombModule>().HandleStrike();
          }
       }
@@ -847,6 +845,7 @@ public class TheArena : MonoBehaviour {
          }
          else {
             Debug.LogFormat("[The Arena #{0}] You pressed Shield for turn {1}, this is incorrect. Strike!", moduleId, defNum + 1);
+            TPStrikes++;
             GetComponent<KMBombModule>().HandleStrike();
          }
       }
@@ -924,6 +923,7 @@ public class TheArena : MonoBehaviour {
             }
             break;
          case "DEF":
+            int Temp = TPStrikes;
             if (Command == "HIT" || Command == "H") {
                DefButtons[0].OnInteract();
                yield return new WaitForSecondsRealtime(.1f);
@@ -945,6 +945,11 @@ public class TheArena : MonoBehaviour {
                   }
                   else {
                      DefButtons[1].OnInteract();
+                  }
+                  yield return new WaitForSeconds(.1f);
+                  if (TPStrikes > Temp) {
+                     yield return "sendtochaterror A strike has been detecting. Ending operation.";
+                     yield break;
                   }
                }
             }

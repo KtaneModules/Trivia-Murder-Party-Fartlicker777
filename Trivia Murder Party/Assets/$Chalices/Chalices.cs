@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using KModkit;
 
@@ -25,7 +22,7 @@ public class Chalices : MonoBehaviour {
    bool[] AnswerToIsAmazing = new bool[8];
    bool[] BlackConditions = new bool[8];
    bool[] Conditions = new bool[20];
-   bool Active = false;
+   bool Active;
 
    static int moduleIdCounter = 1;
    int moduleId;
