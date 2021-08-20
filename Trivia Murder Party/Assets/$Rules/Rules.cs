@@ -13,7 +13,7 @@ public class Rules : MonoBehaviour {
    public Font[] Fonts;
    public Material[] FontMats;
 
-   int[] OddOrEvenNumbers = { 0, 0, 0, 0 };
+   int[] OddOrEvenNumbers = new int[4];
    int RuleIndex = 0;
    int DoOrDontRuleSet = 0;
    int Counter = 0;
@@ -50,8 +50,26 @@ public class Rules : MonoBehaviour {
       moduleId = moduleIdCounter++;
       foreach (KMSelectable RuleButton in RuleButtons) {
          RuleButton.OnInteract += delegate () { RuleButtonPress(RuleButton); return false; };
+         RuleButton.OnHighlight += delegate () { RuleHover(RuleButton); };
+         RuleButton.OnHighlightEnded += delegate () { RuleDehover(RuleButton); };
       }
       StartNowIGuessFuckYouImTerryDavis.OnInteract += delegate () { StartPress(); return false; };
+   }
+
+   void RuleHover (KMSelectable Button) {
+      for (int i = 0; i < 4; i++) {
+         if (Button == RuleButtons[i]) {
+            Options[i].color = new Color32(255, 0, 0, 255);
+         }
+      }
+   }
+
+   void RuleDehover (KMSelectable Button) {
+      for (int i = 0; i < 4; i++) {
+         if (Button == RuleButtons[i]) {
+            Options[i].color = new Color32(255, 255, 255, 255);
+         }
+      }
    }
 
    void Start () {
@@ -213,12 +231,12 @@ public class Rules : MonoBehaviour {
             }
             ShortestOrLongest = Options[0].text;
             for (int i = 1; i < 4; i++) {
-               if (ShortestOrLongest.Length < Options[i].text.Length) {
+               if (ShortestOrLongest.Length > Options[i].text.Length) {
                   ShortestOrLongest = Options[i].text;
                }
             }
             for (int i = 0; i < 4; i++) {
-               if (Options[i].text == ShortestOrLongest) {
+               if (Options[i].text != ShortestOrLongest) {
                   Validity[i] = true;
                }
             }

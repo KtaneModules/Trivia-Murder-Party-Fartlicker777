@@ -42,10 +42,28 @@ public class MentalMath : MonoBehaviour {
 
       foreach (KMSelectable Button in Buttons) {
          Button.OnInteract += delegate () { ButtonPress(Button); return false; };
+         Button.OnHighlight += delegate () { RuleHover(Button); };
+         Button.OnHighlightEnded += delegate () { RuleDehover(Button); };
       }
 
       Crank.OnInteract += delegate () { CrankPress(); return false; };
 
+   }
+
+   void RuleHover (KMSelectable Button) {
+      for (int i = 0; i < 4; i++) {
+         if (Button == Buttons[i]) {
+            AnswerChoiceText[i].color = new Color32(255, 0, 0, 255);
+         }
+      }
+   }
+
+   void RuleDehover (KMSelectable Button) {
+      for (int i = 0; i < 4; i++) {
+         if (Button == Buttons[i]) {
+            AnswerChoiceText[i].color = new Color32(255, 255, 255, 255);
+         }
+      }
    }
 
    void CrankPress () {

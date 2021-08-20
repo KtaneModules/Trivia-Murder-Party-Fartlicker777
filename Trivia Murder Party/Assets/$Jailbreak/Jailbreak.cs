@@ -50,6 +50,23 @@ public class Jailbreak : MonoBehaviour {
       }
       GuessDisplay.text = "Query";
       StartCoroutine(WordGeneration());
+
+      char[] Vowels = { 'A', 'E', 'I', 'O', 'U', 'Y'};
+      bool HasVowels = false;
+
+      for (int i = 0; i < WordList.Phrases.Length; i++) { //It's midnight ok i want to sleep
+         for (int j = 0; j < 4; j++) {
+            for (int k = 0; k < 6; k++) {
+               if (WordList.Phrases[i][j] == Vowels[k]) {
+                  HasVowels = true;
+               }
+            }
+         }
+         if (!HasVowels) {
+            Debug.Log(WordList.Phrases[i]);
+            HasVowels = false;
+         }
+      }
    }
 
    void ButtonPress (KMSelectable Button) {
