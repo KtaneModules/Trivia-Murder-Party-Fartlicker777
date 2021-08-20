@@ -49,24 +49,7 @@ public class Jailbreak : MonoBehaviour {
          DisplayLetters[i].text = "_";
       }
       GuessDisplay.text = "Query";
-      StartCoroutine(WordGeneration());
-
-      char[] Vowels = { 'A', 'E', 'I', 'O', 'U', 'Y'};
-      bool HasVowels = false;
-
-      for (int i = 0; i < WordList.Phrases.Length; i++) { //It's midnight ok i want to sleep
-         for (int j = 0; j < 4; j++) {
-            for (int k = 0; k < 6; k++) {
-               if (WordList.Phrases[i][j] == Vowels[k]) {
-                  HasVowels = true;
-               }
-            }
-         }
-         if (!HasVowels) {
-            Debug.Log(WordList.Phrases[i]);
-            HasVowels = false;
-         }
-      }
+      WordGeneration();
    }
 
    void ButtonPress (KMSelectable Button) {
@@ -124,7 +107,7 @@ public class Jailbreak : MonoBehaviour {
       }
    }
 
-   IEnumerator WordGeneration () {
+   void WordGeneration () {
       GoalWord = WordList.Phrases[UnityEngine.Random.Range(0, WordList.Phrases.Count())];
       bool TPCheck = true;
       while (TwitchPlaysActive && TPCheck) {
@@ -139,7 +122,6 @@ public class Jailbreak : MonoBehaviour {
          }
       }
       Debug.LogFormat("[Jailbreak #{0}] The generated word is {1}.", moduleId, GoalWord);
-      yield return null;
    }
 
    IEnumerator AllTimerFunctions () {
@@ -167,7 +149,7 @@ public class Jailbreak : MonoBehaviour {
          //GetComponent<KMBombModule>().HandleStrike();
          GuessDisplay.text = "Query";
          Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
-         StartCoroutine(WordGeneration());
+         WordGeneration();
          IsActive = false;
          Timer = 90;
          for (int i = 0; i < 4; i++) {
