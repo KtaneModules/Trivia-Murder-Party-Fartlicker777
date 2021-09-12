@@ -9,7 +9,7 @@ public class MentalMath : MonoBehaviour {
 
    public KMSelectable[] Buttons;
    public KMSelectable Crank;
-   
+
    public GameObject MobilePartOfCrank;
 
    public TextMesh[] AnswerChoiceText;
@@ -29,8 +29,11 @@ public class MentalMath : MonoBehaviour {
    int QuestionsAnswered;
    int SecondNumber;
    int Threshold;
-   
+
    bool Activated;
+
+   Coroutine Stunned;
+   bool IsStunned;
 
 #pragma warning disable 0649
    bool TwitchPlaysActive;
@@ -70,30 +73,46 @@ public class MentalMath : MonoBehaviour {
       if (moduleSolved || Activated) {
          return;
       }
-      if (TwitchPlaysActive)
+      if (TwitchPlaysActive) {
          Audio.PlaySoundAtTransform("deaf_is_an_asshole", transform);
-      else
+      }
+      else {
          Audio.PlaySoundAtTransform("Trivia Murder Party Math Weasel Timer", transform);
+      }
       ThresholdCalculator();
       StartCoroutine(CrankTurnAnimation());
    }
 
    void ButtonPress (KMSelectable Button) {
+      if (!Activated || IsStunned) {
+         return;
+      }
       for (int i = 0; i < 4; i++) {
          if (Button == Buttons[i]) {
             if (i == OriginalButtonOrder[0] && Activated) {
                Audio.PlaySoundAtTransform("BiggerDick", Button.transform);
                QuestionsAnswered++;
-               StartCoroutine(EquationGeneration());
+               EquationGeneration();
             }
-            else if (!Activated)
-               return;
             else {
-               GetComponent<KMBombModule>().HandleStrike();
-               Debug.LogFormat("[Mental Math #{0}] You pressed the wrong number, strike numbnuts.", moduleId);
+               Stunned = StartCoroutine(Stun());
+               Debug.LogFormat("[Mental Math #{0}] You pressed the wrong number, you are now stunned!.", moduleId);
             }
          }
       }
+   }
+
+   IEnumerator Stun () {
+      IsStunned = true;
+      Equation.transform.localPosition = new Vector3(0, Equation.transform.localPosition.y, 0);
+      for (int i = 0; i < 4; i++) {
+         AnswerChoiceText[i].text = "";
+      }
+      Equation.text = "You are\nstunned!";
+      yield return new WaitForSeconds(3f);
+      Equation.transform.localPosition = new Vector3(-0.0148f, Equation.transform.localPosition.y, .0686f);
+      IsStunned = false;
+      EquationGeneration();
    }
 
    void ThresholdCalculator () {
@@ -116,10 +135,13 @@ public class MentalMath : MonoBehaviour {
       else
          Threshold = 1;
       Debug.LogFormat("[Mental Math #{0}] {1} module(s) need to be solved.", moduleId, Threshold);
-      StartCoroutine(EquationGeneration());
+      EquationGeneration();
    }
 
-   IEnumerator EquationGeneration () {
+   void EquationGeneration () {
+      if (IsStunned) {
+         return;
+      }
       Activated = true;
       FirstNumber = UnityEngine.Random.Range(0, 16);
       SecondNumber = UnityEngine.Random.Range(0, 16);
@@ -150,7 +172,6 @@ public class MentalMath : MonoBehaviour {
       AnswerChoiceText[OriginalButtonOrder[1]].text = (FirstNumber + x).ToString();
       AnswerChoiceText[OriginalButtonOrder[2]].text = (FirstNumber + y).ToString();
       AnswerChoiceText[OriginalButtonOrder[3]].text = (FirstNumber + z).ToString();
-      yield return null;
    }
 
    void Update () {
@@ -210,7 +231,7 @@ public class MentalMath : MonoBehaviour {
 
    IEnumerator ProcessTwitchCommand (string Command) {
       Command = Command.Trim().ToUpper();
-         yield return null;
+      yield return null;
       if (Command == "CRANK") {
          Crank.OnInteract();
       }

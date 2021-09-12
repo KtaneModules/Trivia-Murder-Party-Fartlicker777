@@ -616,7 +616,6 @@ public static class WordList {
   "dido",
   "didy",
   "died",
-  "diem",
   "dies",
   "diet",
   "digs",

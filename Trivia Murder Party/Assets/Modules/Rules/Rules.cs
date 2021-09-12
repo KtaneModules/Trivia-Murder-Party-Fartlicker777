@@ -38,6 +38,9 @@ public class Rules : MonoBehaviour {
    bool[] Validity = { false, false, false, false };
    bool Activate = false;
 
+   Coroutine Stunned;
+   bool IsStunned;
+
    static int moduleIdCounter = 1;
    int moduleId;
    private bool moduleSolved;
@@ -123,7 +126,7 @@ public class Rules : MonoBehaviour {
    }
 
    void RuleButtonPress (KMSelectable RuleButton) {
-      if (!Activate) {
+      if (!Activate || IsStunned) {
          return;
       }
       else {
@@ -138,14 +141,31 @@ public class Rules : MonoBehaviour {
                   RulePicker();
                }
                else {
-                  GetComponent<KMBombModule>().HandleStrike();
+                  Stunned = StartCoroutine(Stun());
                }
             }
          }
       }
    }
 
+   IEnumerator Stun () {
+      IsStunned = true;
+      for (int i = 0; i < 4; i++) {
+         Options[i].text = "";
+      }
+      TheRuleTM.text = "You are stunned!";
+      for (int i = 0; i < 4; i++) {
+         Validity[i] = false;
+      }
+      yield return new WaitForSeconds(3f);
+      IsStunned = false;
+      RulePicker();
+   }
+
    void RulePicker () {
+      if (IsStunned) {
+         return;
+      }
       DoOrDontRuleSet = UnityEngine.Random.Range(0, 2);
       if (DoOrDontRuleSet == 0) {
          RuleIndex = UnityEngine.Random.Range(0, RuleList.Length);
@@ -193,7 +213,9 @@ public class Rules : MonoBehaviour {
             if ((!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3])) {
                goto Rule0Reset;
             }
-            Inverter();
+            if (DoOrDontRuleSet == 1) {
+               Inverter();
+            }
             TheRuleTM.text += LuckyLetter;
             PossibilitiesForLetters = "";
             break;
@@ -219,7 +241,9 @@ public class Rules : MonoBehaviour {
             if ((!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3])) {
                goto Rule1Reset;
             }
-            Inverter();
+            if (DoOrDontRuleSet == 1) {
+               Inverter();
+            }
             break;
          case 2:
             Rule2Reset:
@@ -243,7 +267,9 @@ public class Rules : MonoBehaviour {
             if ((!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3])) {
                goto Rule2Reset;
             }
-            Inverter();
+            if (DoOrDontRuleSet == 1) {
+               Inverter();
+            }
             break;
          case 3:
             Rule3Reset:
@@ -262,7 +288,9 @@ public class Rules : MonoBehaviour {
             if (Rule3Temp == 4 || (!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3])) {
                goto Rule3Reset;
             }
-            Inverter();
+            if (DoOrDontRuleSet == 1) {
+               Inverter();
+            }
             break;
          case 4:
             Rule4Reset:
@@ -281,7 +309,9 @@ public class Rules : MonoBehaviour {
             if (Rule4Temp == 4 || (!Validity[0] && !Validity[1] && !Validity[2] && !Validity[3]) || (Validity[0] && Validity[1] && Validity[2] && Validity[3])) {
                goto Rule4Reset;
             }
-            Inverter();
+            if (DoOrDontRuleSet == 1) {
+               Inverter();
+            }
             break;
          case 5:
             if (DoOrDontRuleSet == 0) {

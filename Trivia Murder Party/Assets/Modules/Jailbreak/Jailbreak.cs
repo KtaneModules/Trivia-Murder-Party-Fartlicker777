@@ -14,18 +14,20 @@ public class Jailbreak : MonoBehaviour {
    public TextMesh[] DisplayLetters;
    public TextMesh TimerDisplay;
    public TextMesh GuessDisplay;
+   public KMSelectable Module;
 
    int Timer = 90;
 
    string[] TPProtectedWords = new string[5] { "HELP", "VIEW", "SHOW", "ZOOM", "TILT" };
    string GoalWord = "";
    string InputWord = "";
-   string QWERTYAlphabet = "QWERTYUIOPASDFGHJKLZXCVBNM";
+   string QWERTYAlphabet = "QWERTYUIOPASDFGHJKLZXCVBNM.";
 
    bool CanType;
    bool Check;
    bool IsActive;
    bool Last30Seconds;
+   bool Focused;
 
 #pragma warning disable 0649
    bool TwitchPlaysActive;
@@ -42,7 +44,19 @@ public class Jailbreak : MonoBehaviour {
          Button.OnInteract += delegate () { ButtonPress(Button); return false; };
       }
       GetComponent<KMBombModule>().OnActivate += delegate () { Activate(); };
+      if (Application.isEditor) {
+         Focused = true;
+      }
+
+      Module.OnFocus += delegate () { Focused = true; };
+      Module.OnDefocus += delegate () { Focused = false; };
    }
+
+   private KeyCode[] TheKeys = {
+      KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U, KeyCode.I, KeyCode.O, KeyCode.P,
+      KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.J, KeyCode.K, KeyCode.L,
+      KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V, KeyCode.B, KeyCode.N, KeyCode.M, KeyCode.Return
+    };
 
    void Activate () {
       for (int i = 0; i < 4; i++) {
@@ -207,6 +221,14 @@ public class Jailbreak : MonoBehaviour {
       GetComponent<KMBombModule>().HandlePass();
       Audio.PlaySoundAtTransform("DooDOodoodoodooDOoooooo", transform);
       moduleSolved = true;
+   }
+
+   void Update () {
+      for (int i = 0; i < TheKeys.Count(); i++) {
+         if (Input.GetKeyDown(TheKeys[i]) && Focused) {
+            Buttons[i].OnInteract();
+         }
+      }
    }
 
 #pragma warning disable 414
