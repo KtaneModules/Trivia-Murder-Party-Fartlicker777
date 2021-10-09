@@ -421,12 +421,12 @@ public class Skewers : MonoBehaviour {
       else {
          for (int i = 0; i < 4; i++) {
             if (Command[0] == "ABCD"[i]) {
-               Index = i * 4;
+               Index = i;
             }
          }
          for (int i = 0; i < 4; i++) {
             if (Command[1] == "1234"[i]) {
-               Index += i;
+               Index += i * 4;
             }
          }
          Gems[Index].OnInteract();
