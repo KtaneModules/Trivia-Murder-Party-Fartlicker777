@@ -278,19 +278,20 @@ public class Skewers : MonoBehaviour {
       while (SwordPositions[3] == SwordPositions[0] || SwordPositions[3] == SwordPositions[1] || SwordPositions[3] == SwordPositions[2]) {
          SwordPositions[3] = StabSpots[Modulo(Array.IndexOf(StabSpots, SwordPositions[3]) + 1, 16)];
       }
+      //                 012345678901234567890123456
       string alphabet = ".ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       string fourthSN = Bomb.GetSerialNumber()[3].ToString();
       string fifthSN = Bomb.GetSerialNumber()[4].ToString();
 
-      for (int i = 0; i < 27; i++) {
+      for (int i = 1; i < 27; i++) {
          if (alphabet[i].ToString() == fifthSN) {
             tempFifthSN = i;
          }
       }
-      for (int i = 0; i < 27; i++) {
+      for (int i = 1; i < 27; i++) {
          if (alphabet[i].ToString() == fourthSN) {
             temp = i;
-            while (temp > 7) {
+            while (temp >= 7) {
                temp -= 6;
             }
             break;
