@@ -1,7 +1,5 @@
 public static class WordList {
    public static string[] Phrases = {
-  "abbe",
-  "abed",
   "abet",
   "able",
   "ably",
@@ -14,7 +12,7 @@ public static class WordList {
   "aclu",
   "acme",
   "acne",
-  "acre",
+  "acre", //I hardly know 'er
   "acts",
   "adam",
   "adds",
@@ -86,7 +84,7 @@ public static class WordList {
   "ants",
   "anus",
   "aped",
-  "aper",
+  "aper", //I hardly know 'er
   "apes",
   "apex",
   "apse",
@@ -120,7 +118,7 @@ public static class WordList {
   "aunt",
   "aura",
   "auto",
-  "aver",
+  "aver", //I hardly know 'er
   "aves",
   "avid",
   "avis",
@@ -168,13 +166,12 @@ public static class WordList {
   "bans",
   "barb",
   "bard",
-  "bare",
+  "bare", //I hardly know 'er
   "barf",
   "bark",
   "barn",
   "bars",
   "base",
-  "ssss",
   "bash",
   "bask",
   "bass",
@@ -197,7 +194,7 @@ public static class WordList {
   "beef",
   "been",
   "beep",
-  "beer",
+  "beer", //I hardly know 'er
   "bees",
   "beet",
   "begs",
@@ -221,7 +218,7 @@ public static class WordList {
   "bibs",
   "bide",
   "bids",
-  "bier",
+  "bier", //I hardly know 'er
   "biff",
   "bike",
   "bile",
@@ -236,6 +233,7 @@ public static class WordList {
   "bits",
   "blab",
   "blah",
+  "blan",
   "blat",
   "bldg",
   "bled",
@@ -257,7 +255,7 @@ public static class WordList {
   "bode",
   "bods",
   "body",
-  "boer",
+  "boer", //I hardly know 'er
   "boff",
   "bogs",
   "bogy",
@@ -285,7 +283,7 @@ public static class WordList {
   "boos",
   "boot",
   "bops",
-  "bore",
+  "bore", //I hardly know 'er
   "born",
   "bort",
   "bosh",
@@ -351,7 +349,7 @@ public static class WordList {
   "buys",
   "buzz",
   "byes",
-  "byre",
+  "byre", //I hardly know 'er
   "byte",
   "cabs",
   "cads",
@@ -375,7 +373,7 @@ public static class WordList {
   "cape",
   "caps",
   "card",
-  "care",
+  "care", //I hardly know 'er
   "carl",
   "carp",
   "cars",
@@ -488,7 +486,7 @@ public static class WordList {
   "cops",
   "copy",
   "cord",
-  "core",
+  "core", //I hardly know 'er
   "cork",
   "corm",
   "corn",
@@ -530,7 +528,7 @@ public static class WordList {
   "cups",
   "curb",
   "curd",
-  "cure",
+  "cure", //I hardly know 'er
   "curl",
   "curs",
   "curt",
@@ -559,7 +557,7 @@ public static class WordList {
   "dane",
   "dang",
   "dank",
-  "dare",
+  "dare", //I hardly know 'er
   "dark",
   "darn",
   "dart",
@@ -584,7 +582,7 @@ public static class WordList {
   "deed",
   "deem",
   "deep",
-  "deer",
+  "deer", //I hardly know 'er
   "dees",
   "deft",
   "defy",
@@ -629,7 +627,7 @@ public static class WordList {
   "dint",
   "dips",
   "dipt",
-  "dire",
+  "dire", //I hardly know 'er
   "dirk",
   "dirt",
   "disc",
@@ -641,7 +639,7 @@ public static class WordList {
   "dock",
   "docs",
   "dodo",
-  "doer",
+  "doer", //I hardly know 'er
   "does",
   "doff",
   "doge",
@@ -725,7 +723,7 @@ public static class WordList {
   "duty",
   "dyad",
   "dyed",
-  "dyer",
+  "dyer", //I hardly know 'er
   "dyes",
   "dyke",
   "dyne",
@@ -762,7 +760,7 @@ public static class WordList {
   "eggs",
   "egis",
   "egos",
-  "eire",
+  "eire", //I hardly know 'er
   "eked",
   "ekes",
   "elan",
@@ -803,10 +801,10 @@ public static class WordList {
   "etna",
   "etym",
   "even",
-  "ever",
+  "ever", //I hardly know 'er
   "eves",
   "evil",
-  "ewer",
+  "ewer", //I hardly know 'er
   "ewes",
   "exam",
   "exec",
@@ -814,7 +812,7 @@ public static class WordList {
   "exit",
   "expo",
   "eyed",
-  "eyer",
+  "eyer", //I hardly know 'er
   "eyes",
   "face",
   "fact",
@@ -830,7 +828,7 @@ public static class WordList {
   "fame",
   "fang",
   "fans",
-  "fare",
+  "fare", //I hardly know 'er
   "farm",
   "faro",
   "fart",
@@ -877,7 +875,7 @@ public static class WordList {
   "fink",
   "finn",
   "fins",
-  "fire",
+  "fire", //I hardly know 'er
   "firm",
   "firs",
   "fish",
@@ -928,7 +926,7 @@ public static class WordList {
   "fops",
   "fora",
   "ford",
-  "fore",
+  "fore", //I hardly know 'er
   "fork",
   "form",
   "fort",
@@ -1054,7 +1052,7 @@ public static class WordList {
   "gobs",
   "goby",
   "gods",
-  "goer",
+  "goer", //I hardly know 'er
   "goes",
   "gogo",
   "gold",
@@ -1067,7 +1065,7 @@ public static class WordList {
   "goon",
   "goop",
   "goos",
-  "gore",
+  "gore", //I hardly know 'er
   "gory",
   "gosh",
   "goth",
@@ -1109,7 +1107,7 @@ public static class WordList {
   "guys",
   "gyms",
   "gyps",
-  "gyre",
+  "gyre", //I hardly know 'er
   "gyro",
   "gyve",
   "hack",
@@ -1133,7 +1131,7 @@ public static class WordList {
   "hank",
   "haps",
   "hard",
-  "hare",
+  "hare", //I hardly know 'er
   "hark",
   "harm",
   "harp",
@@ -1172,7 +1170,7 @@ public static class WordList {
   "hens",
   "herb",
   "herd",
-  "here",
+  "here", //I hardly know 'er
   "hero",
   "herr",
   "hers",
@@ -1190,7 +1188,7 @@ public static class WordList {
   "hind",
   "hint",
   "hips",
-  "hire",
+  "hire", //I hardly know 'er
   "hisn",
   "hiss",
   "hist",
@@ -1203,7 +1201,7 @@ public static class WordList {
   "hock",
   "hods",
   "hoed",
-  "hoer",
+  "hoer", //I hardly know 'er
   "hoes",
   "hogs",
   "hoke",
@@ -1336,7 +1334,7 @@ public static class WordList {
   "jazz",
   "jean",
   "jeep",
-  "jeer",
+  "jeer", //I hardly know 'er
   "jeez",
   "jefe",
   "jell",
@@ -1386,7 +1384,7 @@ public static class WordList {
   "junk",
   "juno",
   "jupe",
-  "jure",
+  "jure", //I hardly know 'er
   "jury",
   "just",
   "jute",
@@ -1503,7 +1501,7 @@ public static class WordList {
   "lech",
   "lect",
   "leek",
-  "leer",
+  "leer", //I hardly know 'er
   "lees",
   "left",
   "legs",
@@ -1533,7 +1531,7 @@ public static class WordList {
   "lied",
   "lief",
   "lien",
-  "lier",
+  "lier", //I hardly know 'er
   "lies",
   "lieu",
   "life",
@@ -1558,7 +1556,7 @@ public static class WordList {
   "lion",
   "lips",
   "lira",
-  "lire",
+  "lire", //I hardly know 'er
   "lisp",
   "list",
   "lite",
@@ -1595,7 +1593,7 @@ public static class WordList {
   "lope",
   "lops",
   "lord",
-  "lore",
+  "lore", //I hardly know 'er
   "lorn",
   "lory",
   "lose",
@@ -1625,7 +1623,7 @@ public static class WordList {
   "lung",
   "lunk",
   "luny",
-  "lure",
+  "lure", //I hardly know 'er
   "lurk",
   "lush",
   "lust",
@@ -1633,7 +1631,7 @@ public static class WordList {
   "luxe",
   "lyes",
   "lynx",
-  "lyre",
+  "lyre", //I hardly know 'er
   "mace",
   "mach",
   "mack",
@@ -1660,7 +1658,7 @@ public static class WordList {
   "many",
   "maps",
   "marc",
-  "mare",
+  "mare", //I hardly know 'er
   "mark",
   "marl",
   "mars",
@@ -1700,7 +1698,7 @@ public static class WordList {
   "mens",
   "menu",
   "meow",
-  "mere",
+  "mere", //I hardly know 'er
   "mesa",
   "mesh",
   "mess",
@@ -1732,7 +1730,7 @@ public static class WordList {
   "mins",
   "mint",
   "minx",
-  "mire",
+  "mire", //I hardly know 'er
   "mirk",
   "mirv",
   "miry",
@@ -1770,7 +1768,7 @@ public static class WordList {
   "moot",
   "mope",
   "mops",
-  "more",
+  "more", //I hardly know 'er
   "morn",
   "moss",
   "most",
@@ -1901,7 +1899,7 @@ public static class WordList {
   "offs",
   "ogee",
   "ogle",
-  "ogre",
+  "ogre", //I hardly know 'er
   "ohed",
   "ohio",
   "ohms",
@@ -1975,7 +1973,7 @@ public static class WordList {
   "ouzo",
   "oval",
   "oven",
-  "over",
+  "over", //I hardly know 'er
   "ovid",
   "ovum",
   "owed",
@@ -1984,7 +1982,7 @@ public static class WordList {
   "owns",
   "oxen",
   "oxes",
-  "oyer",
+  "oyer", //I hardly know 'er
   "pace",
   "pack",
   "pacs",
@@ -2007,7 +2005,7 @@ public static class WordList {
   "paps",
   "para",
   "pard",
-  "pare",
+  "pare", //I hardly know 'er
   "park",
   "pars",
   "part",
@@ -2035,7 +2033,7 @@ public static class WordList {
   "peel",
   "peen",
   "peep",
-  "peer",
+  "peer", //I hardly know 'er
   "pees",
   "pegs",
   "peke",
@@ -2046,7 +2044,7 @@ public static class WordList {
   "pent",
   "peon",
   "peps",
-  "pere",
+  "pere", //I hardly know 'er
   "perk",
   "perm",
   "pert",
@@ -2061,7 +2059,7 @@ public static class WordList {
   "pick",
   "pics",
   "pied",
-  "pier",
+  "pier", //I hardly know 'er
   "pies",
   "pigs",
   "pike",
@@ -2132,7 +2130,7 @@ public static class WordList {
   "poor",
   "pope",
   "pops",
-  "pore",
+  "pore", //I hardly know 'er
   "pork",
   "porn",
   "port",
@@ -2180,14 +2178,14 @@ public static class WordList {
   "puny",
   "pupa",
   "pups",
-  "pure",
+  "pure", //I hardly know 'er
   "purl",
   "purr",
   "push",
   "puss",
   "puts",
   "putt",
-  "pyre",
+  "pyre", //I hardly know 'er
   "qaid",
   "qoph",
   "quad",
@@ -2230,7 +2228,7 @@ public static class WordList {
   "rape",
   "raps",
   "rapt",
-  "rare",
+  "rare", //I hardly know 'er
   "rase",
   "rash",
   "rasp",
@@ -2339,7 +2337,7 @@ public static class WordList {
   "ruck",
   "rude",
   "rued",
-  "ruer",
+  "ruer", //I hardly know 'er
   "rues",
   "ruff",
   "rugs",
@@ -2413,7 +2411,7 @@ public static class WordList {
   "seem",
   "seen",
   "seep",
-  "seer",
+  "seer", //I hardly know 'er
   "sees",
   "self",
   "sell",
@@ -2423,7 +2421,7 @@ public static class WordList {
   "sept",
   "sera",
   "serb",
-  "sere",
+  "sere", //I hardly know 'er
   "serf",
   "sets",
   "sewn",
@@ -2470,7 +2468,7 @@ public static class WordList {
   "sink",
   "sins",
   "sips",
-  "sire",
+  "sire", //I hardly know 'er
   "sirs",
   "site",
   "sits",
@@ -2547,7 +2545,7 @@ public static class WordList {
   "soot",
   "soph",
   "sops",
-  "sore",
+  "sore", //I hardly know 'er
   "sort",
   "sots",
   "soul",
@@ -2596,7 +2594,7 @@ public static class WordList {
   "suck",
   "suds",
   "sued",
-  "suer",
+  "suer", //I hardly know 'er
   "sues",
   "suet",
   "suey",
@@ -2612,7 +2610,7 @@ public static class WordList {
   "supe",
   "sups",
   "supt",
-  "sure",
+  "sure", //I hardly know 'er
   "surf",
   "swab",
   "swag",
@@ -2651,7 +2649,7 @@ public static class WordList {
   "taos",
   "tape",
   "taps",
-  "tare",
+  "tare", //I hardly know 'er
   "tarn",
   "taro",
   "tarp",
@@ -2709,7 +2707,7 @@ public static class WordList {
   "tide",
   "tidy",
   "tied",
-  "tier",
+  "tier", //I hardly know 'er
   "ties",
   "tiff",
   "tike",
@@ -2724,7 +2722,7 @@ public static class WordList {
   "tiny",
   "tipi",
   "tips",
-  "tire",
+  "tire", //I hardly know 'er
   "tiro",
   "tits",
   "tnpk",
@@ -2755,7 +2753,7 @@ public static class WordList {
   "tops",
   "tora",
   "torc",
-  "tore",
+  "tore", //I hardly know 'er
   "torn",
   "toro",
   "tors",
@@ -2819,7 +2817,7 @@ public static class WordList {
   "tyke",
   "type",
   "typo",
-  "tyre",
+  "tyre", //I hardly know 'er
   "tyro",
   "tzar",
   "ufos",
@@ -2847,7 +2845,7 @@ public static class WordList {
   "ursa",
   "used",
   "usee",
-  "user",
+  "user", //I hardly know 'er
   "uses",
   "ussr",
   "utah",
@@ -2865,7 +2863,7 @@ public static class WordList {
   "veal",
   "veda",
   "veep",
-  "veer",
+  "veer", //I hardly know 'er
   "vees",
   "veil",
   "vein",
@@ -2885,7 +2883,7 @@ public static class WordList {
   "vice",
   "vide",
   "vied",
-  "vier",
+  "vier", //I hardly know 'er
   "vies",
   "view",
   "vile",
@@ -2934,7 +2932,7 @@ public static class WordList {
   "wang",
   "want",
   "ward",
-  "ware",
+  "ware", //I hardly know 'er
   "wark",
   "warm",
   "warn",
@@ -2971,7 +2969,7 @@ public static class WordList {
   "wens",
   "went",
   "wept",
-  "were",
+  "were", //I hardly know 'er
   "wert",
   "west",
   "wets",
@@ -3009,7 +3007,7 @@ public static class WordList {
   "wins",
   "winy",
   "wipe",
-  "wire",
+  "wire", //I hardly know 'er
   "wiry",
   "wise",
   "wish",
@@ -3030,7 +3028,7 @@ public static class WordList {
   "woos",
   "wops",
   "word",
-  "wore",
+  "wore", //I hardly know 'er
   "work",
   "worm",
   "worn",
@@ -3051,7 +3049,7 @@ public static class WordList {
   "yank",
   "yaps",
   "yard",
-  "yare",
+  "yare", //I hardly know 'er
   "yarn",
   "yawl",
   "yawn",
@@ -3076,7 +3074,7 @@ public static class WordList {
   "yolk",
   "yond",
   "yoni",
-  "yore",
+  "yore", //I hardly know 'er
   "york",
   "your",
   "yowl",

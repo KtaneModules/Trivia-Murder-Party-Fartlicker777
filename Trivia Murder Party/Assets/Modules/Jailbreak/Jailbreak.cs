@@ -69,6 +69,13 @@ public class Jailbreak : MonoBehaviour {
    void ButtonPress (KMSelectable Button) {
       Audio.PlaySoundAtTransform("Clack", Button.transform);
       Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, Button.transform);
+      if (Button == Buttons[26] && InputWord.Length != 4) {
+         Audio.PlaySoundAtTransform("bruh", transform);
+         GuessDisplay.text = "Query";
+         InputWord = "";
+         GuessDisplay.text = InputWord;
+         return;
+      }
       if (CanType || moduleSolved) {
          return;
       }
@@ -88,13 +95,6 @@ public class Jailbreak : MonoBehaviour {
             StopAllCoroutines();
             moduleSolved = true;
             StartCoroutine(SolveAnimation());
-         }
-         else if (Button == Buttons[i] && InputWord.Length < 4) {
-            GetComponent<KMBombModule>().HandleStrike();
-            Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
-            GuessDisplay.text = "Query";
-            InputWord = "";
-            GuessDisplay.text = InputWord;
          }
          else if (Button == Buttons[i] && i == 26 && InputWord.Length == 4) {
             for (int j = 0; j < WordList.Phrases.Count(); j++) {
