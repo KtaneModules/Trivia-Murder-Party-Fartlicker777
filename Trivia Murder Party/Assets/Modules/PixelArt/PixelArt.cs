@@ -17,10 +17,10 @@ public class PixelArt : MonoBehaviour {
    bool[] ColorAnswer = new bool[24];
    bool[] CurrentButtonColor = new bool[24];
    bool[] Active = { false, false, true };
-   bool TPAnswerGeneration;
 
    static int moduleIdCounter = 1;
    int moduleId;
+   bool moduleSolved;
 
    void Awake () {
       moduleId = moduleIdCounter++;
@@ -272,7 +272,7 @@ public class PixelArt : MonoBehaviour {
       }
       else {
          ColorOfButton[13].GetComponent<MeshRenderer>().material = Colores[1];
-         Active[13] = false;
+         Active[2] = false;
       }
       yield return new WaitForSeconds(.1f);
       if (ColorAnswer[8] == CurrentButtonColor[8]) {
@@ -288,6 +288,7 @@ public class PixelArt : MonoBehaviour {
 
       if (Active[2]) {
          GetComponent<KMBombModule>().HandlePass();
+         moduleSolved = true;
       }
       else {
          GetComponent<KMBombModule>().HandleStrike();
@@ -302,7 +303,7 @@ public class PixelArt : MonoBehaviour {
    }
 
 #pragma warning disable 414
-   private readonly string TwitchHelpMessage = @"Use !{0} start A1 to start. Use !{0} toggle A1 to toggle the corresponding square. Letters are columns and numbers are rows. Use !{0} submit to submit.";
+   private readonly string TwitchHelpMessage = @"Use !{0} start to start. Use !{0} toggle A1 to toggle the corresponding square. Letters are columns and numbers are rows. Use !{0} submit to submit.";
 #pragma warning restore 414
 
    IEnumerator ProcessTwitchCommand (string Command) {
@@ -347,12 +348,10 @@ public class PixelArt : MonoBehaviour {
    }
 
    IEnumerator TwitchHandleForcedSolve () {
-      if (!Active[0] && !TPAnswerGeneration) {
+      if (!Active[0]) {
          StatusLightButton.OnInteract();
-         TPAnswerGeneration = true;
-         yield return true;
       }
-      if (TPAnswerGeneration) {
+      while (!Active[1]) {
          yield return true;
       }
       for (int i = 0; i < 24; i++) {
@@ -362,5 +361,6 @@ public class PixelArt : MonoBehaviour {
          }
       }
       StatusLightButton.OnInteract();
+      while (!moduleSolved) yield return true;
    }
 }

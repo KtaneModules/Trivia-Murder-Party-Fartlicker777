@@ -142,6 +142,7 @@ public class Skewers : MonoBehaviour {
          yield return new WaitForSecondsRealtime(1f);
          if (!willStrike) {
             GetComponent<KMBombModule>().HandlePass();
+            moduleSolved = true;
          }
          else {
             GetComponent<KMBombModule>().HandleStrike();
@@ -448,6 +449,6 @@ public class Skewers : MonoBehaviour {
       Calculate(Bomb.GetSolvedModuleNames().Count(), false);
       PermissibleGems();
       Gems[ValidSpots[Random.Range(0, ValidSpots.Count())]].OnInteract();
-      yield return true;
+      while (!moduleSolved) yield return true;
    }
 }
