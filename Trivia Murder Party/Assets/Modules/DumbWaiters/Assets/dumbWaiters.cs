@@ -299,7 +299,6 @@ public class dumbWaiters : MonoBehaviour {
       buttons[solution].OnInteract();
       while (!moduleSolved) {
          yield return true;
-         yield return new WaitForSeconds(.1f);
       }
    }
 }

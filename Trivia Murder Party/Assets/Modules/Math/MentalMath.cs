@@ -252,14 +252,13 @@ public class MentalMath : MonoBehaviour {
       Timer += 50f;
       if (!Activated) {
          Crank.OnInteract();
+         yield return new WaitForSecondsRealtime(.1f);
       }
       while (QuestionsAnswered != Threshold) {
          Buttons[OriginalButtonOrder[0]].OnInteract();
          yield return new WaitForSecondsRealtime(.1f);
       }
       while (!moduleSolved) {
-         Buttons[OriginalButtonOrder[0]].OnInteract();
-         yield return new WaitForSecondsRealtime(.1f);
          yield return true;
       }
    }

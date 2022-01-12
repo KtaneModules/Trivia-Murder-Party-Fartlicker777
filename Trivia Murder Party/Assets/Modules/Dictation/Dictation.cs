@@ -195,6 +195,7 @@ public class Dictation : MonoBehaviour {
          GetComponent<KMBombModule>().HandlePass();
          NumberDisplay.text = "404";
          DisplayText.text = "System\nOverloaded";
+         Solving = false;
          yield break;
       }
       StartCoroutine(SolveAnimation());
@@ -320,5 +321,6 @@ public class Dictation : MonoBehaviour {
          yield return new WaitForSecondsRealtime(.1f);
       }
       ReturnButton.OnInteract();
+      while (Solving) yield return true;
    }
 }

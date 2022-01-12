@@ -28,6 +28,7 @@ public class Jailbreak : MonoBehaviour {
    bool IsActive;
    bool Last30Seconds;
    bool Focused;
+   bool RealSolve;
 
 #pragma warning disable 0649
    bool TwitchPlaysActive;
@@ -220,7 +221,7 @@ public class Jailbreak : MonoBehaviour {
       Debug.LogFormat("[Jailbreak #{0}] You guessed the word. Module disarmed.", moduleId);
       GetComponent<KMBombModule>().HandlePass();
       Audio.PlaySoundAtTransform("DooDOodoodoodooDOoooooo", transform);
-      moduleSolved = true;
+      RealSolve = true;
    }
 
    void Update () {
@@ -242,8 +243,9 @@ public class Jailbreak : MonoBehaviour {
          yield return "sendtochaterror Too big a word!";
       }
       else if (command.Length < 4) {
-         GetComponent<KMBombModule>().HandleStrike();
-         Audio.PlaySoundAtTransform("DooDooDooDoo", transform);
+         yield return "sendtochaterror Too small a word!";
+         /*GetComponent<KMBombModule>().HandleStrike();
+         Audio.PlaySoundAtTransform("DooDooDooDoo", transform);*/
          yield break;
       }
       else {
@@ -278,7 +280,7 @@ public class Jailbreak : MonoBehaviour {
 
    IEnumerator TwitchHandleForcedSolve () {
 
-      while (!moduleSolved) {
+      /*while (!moduleSolved) {
          string AutoGuessWord = "";
          int AutoGuessCorrectLetters = 0;
          AutoGuessWord = WordList.Phrases[UnityEngine.Random.Range(0, WordList.Phrases.Count())];
@@ -298,8 +300,24 @@ public class Jailbreak : MonoBehaviour {
             yield return new WaitForSecondsRealtime(.1f);
          }
          Buttons[26].OnInteract();
-      }
+      }*/
 
-      //yield return ProcessTwitchCommand(GoalWord);
+      if (InputWord.Length > 0)
+      {
+         for (int i = InputWord.Length; i < 4; i++)
+         {
+            Buttons[QWERTYAlphabet.IndexOf(QWERTYAlphabet.PickRandom())].OnInteract();
+            yield return new WaitForSecondsRealtime(.1f);
+         }
+         Buttons[26].OnInteract();
+         yield return new WaitForSecondsRealtime(.1f);
+      }
+      for (int i = 0; i < 4; i++) {
+         Buttons[QWERTYAlphabet.IndexOf(GoalWord[i].ToString().ToUpper())].OnInteract();
+         yield return new WaitForSecondsRealtime(.1f);
+      }
+      Buttons[26].OnInteract();
+
+      while (!RealSolve) yield return true;
    }
 }

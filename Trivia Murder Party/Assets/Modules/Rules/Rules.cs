@@ -440,7 +440,7 @@ public class Rules : MonoBehaviour {
    }
 
 #pragma warning disable 414
-   private readonly string TwitchHelpMessage = @"Use !{0} 1/2/3/4 to press the corresponding button from top to bottom. oh and use !{0} start to start it i guess";
+   private readonly string TwitchHelpMessage = @"Use !{0} start to start. Use !{0} 1/2/3/4 to press the corresponding button from top to bottom.";
 #pragma warning restore 414
 
    IEnumerator ProcessTwitchCommand (string Command) {
@@ -488,14 +488,7 @@ public class Rules : MonoBehaviour {
          }
       }
       while (!moduleSolved) {
-         for (int i = 0; i < 4; i++) {
-            if (Validity[i]) {
-               RuleButtons[i].OnInteract();
-               yield return new WaitForSecondsRealtime(.1f);
-               break;
-            }
-            yield return true;
-         }
+         yield return true;
       }
    }
 }
