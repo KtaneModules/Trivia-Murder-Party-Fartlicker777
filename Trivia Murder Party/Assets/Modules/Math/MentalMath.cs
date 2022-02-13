@@ -234,6 +234,7 @@ public class MentalMath : MonoBehaviour {
       yield return null;
       if (Command == "CRANK") {
          Crank.OnInteract();
+         yield break;
       }
       else if (!Activated) {
          yield return "sendtochaterror You haven't started!";
