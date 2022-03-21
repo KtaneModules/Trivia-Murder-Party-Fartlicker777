@@ -896,7 +896,7 @@ public class TheArena : MonoBehaviour {
    }
 
 #pragma warning disable 414
-   private readonly string TwitchHelpMessage = @"Use !{0} A/D/G to press Attack/Defend/Grab. Attack: Use !{0} cycle to view all weapons. Use !{0} <Weapon> to use that specific weapon. This is not chainable. Defend: Use !{0} Hit/Block/H/B to press that button, chain with single letters such as HDHDHDHD. Grab: Use !{0} ABC123 to hit that specific button. This is not chainable.";
+   private readonly string TwitchHelpMessage = @"Use !{0} A/D/G to press Attack/Defend/Grab. Attack: Use !{0} cycle to view all weapons. Use !{0} <Weapon> to use that specific weapon. This is not chainable. Defend: Use !{0} Hit/Block/H/B to press that button, chain with single letters such as HBHBHBHB. Grab: Use !{0} ABC123 to hit that specific button. This is not chainable.";
 #pragma warning restore 414
 
    IEnumerator ProcessTwitchCommand (string Command) {
