@@ -68,7 +68,7 @@ public class Skewers : MonoBehaviour {
    IEnumerator InitialOpen () {
       for (int i = 0; i < 25; i++) {
          Top.transform.Rotate(-3.6f, 0, 0);
-         yield return new WaitForSecondsRealtime(.01f);
+         yield return new WaitForSeconds(.01f);
       }
    }
 
@@ -77,12 +77,20 @@ public class Skewers : MonoBehaviour {
       for (int i = 0; i < 25; i++) {
          Top.transform.Rotate(3.6f, 0, 0);
       }
-      for (int i = 0; i < 16; i++) {
-         GemColors.Add(Random.Range(0, 8));
-         GemsGO[i].GetComponent<MeshRenderer>().material = Colors[GemColors[i]];
-         ValidSpots.Add(i);
-         Swords[i].gameObject.SetActive(false);
-      }
+      bool Match = false;
+      do {
+         Match = false;
+         for (int i = 0; i < 16; i++) {
+            GemColors.Add(Random.Range(0, 8));
+            GemsGO[i].GetComponent<MeshRenderer>().material = Colors[GemColors[i]];
+            ValidSpots.Add(i);
+            Swords[i].gameObject.SetActive(false);
+            if (DefaultRGBGems[i] == GemColors[i]) {
+               Match = true;
+            }
+         }
+      } while (Match);
+      
       SwordPositions[0] = Bomb.GetSerialNumberNumbers().Last();
       SwordPositions[0] = StabSpots[Modulo(Array.IndexOf(StabSpots, SwordPositions[0]) - Bomb.GetSerialNumberNumbers().First(), 16)];
       
@@ -128,18 +136,18 @@ public class Skewers : MonoBehaviour {
       if (type == "close") {
          for (int i = 0; i < 25; i++) {
             Top.transform.Rotate(3.6f, 0, 0);
-            yield return new WaitForSecondsRealtime(.01f);
+            yield return new WaitForSeconds(.01f);
          }
          Audio.PlaySoundAtTransform("Close", transform);
-         yield return new WaitForSecondsRealtime(1f);
+         yield return new WaitForSeconds(1f);
          StartCoroutine(Penetration());
       }
       else {
          for (int i = 0; i < 25; i++) {
             Top.transform.Rotate(-3.6f, 0, 0);
-            yield return new WaitForSecondsRealtime(.01f);
+            yield return new WaitForSeconds(.01f);
          }
-         yield return new WaitForSecondsRealtime(1f);
+         yield return new WaitForSeconds(1f);
          if (!willStrike) {
             GetComponent<KMBombModule>().HandlePass();
             moduleSolved = true;
@@ -163,7 +171,7 @@ public class Skewers : MonoBehaviour {
             }
             for (int i = 0; i < 25; i++) {
                Top.transform.Rotate(3.6f, 0, 0);
-               yield return new WaitForSecondsRealtime(.01f);
+               yield return new WaitForSeconds(.01f);
             }
             Audio.PlaySoundAtTransform("Close", transform);
             GemColors.Clear();
@@ -181,10 +189,10 @@ public class Skewers : MonoBehaviour {
             for (int i = 0; i < 16; i++) {
                Calculate(i, true);
             }
-            yield return new WaitForSecondsRealtime(.5f);
+            yield return new WaitForSeconds(.5f);
             for (int i = 0; i < 25; i++) {
                Top.transform.Rotate(-3.6f, 0, 0);
-               yield return new WaitForSecondsRealtime(.01f);
+               yield return new WaitForSeconds(.01f);
             }
             Animating = false;
          }
@@ -195,15 +203,15 @@ public class Skewers : MonoBehaviour {
       for (int i = 0; i < 5; i++) {
          Swords[SwordPositions[i]].gameObject.SetActive(true);
       }
-      yield return new WaitForSecondsRealtime(.5f);
+      yield return new WaitForSeconds(.5f);
       for (int i = 0; i < 25; i++) {
          TopSwords.transform.localPosition -= new Vector3(0, 0, .005f);
          BottomSwords.transform.localPosition += new Vector3(0, 0, .005f);
          LeftSwords.transform.localPosition += new Vector3(.005f, 0, 0);
          RightSwords.transform.localPosition -= new Vector3(.005f, 0, 0);
-         yield return new WaitForSecondsRealtime(.01f);
+         yield return new WaitForSeconds(.01f);
       }
-      yield return new WaitForSecondsRealtime(.2f);
+      yield return new WaitForSeconds(.2f);
       for (int i = 0; i < 30; i++) {
          TopSwords.transform.localPosition += new Vector3(0, 0, .011f); //No idea why this one is different.
          BottomSwords.transform.localPosition -= new Vector3(0, 0, .01f);
@@ -212,9 +220,9 @@ public class Skewers : MonoBehaviour {
          if (i == 2) {
             Audio.PlaySoundAtTransform("Tearing", transform);
          }
-         yield return new WaitForSecondsRealtime(.01f);
+         yield return new WaitForSeconds(.01f);
       }
-      yield return new WaitForSecondsRealtime(.2f);
+      yield return new WaitForSeconds(.2f);
       StartCoroutine(CloseOrOpen("open"));
    }
 
@@ -444,7 +452,7 @@ public class Skewers : MonoBehaviour {
    IEnumerator TwitchHandleForcedSolve () {
       if (!Ran) {
          Module.OnHighlight();
-         yield return new WaitForSecondsRealtime(2.5f);
+         yield return new WaitForSeconds(2.5f);
       }
       Calculate(Bomb.GetSolvedModuleNames().Count(), false);
       PermissibleGems();

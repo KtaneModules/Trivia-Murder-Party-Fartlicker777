@@ -161,7 +161,7 @@ public class Chalices : MonoBehaviour {
          Conditions[17] = true;
          Debug.LogFormat("[Chalices #{0}] X's condition is true.", moduleId);
       }
-      if ((Array.IndexOf(Cups, "Wine Glasses") == 0 || Array.IndexOf(Cups, "Wine Glasses") == 7) && (Array.IndexOf(Cups, "Shot Glass") == 0 || Array.IndexOf(Cups, "Shot Glass") == 7)) { //y
+      if ((Array.IndexOf(Cups, "Wine Glass") == 0 || Array.IndexOf(Cups, "Wine Glass") == 7) && (Array.IndexOf(Cups, "Shot Glass") == 0 || Array.IndexOf(Cups, "Shot Glass") == 7)) { //y
          Conditions[18] = true;
          Debug.LogFormat("[Chalices #{0}] Y's condition is true.", moduleId);
       }

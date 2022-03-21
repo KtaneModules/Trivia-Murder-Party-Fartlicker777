@@ -315,7 +315,18 @@ public class PixelArt : MonoBehaviour {
          yield return "sendtochaterror Invalid command!";
          yield break;
       }
-      if (Parameters[0].ToString().ToLower() == "start" || Parameters[0].ToString().ToLower() == "submit") { StatusLightButton.OnInteract(); }
+      if (Parameters[0].ToString().ToLower() == "start" || Parameters[0].ToString().ToLower() == "submit") {
+         StatusLightButton.OnInteract();
+         if (Active[1]) {
+            bool weed = true;
+            for (int i = 0; i < 24; i++) {
+               if (ColorAnswer[i] != CurrentButtonColor[i]) {
+                  weed = false;
+               }
+            }
+            yield return weed ? "solve" : "strike";
+         }
+      }
       else if (Parameters[0].ToString().ToLower() == "toggle") {
          for (int i = 1; i < Parameters.Length; i++) {
             if (Parameters[i].Length != 2) {

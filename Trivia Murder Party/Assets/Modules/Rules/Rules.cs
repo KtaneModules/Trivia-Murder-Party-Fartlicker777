@@ -25,7 +25,7 @@ public class Rules : MonoBehaviour {
    readonly string[] WordList = {
 "ACID","BUST","CODE","DAZE","ECHO","FILM","GOLF","HUNT","ITCH","JURY","KING","LIME","MONK","NUMB","ONLY","PREY","QUIT","RAVE","SIZE","TOWN","URGE","VERY","WAXY","XYLO","YARD","ZERO","ABORT","BLEND","CRYPT","DWARF","EQUIP","FANCY","GIZMO","HELIX","IMPLY","JOWLS","KNIFE","LEMON","MAJOR","NIGHT","OVERT","POWER","QUILT","RUSTY","STOMP","TRASH","UNTIL","VIRUS","WHISK","XERIC","YACHT","ZEBRA","ADVICE","BUTLER","CAVITY","DIGEST","ELBOWS","FIXURE","GOBLET","HANDLE","INDUCT","JOKING","KNEADS","LENGTH","MOVIES","NIMBLE","OBTAIN","PERSON","QUIVER","RACHET","SAILOR","TRANCE","UPHELD","VANISH","WALNUT","XYLOSE","YANKED","ZODIAC","ALREADY","BROWSED","CAPITOL","DESTROY","ERASING","FLASHED","GRIMACE","HIDEOUT","INFUSED","JOYRIDE","KETCHUP","LOCKING","MAILBOX","NUMBERS","OBSCURE","PHANTOM","QUIETLY","REFUSAL","SUBJECT","TRAGEDY","UNKEMPT","VENISON","WARSHIP","XANTHIC","YOUNGER","ZEPHYRS","ADVOCATE","BACKFLIP","CHIMNEYS","DISTANCE","EXPLOITS","FOCALIZE","GIFTWRAP","HOVERING","INVENTOR","JEALOUSY","KINSFOLK","LOCKABLE","MERCIFUL","NOTECARD","OVERCAST","PERILOUS","QUESTION","RAINCOAT","STEALING","TREASURY","UPDATING","VERTICAL","WISHBONE","XENOLITH","YEARLONG","ZEALOTRY","ABHORRENT","BACCARATS","CULTIVATE","DAMNINGLY","EFFLUXION","FUTURISTS","GYROSCOPE","HAZARDOUS","ILLOGICAL","JUXTAPOSE","KILOBYTES","LANTHANUM","MATERIALS","NIHILISTS","OBSCENITY","PAINFULLY","QUEERNESS","RESTROOMS","SABOTAGED","TYRANNOUS","UMPTEENTH","VEXILLATE","WAYLAYERS","XENOBLAST","YTTERBIUM","ZIGZAGGER"
 };
-   string[] Introtexts = { "You will fail", "The timer is ticking", "It is inevitable", "Better flee", "Give up", "There is no hope" };
+   //string[] Introtexts = { "You will fail", "The timer is ticking", "It is inevitable", "Better flee", "Give up", "There is no hope" };
    string[] RuleList = { "Press a word\nwith the letter\n", "Press the\nshortest word", "Press the\nlongest word", "Press an\neven number", "Press an\nodd number", "Press the\n{0} button" };
    string[] DontRuleList = { "Don't press a\nword with the\nletter ", "Don't press\nthe shortest\nword", "Don't press\nthe longest\nword", "Don't press\nan even\nnumber", "Don't press\nan odd number", "Don't press\nthe {0}\nbutton" };
    string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -81,11 +81,11 @@ public class Rules : MonoBehaviour {
    }
 
    void IntroTextGenerator () {
-      Introtexts.Shuffle();
+      /*Introtexts.Shuffle();
       for (int i = 0; i < 4; i++) {
          Options[i].text = Introtexts[i];
-      }
-      TheRuleTM.text = "Don't Mess up.";
+      }*/
+      TheRuleTM.text = "Press here to start.";
    }
 
    void StartPress () {
