@@ -77,32 +77,9 @@ public class Skewers : MonoBehaviour {
       for (int i = 0; i < 25; i++) {
          Top.transform.Rotate(3.6f, 0, 0);
       }
-      bool Match = false;
-      do {
-         Match = false;
-         for (int i = 0; i < 16; i++) {
-            GemColors.Add(Random.Range(0, 8));
-            GemsGO[i].GetComponent<MeshRenderer>().material = Colors[GemColors[i]];
-            ValidSpots.Add(i);
-            Swords[i].gameObject.SetActive(false);
-            if (DefaultRGBGems[i] == GemColors[i]) {
-               Match = true;
-            }
-         }
-      } while (Match);
-      
       SwordPositions[0] = Bomb.GetSerialNumberNumbers().Last();
       SwordPositions[0] = StabSpots[Modulo(Array.IndexOf(StabSpots, SwordPositions[0]) - Bomb.GetSerialNumberNumbers().First(), 16)];
-      
-      Debug.LogFormat("[Skewers #{0}] The colors are:", moduleId);
-      Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[0]], ColorNamesForLog[GemColors[1]], ColorNamesForLog[GemColors[2]], ColorNamesForLog[GemColors[3]]);
-      Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[4]], ColorNamesForLog[GemColors[5]], ColorNamesForLog[GemColors[6]], ColorNamesForLog[GemColors[7]]);
-      Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[8]], ColorNamesForLog[GemColors[9]], ColorNamesForLog[GemColors[10]], ColorNamesForLog[GemColors[11]]);
-      Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[12]], ColorNamesForLog[GemColors[13]], ColorNamesForLog[GemColors[14]], ColorNamesForLog[GemColors[15]]);
-      Debug.LogFormat("[Skewers #{0}] The first sword will be always be at position {1}.", moduleId, "0123456789ABCDEF"[SwordPositions[0]]);
-      for (int i = 0; i < 16; i++) {
-         Calculate(i, true);
-      }
+      Generate();
    }
 
    void GemPress (KMSelectable Gem) {
@@ -132,6 +109,35 @@ public class Skewers : MonoBehaviour {
       }
    }
 
+   void Generate () {
+      
+      GemColors.Clear();
+      ValidSpots.Clear();
+      int Match = UnityEngine.Random.Range(0, 16);
+      for (int i = 0; i < 16; i++) {
+         if (i != Match) {
+            GemColors.Add(Random.Range(0, 8));
+         }
+         else {
+            GemColors.Add(DefaultRGBGems[i]);
+         }
+         GemsGO[i].GetComponent<MeshRenderer>().material = Colors[GemColors[i]];
+         ValidSpots.Add(i);
+         Swords[i].gameObject.SetActive(false);
+         
+      }
+
+      Debug.LogFormat("[Skewers #{0}] The colors are:", moduleId);
+      Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[0]], ColorNamesForLog[GemColors[1]], ColorNamesForLog[GemColors[2]], ColorNamesForLog[GemColors[3]]);
+      Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[4]], ColorNamesForLog[GemColors[5]], ColorNamesForLog[GemColors[6]], ColorNamesForLog[GemColors[7]]);
+      Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[8]], ColorNamesForLog[GemColors[9]], ColorNamesForLog[GemColors[10]], ColorNamesForLog[GemColors[11]]);
+      Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[12]], ColorNamesForLog[GemColors[13]], ColorNamesForLog[GemColors[14]], ColorNamesForLog[GemColors[15]]);
+      Debug.LogFormat("[Skewers #{0}] The first sword will be always be at position {1}.", moduleId, "0123456789ABCDEF"[SwordPositions[0]]);
+      for (int i = 0; i < 16; i++) {
+         Calculate(i, true);
+      }
+   }
+
    IEnumerator CloseOrOpen (string type) {
       if (type == "close") {
          for (int i = 0; i < 25; i++) {
@@ -151,6 +157,11 @@ public class Skewers : MonoBehaviour {
          if (!willStrike) {
             GetComponent<KMBombModule>().HandlePass();
             moduleSolved = true;
+            for (int i = 0; i < 25; i++) {
+               Top.transform.Rotate(3.6f, 0, 0);
+               yield return new WaitForSeconds(.01f);
+            }
+            Audio.PlaySoundAtTransform("Close", transform);
          }
          else {
             GetComponent<KMBombModule>().HandleStrike();
@@ -174,21 +185,9 @@ public class Skewers : MonoBehaviour {
                yield return new WaitForSeconds(.01f);
             }
             Audio.PlaySoundAtTransform("Close", transform);
-            GemColors.Clear();
-            ValidSpots.Clear();
-            for (int i = 0; i < 16; i++) {
-               GemColors.Add(Random.Range(0, 8));
-               GemsGO[i].GetComponent<MeshRenderer>().material = Colors[GemColors[i]];
-               ValidSpots.Add(i);
-            }
-            Debug.LogFormat("[Skewers #{0}] The colors are:", moduleId);
-            Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[0]], ColorNamesForLog[GemColors[1]], ColorNamesForLog[GemColors[2]], ColorNamesForLog[GemColors[3]]);
-            Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[4]], ColorNamesForLog[GemColors[5]], ColorNamesForLog[GemColors[6]], ColorNamesForLog[GemColors[7]]);
-            Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[8]], ColorNamesForLog[GemColors[9]], ColorNamesForLog[GemColors[10]], ColorNamesForLog[GemColors[11]]);
-            Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[12]], ColorNamesForLog[GemColors[13]], ColorNamesForLog[GemColors[14]], ColorNamesForLog[GemColors[15]]);
-            for (int i = 0; i < 16; i++) {
-               Calculate(i, true);
-            }
+
+            Generate();
+
             yield return new WaitForSeconds(.5f);
             for (int i = 0; i < 25; i++) {
                Top.transform.Rotate(-3.6f, 0, 0);

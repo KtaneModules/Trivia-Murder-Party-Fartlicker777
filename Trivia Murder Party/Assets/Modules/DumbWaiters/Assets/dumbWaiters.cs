@@ -29,7 +29,7 @@ public class dumbWaiters : MonoBehaviour {
    private int rightCount;
    private int solution;
 
-   private static readonly string[] names = new string[24] { "TasThing", "Deaf", "Blananas2", "Fish", "Usernam3", "EpicToast", "Makebao", "KavinKul", "Crazycaleb", "Danny7007", "Fang", "Vinco", "Arceus", "Xmaster", "FredV", "Kaito", "SillyPuppy", "Edan", "Mythers", "Procyon", "eXish", "RedPenguin", "MCD573", "Mr. Peanut" };
+   private static readonly string[] names = new string[24] { "TasThing", "Deaf", "Blananas2", "Fish", "Usernam3", "EpicToast", "Makebao", "KavinKul", "Crazycaleb", "tandyCake", "Fang", "Vinco", "Arceus", "Xmaster", "FredV", "Kaito", "SillyPuppy", "Edan", "Mythers", "Procyon", "eXish", "RedPenguin", "MCD573", "Mr. Peanut" };
    private static readonly int[] parenthesesNumbers = new int[24] { 17, 24, 6, 9, 15, 7, 22, 19, 8, 11, 3, 21, 18, 20, 16, 14, 4, 13, 2, 10, 12, 1, 5, 23 };
    private static readonly int[] startsWithVowel = new int[5] { 4, 5, 12, 17, 20 };
    private static readonly int[] containsNumber = new int[3] { 4, 9, 22 };
@@ -217,7 +217,7 @@ public class dumbWaiters : MonoBehaviour {
             case "Crazycaleb":
                left = bomb.GetModuleNames().Any(x => x == "The Jewel Vault");
                break;
-            case "Danny7007":
+            case "tandyCake":
                left = presentPlayers.Any(x => x / 6 == 0 && !chosen.Contains(x));
                break;
             case "Fang":

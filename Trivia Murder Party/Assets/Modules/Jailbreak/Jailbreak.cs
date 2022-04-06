@@ -280,7 +280,7 @@ public class Jailbreak : MonoBehaviour {
 
    IEnumerator TwitchHandleForcedSolve () {
 
-      /*while (!moduleSolved) {
+      while (!moduleSolved) {
          string AutoGuessWord = "";
          int AutoGuessCorrectLetters = 0;
          AutoGuessWord = WordList.Phrases[UnityEngine.Random.Range(0, WordList.Phrases.Count())];
@@ -300,9 +300,9 @@ public class Jailbreak : MonoBehaviour {
             yield return new WaitForSecondsRealtime(.1f);
          }
          Buttons[26].OnInteract();
-      }*/
+      }
 
-      if (InputWord.Length > 0)
+      /*if (InputWord.Length > 0) Kill yourself exish
       {
          for (int i = InputWord.Length; i < 4; i++)
          {
@@ -318,6 +318,7 @@ public class Jailbreak : MonoBehaviour {
       }
       Buttons[26].OnInteract();
 
-      while (!RealSolve) yield return true;
+      while (!RealSolve) yield return true;*/
+
    }
 }
