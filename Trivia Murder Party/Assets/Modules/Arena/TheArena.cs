@@ -425,7 +425,7 @@ public class TheArena : MonoBehaviour {
          }
       }
 
-      if (nonparadoxes == 0 || maxDmg < 10) {
+      if (nonparadoxes == 0 || maxDmg < 10 || validAnswers.Count() <= 1) {
          attempts++;
          goto tryAgain;
       }
@@ -659,7 +659,7 @@ public class TheArena : MonoBehaviour {
       return ((q - 1) % 9) + 1;
    }
 
-   // <Danny's Lunar Arithmetic functions>
+   // <Claire's Lunar Arithmetic functions>
 
    int lunA (int first, int second) {
       int maxLength = Math.Max(first.ToString().Length, second.ToString().Length);
@@ -693,7 +693,7 @@ public class TheArena : MonoBehaviour {
       return adders.First();
    }
 
-   // </Danny's Lunar Arithmetic functions>
+   // </Claire's Lunar Arithmetic functions>
 
    void EventButtonPress (KMSelectable evB) {
       evB.AddInteractionPunch();
