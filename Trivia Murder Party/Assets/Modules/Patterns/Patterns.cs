@@ -16,19 +16,19 @@ public class Patterns : MonoBehaviour {
    public Sprite[] Symbols;
    public SpriteRenderer[] CardSymbols;
    public Sprite[] WhitePeopleBeLike;
-   public Material[] Colors;
+   public Material[] Colors; //KRGYBMCW
 
    int[] GridColor = {
       0, 3, 5, 1, 2, 0, 6, 7, 0, 5,
       6, 3, 6, 7, 2, 5, 7, 4, 1, 4,
       1, 1, 2, 1, 5, 7, 1, 5, 3, 0,
-      6, 1, 1, 2, 2, 3, 6, 1, 3, 7,
+      6, 1, 3, 2, 2, 3, 6, 1, 3, 7,
       5, 2, 4, 6, 3, 1, 6, 1, 2, 6,
       5, 0, 2, 4, 1, 2, 4, 7, 5, 3,
-      3, 5, 2, 4, 3, 4, 5, 0, 5, 5,
+      3, 6, 2, 4, 3, 4, 5, 0, 5, 5,
       2, 5, 6, 0, 2, 4, 5, 3, 7, 5,
-      4, 1, 5, 5, 2, 2, 1, 3, 5, 0,
-      5, 5, 7, 6, 0, 5, 6, 5, 1, 7
+      4, 1, 5, 5, 3, 2, 1, 3, 1, 0,
+      0, 5, 7, 6, 0, 5, 6, 5, 1, 7
    };
    int[] GridSymbols = {
       2, 2, 0, 0, 0, 1, 1, 0, 1, 2,
@@ -104,8 +104,35 @@ public class Patterns : MonoBehaviour {
 
    // Use this for initialization
    void Start () {
+      if (AmbiguityChecker()) {
+         GetComponent<KMBombModule>().HandlePass();
+      }
       Reset();
       //StartCoroutine(Spin());
+   }
+
+   bool AmbiguityChecker() {
+      bool check = false;
+      for (int i = 0; i < 10; i++) {
+         for (int j = 0; j < 5; j++) {
+            if (GridColor[i * 10 + j] == GridColor[i * 10 + j + 5] && GridSymbols[i * 10 + j] == GridSymbols[i * 10 + j + 5]) {
+               Debug.Log("X = " + j);
+               Debug.Log("Y = " + i);
+               Debug.Log("Horiz");
+               check = true;
+            }
+         }
+      }
+
+      for (int i = 0; i < 50; i++) {
+         if (GridColor[i] == GridColor[i + 50] && GridSymbols[i] == GridSymbols[i + 50]) {
+            Debug.Log("X = " + i % 10);
+            Debug.Log("Y = " + i / 10);
+            Debug.Log("Vert");
+            check = true;
+         }
+      }
+      return check;
    }
 
    void Reset () {
