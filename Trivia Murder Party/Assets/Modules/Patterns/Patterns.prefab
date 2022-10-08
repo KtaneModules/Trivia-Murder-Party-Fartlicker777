@@ -1674,11 +1674,12 @@ MonoBehaviour:
   Children:
   - {fileID: 114157469989983708}
   - {fileID: 114397749018072944}
+  - {fileID: 0}
   - {fileID: 114171695488826868}
   - {fileID: 114496887625660402}
   - {fileID: 114739134664184064}
   IsPassThrough: 0
-  ChildRowLength: 5
+  ChildRowLength: 3
   Highlight: {fileID: 114733147343226982}
   SelectableColliders: []
   DefaultSelectableIndex: 1
