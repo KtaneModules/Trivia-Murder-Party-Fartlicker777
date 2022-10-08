@@ -178,6 +178,9 @@ public class Rules : MonoBehaviour {
       switch (RuleIndex) {
          case 0:
             Rule0Reset:
+            for (int i = 0; i < 4; i++) {
+               Validity[i] = false;
+            }
             PossibilitiesForLetters = "";
             for (int i = 0; i < 4; i++) {
                Options[i].text = WordList[UnityEngine.Random.Range(0, WordList.Length)];
@@ -222,6 +225,9 @@ public class Rules : MonoBehaviour {
          case 1:
             Rule1Reset:
             for (int i = 0; i < 4; i++) {
+               Validity[i] = false;
+            }
+            for (int i = 0; i < 4; i++) {
                Options[i].text = WordList[UnityEngine.Random.Range(0, WordList.Length)];
             }
             if ((Options[0].text.Length == Options[1].text.Length || Options[0].text.Length == Options[2].text.Length || Options[0].text.Length == Options[3].text.Length) || (Options[1].text.Length == Options[2].text.Length || Options[1].text.Length == Options[3].text.Length) || Options[2].text.Length == Options[3].text.Length) {
@@ -248,6 +254,9 @@ public class Rules : MonoBehaviour {
          case 2:
             Rule2Reset:
             for (int i = 0; i < 4; i++) {
+               Validity[i] = false;
+            }
+            for (int i = 0; i < 4; i++) {
                Options[i].text = WordList[UnityEngine.Random.Range(0, WordList.Length)];
             }
             if ((Options[0].text.Length == Options[1].text.Length || Options[0].text.Length == Options[2].text.Length || Options[0].text.Length == Options[3].text.Length) || (Options[1].text.Length == Options[2].text.Length || Options[1].text.Length == Options[3].text.Length) || Options[2].text.Length == Options[3].text.Length) {
@@ -255,12 +264,12 @@ public class Rules : MonoBehaviour {
             }
             ShortestOrLongest = Options[0].text;
             for (int i = 1; i < 4; i++) {
-               if (ShortestOrLongest.Length > Options[i].text.Length) {
+               if (ShortestOrLongest.Length < Options[i].text.Length) {
                   ShortestOrLongest = Options[i].text;
                }
             }
             for (int i = 0; i < 4; i++) {
-               if (Options[i].text != ShortestOrLongest) {
+               if (Options[i].text == ShortestOrLongest) {
                   Validity[i] = true;
                }
             }
@@ -477,6 +486,9 @@ public class Rules : MonoBehaviour {
       if (!Activate) {
          StartNowIGuessFuckYouImTerryDavis.OnInteract();
          yield return new WaitForSecondsRealtime(.1f);
+      }
+      while (IsStunned) {
+         yield return null;
       }
       while (Counter != Threshhold) {
          for (int i = 0; i < 4; i++) {

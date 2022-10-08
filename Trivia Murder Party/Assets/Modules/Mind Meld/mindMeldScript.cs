@@ -22,6 +22,7 @@ public class mindMeldScript : MonoBehaviour {
    private static int _moduleIdCounter = 1;
    private int _moduleId;
    private bool solved;
+   private bool realSolved;
    private bool inSubmissionMode = false;
    private bool redealAnimationPlaying, strikeAnimationPlaying, solveAnimationPlaying = false;
    private bool revealed = false;
@@ -379,6 +380,7 @@ public class mindMeldScript : MonoBehaviour {
       }
       yield return new WaitForSecondsRealtime(.6f);
       Module.HandlePass();
+      realSolved = true;
       yield return new WaitForSecondsRealtime(1f);
       for (int i = 0; i < 4; i++)
          spriteTransforms[playerPositions[i]].gameObject.SetActive(false);
@@ -453,7 +455,8 @@ public class mindMeldScript : MonoBehaviour {
       while (redealAnimationPlaying) {
          yield return true;
       }
-        cardSelectables[answerCard].OnInteract();
-        yield return new WaitForSeconds(0.1f);
+      cardSelectables[answerCard].OnInteract();
+      yield return new WaitForSeconds(0.1f);
+      while (!realSolved) yield return true;
    }
 }
