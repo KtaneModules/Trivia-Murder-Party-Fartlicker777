@@ -264,12 +264,12 @@ public class Rules : MonoBehaviour {
             }
             ShortestOrLongest = Options[0].text;
             for (int i = 1; i < 4; i++) {
-               if (ShortestOrLongest.Length > Options[i].text.Length) {
+               if (ShortestOrLongest.Length < Options[i].text.Length) {
                   ShortestOrLongest = Options[i].text;
                }
             }
             for (int i = 0; i < 4; i++) {
-               if (Options[i].text != ShortestOrLongest) {
+               if (Options[i].text == ShortestOrLongest) {
                   Validity[i] = true;
                }
             }

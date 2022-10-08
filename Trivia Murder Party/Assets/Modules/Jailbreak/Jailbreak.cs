@@ -316,9 +316,9 @@ public class Jailbreak : MonoBehaviour {
          Buttons[QWERTYAlphabet.IndexOf(GoalWord[i].ToString().ToUpper())].OnInteract();
          yield return new WaitForSecondsRealtime(.1f);
       }
-      Buttons[26].OnInteract();
+      Buttons[26].OnInteract();*/
 
-      while (!RealSolve) yield return true;*/
+      while (!RealSolve) yield return true;
 
    }
 }
