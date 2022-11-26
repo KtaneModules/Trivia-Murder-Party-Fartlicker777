@@ -18,7 +18,7 @@ public class Jailbreak : MonoBehaviour {
 
    int Timer = 90;
 
-   string[] TPProtectedWords = new string[5] { "HELP", "VIEW", "SHOW", "ZOOM", "TILT" };
+   string[] TPProtectedWords = new string[] { "HELP", "VIEW", "SHOW", "ZOOM", "TILT", "KEEP", "TAKE", "MINE" };
    string GoalWord = "";
    string InputWord = "";
    string QWERTYAlphabet = "QWERTYUIOPASDFGHJKLZXCVBNM.";
@@ -79,6 +79,9 @@ public class Jailbreak : MonoBehaviour {
       }
       if (CanType || moduleSolved) {
          return;
+      }
+      if (InputWord == "FUCK") {
+         Audio.PlaySoundAtTransform("Fuck!", transform);
       }
       for (int i = 0; i < 27; i++) {
          if (!IsActive) {
