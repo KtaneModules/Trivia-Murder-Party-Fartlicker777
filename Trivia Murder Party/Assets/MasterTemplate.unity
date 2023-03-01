@@ -1147,7 +1147,7 @@ Prefab:
     - target: {fileID: 114848120511536268, guid: 8814ea52310d2614a9feda02ec355ae4,
         type: 2}
       propertyPath: TwitchPlaysActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114848120511536268, guid: 8814ea52310d2614a9feda02ec355ae4,
         type: 2}
@@ -1674,6 +1674,10 @@ Prefab:
     - target: {fileID: 4918250901796052, guid: 1ec33674e77261e4281e8d0f22f4b5de, type: 2}
       propertyPath: m_RootOrder
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390321656774284, guid: 1ec33674e77261e4281e8d0f22f4b5de, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ec33674e77261e4281e8d0f22f4b5de, type: 2}

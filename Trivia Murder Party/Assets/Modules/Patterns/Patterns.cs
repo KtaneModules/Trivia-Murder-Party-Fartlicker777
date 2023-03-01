@@ -24,7 +24,7 @@ public class Patterns : MonoBehaviour {
       1, 1, 2, 1, 5, 7, 1, 5, 3, 0,
       6, 1, 3, 2, 2, 3, 6, 1, 3, 7,
       5, 2, 4, 6, 3, 1, 6, 1, 2, 6,
-      5, 0, 2, 4, 1, 2, 4, 7, 5, 3,
+      5, 0, 2, 4, 6, 2, 4, 7, 5, 3,
       3, 6, 2, 4, 3, 4, 5, 0, 5, 5,
       2, 5, 6, 0, 2, 4, 5, 3, 7, 5,
       4, 1, 5, 5, 3, 2, 1, 3, 1, 0,
@@ -132,6 +132,42 @@ public class Patterns : MonoBehaviour {
             check = true;
          }
       }
+
+      List<string> AllColor = new List<string> { };
+      List<string> AllShape = new List<string> { };
+
+      for (int i = 0; i < 10; i++) {
+         for (int j = 0; j < 5; j++) {
+            AllColor.Add(GridColor[i * 10 + j].ToString() + GridColor[i * 10 + 1 + j].ToString() + GridColor[i * 10 + 2 + j].ToString() + GridColor[i * 10 + 3 + j].ToString() + GridColor[i * 10 + 4 + j].ToString());
+            AllShape.Add(GridSymbols[i * 10 + j].ToString() + GridSymbols[i * 10 + 1 + j].ToString() + GridSymbols[i * 10 + 2 + j].ToString() + GridSymbols[i * 10 + 3 + j].ToString() + GridSymbols[i * 10 + 4 + j].ToString());
+         }
+      }
+
+      
+
+      for (int i = 0; i < 50; i++) {
+         Debug.Log(GridColor[i]);
+         Debug.Log(int.Parse(AllColor[i / 10].ToString()));
+         if (GridColor[i] == int.Parse(AllColor[i / 10].ToString()) && GridSymbols[i] == int.Parse(AllShape[i / 10].ToString())) {
+            Debug.Log("Phase 1");
+            Debug.Log("X = " + i % 10);
+            Debug.Log("Y = " + i / 10);
+            if (GridColor[i + 10] == int.Parse(AllColor[i / 10 + 10].ToString()) && GridSymbols[i + 10] == int.Parse(AllShape[i / 10 + 10].ToString())) {
+               if (GridColor[i + 20] == int.Parse(AllColor[i / 10 + 20].ToString()) && GridSymbols[i + 20] == int.Parse(AllShape[i / 10 + 20].ToString())) {
+                  if (GridColor[i + 30] == int.Parse(AllColor[i / 10 + 30].ToString()) && GridSymbols[i + 30] == int.Parse(AllShape[i / 10 + 30].ToString())) {
+                     if (GridColor[i + 40] == int.Parse(AllColor[i / 10 + 40].ToString()) && GridSymbols[i + 40] == int.Parse(AllShape[i / 10 + 40].ToString())) { //lol
+                        Debug.Log("X = " + i % 10);
+                        Debug.Log("Y = " + i / 10);
+                        Debug.Log("Fuck");
+                        check = true;
+                     }
+                  }
+               }
+            }
+         }
+      }
+
+
       return check;
    }
 
