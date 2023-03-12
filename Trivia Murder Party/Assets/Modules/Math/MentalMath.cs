@@ -31,6 +31,7 @@ public class MentalMath : MonoBehaviour {
    int Threshold;
 
    bool Activated;
+   bool Checking;
 
    Coroutine Stunned;
    bool IsStunned;
@@ -70,7 +71,7 @@ public class MentalMath : MonoBehaviour {
    }
 
    void CrankPress () {
-      if (moduleSolved || Activated) {
+      if (moduleSolved || Activated || Checking) {
          return;
       }
       if (TwitchPlaysActive) {
@@ -180,6 +181,8 @@ public class MentalMath : MonoBehaviour {
       if (Activated) {
          Timer += Time.deltaTime;
          if ((Timer >= 30f && !TwitchPlaysActive) || (Timer >= 100f && TwitchPlaysActive)) {
+            Checking = true;
+            Activated = false;
             StopAllCoroutines();
             MobilePartOfCrank.transform.localEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
             StartCoroutine(Check());
@@ -194,13 +197,13 @@ public class MentalMath : MonoBehaviour {
       }
       OutOfText.text = QuestionsAnswered.ToString() + " out of " + Threshold.ToString();
       yield return new WaitForSeconds(5f);
-      Activated = false;
       if (QuestionsAnswered >= Threshold) {
          GetComponent<KMBombModule>().HandlePass();
          moduleSolved = true;
          Debug.LogFormat("[Mental Math #{0}] You answered {1} out of the required {2}. Module disarmed.", moduleId, QuestionsAnswered, Threshold);
       }
       else {
+         Checking = false;
          GetComponent<KMBombModule>().HandleStrike();
          Debug.LogFormat("[Mental Math #{0}] You answered {1} out of the required {2}. Strike.", moduleId, QuestionsAnswered, Threshold);
          Timer = 0f;
