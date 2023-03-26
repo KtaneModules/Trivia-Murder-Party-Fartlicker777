@@ -195,15 +195,17 @@ public class MentalMath : MonoBehaviour {
          AnswerChoiceText[i].text = "";
          Equation.text = "";
       }
+      Equation.transform.localPosition = new Vector3(-0.0148f, Equation.transform.localPosition.y, .0686f);
+      IsStunned = false;
       OutOfText.text = QuestionsAnswered.ToString() + " out of " + Threshold.ToString();
       yield return new WaitForSeconds(5f);
+      Checking = false;
       if (QuestionsAnswered >= Threshold) {
          GetComponent<KMBombModule>().HandlePass();
          moduleSolved = true;
          Debug.LogFormat("[Mental Math #{0}] You answered {1} out of the required {2}. Module disarmed.", moduleId, QuestionsAnswered, Threshold);
       }
       else {
-         Checking = false;
          GetComponent<KMBombModule>().HandleStrike();
          Debug.LogFormat("[Mental Math #{0}] You answered {1} out of the required {2}. Strike.", moduleId, QuestionsAnswered, Threshold);
          Timer = 0f;
