@@ -190,7 +190,7 @@ public class dumbWaiters : MonoBehaviour {
       for (int i = 0; i < 7; i++) {
          var left = false;
          switch (names[orderedPlayers[i]]) {
-            case "TasThing":
+            case "TasThiluna":
                left = chosen.Count() % 2 == 0;
                break;
             case "Deaf":
