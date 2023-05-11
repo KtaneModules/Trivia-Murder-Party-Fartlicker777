@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -22,6 +24,8 @@ public class Dictation : MonoBehaviour {
 
    float Fanfare;
    float DefaultTimePerWord = 0.05f;
+
+   bool HokSengLau;
 
    string QWERTYAlphabet = "QWERTYUIOPASDFGHJKLZXCVBNM<";
    private string[][] PhraseList = new string[][] {
@@ -85,6 +89,23 @@ public class Dictation : MonoBehaviour {
 
    void Start () {
       PhraseIndex = UnityEngine.Random.Range(0, PhraseList.Count());
+      if (GetMissionID() == "mod_ThiccBombs_Murder" || GetMissionID() == "mod_ThiccBombs_The Bomb of the Obra Dinn" || Application.isEditor) {
+         PhraseIndex = PhraseList.Count() - 1;
+         HokSengLau = true;
+      }
+   }
+
+   private string GetMissionID () {
+      try {
+         Component gameplayState = GameObject.Find("GameplayState(Clone)").GetComponent("GameplayState");
+         Type type = gameplayState.GetType();
+         FieldInfo fieldMission = type.GetField("MissionToLoad", BindingFlags.Public | BindingFlags.Static);
+         return fieldMission.GetValue(gameplayState).ToString();
+      }
+
+      catch (NullReferenceException) {
+         return "undefined";
+      }
    }
 
    void KeyPress (KMSelectable Key) {
@@ -118,8 +139,12 @@ public class Dictation : MonoBehaviour {
          return;
       }
       if (!IsDisplayingPhrase) {
-         StartCoroutine(DisplayPhrase());
          CurrentSubmission = "";
+         if (HokSengLau) {
+            StartCoroutine(SayHokSengLau());
+            return;
+         }
+         StartCoroutine(DisplayPhrase());
       }
    }
 
@@ -151,6 +176,33 @@ public class Dictation : MonoBehaviour {
          NumberDisplay.text = "!";
          CurrentSubmission = "";
       }
+   }
+
+   IEnumerator SayHokSengLau () {
+      float[] WaitTimes = { .5f, 1f, 3f, 2.5f, 2.5f, 2f, .5f, 1.3f, 2f, 2.9f, 1f, 1.3f, 1.3f, 1.1f, 1f, 1f, 2f, 1f, 1f, 1f, .7f, .6f, .8f, .8f, .8f, 1f};
+      string[] HokSpeech = { "Hok Seng Lau", "you have been\nfound guilty by\nself confession", "of the murder\nof Nunzio Pasqua", "No he has done\nnothing wrong", "Miss Lim it is\ntoo late", "Quiet", "", "As captain of\nthis ship", "and by the\nauthority of\nthe East India\nCompany", "and thus the", "Crown of England", "I sentence you", "to death", "by firing line", "", "Stop\nStop right now", "Mr Wolff", "When you\nare ready", "", "Right sir", "", "Ready men", "", "Aim", "", "Fire" };
+      HasBeenActivated = true;
+      TVStatusSphere.GetComponent<MeshRenderer>().material = StatusColors[1];
+      IsDisplayingPhrase = true;
+      Audio.PlaySoundAtTransform("Murder_pt2", transform);
+      for (int i = 0; i < HokSpeech.Length; i++) {
+         yield return new WaitForSeconds(WaitTimes[i]);
+         DisplayText.text = HokSpeech[i];
+      }
+      TVStatusSphere.GetComponent<MeshRenderer>().material = StatusColors[0];
+      IndexOfSubmissionWord = UnityEngine.Random.Range(0, PhraseList[PhraseIndex].Count());
+      for (int i = 0; i < PhraseList[PhraseIndex][IndexOfSubmissionWord].Length; i++) {
+         UnderscoresAwaitingSubmission += "-";
+      }
+      DisplayText.text = UnderscoresAwaitingSubmission;
+      NumberDisplay.text = (IndexOfSubmissionWord + 1).ToString();
+      IsDisplayingPhrase = false;
+      string Logmessage = "";
+      for (int i = 0; i < PhraseList[PhraseIndex].Count(); i++) {
+         Logmessage += PhraseList[PhraseIndex][i] + " ";
+      }
+      Debug.LogFormat("[Dictation #{0}] The message is \"{1}\".", moduleId, Logmessage);
+      Debug.LogFormat("[Dictation #{0}] It asks for word number {1}, which is \"{2}\".", moduleId, IndexOfSubmissionWord + 1, PhraseList[PhraseIndex][IndexOfSubmissionWord]);
    }
 
    IEnumerator DisplayPhrase () {
