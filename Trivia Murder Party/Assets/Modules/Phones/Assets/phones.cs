@@ -212,7 +212,7 @@ public class phones : MonoBehaviour {
       var standardBaseNumbers = new int[] { ports, aa, unlits, holders, lits, plates, d, indicators, batteries, month, modules, time, month, unlits, aa, batteries, holders, time, lits, modules, ports, plates, d, indicators, batteries, holders, aa, d, indicators, lits, unlits, ports, plates, time, modules, month };
       var standardModules = new string[] { "Big Circle", "Gridlock", "Black Hole", "Yellow Arrows", "Radiator", "Pathfinder", "Triamonds", "Regular Hexpressions", "Simon Shrieks", "hexOrbits", "Etterna", "1D Maze", "Scavenger Hunt", "Chinese Counting", "Binary Puzzle", "Cooking", "Laundry", "Forget This", "Bamboozling Button", "Brush Strokes", "Tennis", "The Assorted Arrangement", "Simon Screams", "Morsematics", "Bone Apple Tea", "Crazy Talk", "Round Keypad", "Widdershins", "Yahtzee", "The Cube", "Snooker", "IKEA Plushies", "Indigo Cipher", "Hold Ups", "Navinums", "Name Codes" };
 
-      var tmpModules = new string[] { "Phones", "Mirror", "Scratch-Off", "Words", "Skewers", "Rules", "Pixel Art", "Chalices", "Dumb Waiters", "Jailbreak", "Dictation", "The Arena", "Mental Math", "DEAF PUT DARKS THING HERE FAT", "Patterns" };
+      var tmpModules = new string[] { "Phones", "Mirror", "Scratch-Off", "Words", "Skewers", "Rules", "Pixel Art", "Chalices", "Dumb Waiters", "Jailbreak", "Dictation", "The Arena", "Mental Math", "Mind Meld", "Patterns" };
       var repeatNames = new string[] { "Kanye", "Gorg", "Candy", "Steyganfries", "Lord Honkingshire III" };
       var repeatBaseNumbers = new int[]
      {
