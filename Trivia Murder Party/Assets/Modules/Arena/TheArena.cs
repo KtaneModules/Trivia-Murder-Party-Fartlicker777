@@ -972,7 +972,7 @@ public class TheArena : MonoBehaviour {
                   break;
                default:
                   yield return "sendtochaterror I don't understand!";
-                  break;
+                  yield break;
             }
             switch (Command[1]) {
                case '1':
@@ -986,7 +986,7 @@ public class TheArena : MonoBehaviour {
                   break;
                default:
                   yield return "sendtochaterror I don't understand!";
-                  break;
+                  yield break;
             }
             GrbButtons[IndexOfTPButton].OnInteract();
             yield return new WaitForSecondsRealtime(.1f);
@@ -1005,7 +1005,10 @@ public class TheArena : MonoBehaviour {
                   EventButtons[2].OnInteract();
                   yield return new WaitForSecondsRealtime(.1f);
                   break;
-            }
+               default:
+                  yield return "sendtochaterror I don't understand!";
+                  yield break;
+               }
             break;
       }
    }
