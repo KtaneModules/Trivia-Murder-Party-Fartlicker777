@@ -20,6 +20,7 @@ public class Skewers : MonoBehaviour {
    public GameObject LeftSwords;
    public GameObject RightSwords;
    public KMSelectable Module;
+   public VoltageMeterReader VMR;
 
    List<int> GemColors = new List<int> { };
    List<int> ValidSpots = new List<int> { };
@@ -86,7 +87,7 @@ public class Skewers : MonoBehaviour {
       if (Animating) {
          return;
       }
-      Calculate(Bomb.GetSolvedModuleNames().Count(), false);
+      Calculate();
       PermissibleGems();
       Animating = true;
       StartCoroutine(CloseOrOpen("close"));
@@ -133,9 +134,6 @@ public class Skewers : MonoBehaviour {
       Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[8]], ColorNamesForLog[GemColors[9]], ColorNamesForLog[GemColors[10]], ColorNamesForLog[GemColors[11]]);
       Debug.LogFormat("[Skewers #{0}] {1} {2} {3} {4}", moduleId, ColorNamesForLog[GemColors[12]], ColorNamesForLog[GemColors[13]], ColorNamesForLog[GemColors[14]], ColorNamesForLog[GemColors[15]]);
       Debug.LogFormat("[Skewers #{0}] The first sword will be always be at position {1}.", moduleId, "0123456789ABCDEF"[SwordPositions[0]]);
-      for (int i = 0; i < 16; i++) {
-         Calculate(i, true);
-      }
    }
 
    IEnumerator CloseOrOpen (string type) {
@@ -225,9 +223,9 @@ public class Skewers : MonoBehaviour {
       StartCoroutine(CloseOrOpen("open"));
    }
 
-   void Calculate (int Solves, bool WillLog) {
-      int temp = Solves + Bomb.GetBatteryCount() + Bomb.GetIndicators().Count();
-      temp %= 16;
+   void Calculate () {
+      
+      int temp = ((VMR.GetVoltageMeterInt() == -1 ? 0 : VMR.GetVoltageMeterInt()) + Bomb.GetBatteryCount() + Bomb.GetIndicators().Count()) % 16;
       SwordPositions[1] = temp;
       if (SwordPositions[1] == SwordPositions[0]) {
          SwordPositions[1] = StabSpots[Modulo(Array.IndexOf(StabSpots, SwordPositions[1]) + 1, 16)];
@@ -313,9 +311,7 @@ public class Skewers : MonoBehaviour {
       while (SwordPositions[4] == SwordPositions[0] || SwordPositions[4] == SwordPositions[1] || SwordPositions[4] == SwordPositions[2] || SwordPositions[4] == SwordPositions[3]) {
          SwordPositions[4] = StabSpots[Modulo(Array.IndexOf(StabSpots, SwordPositions[4]) + 1, 16)];
       }
-      if (WillLog) {
-         Debug.LogFormat("[Skewers #{0}] At {1} solves, the swords will be at: {2}{3}{4}{5}", moduleId, Solves, "0123456789ABCDEF"[SwordPositions[1]], "0123456789ABCDEF"[SwordPositions[2]], "0123456789ABCDEF"[SwordPositions[3]], "0123456789ABCDEF"[SwordPositions[4]]);
-      }
+      Debug.LogFormat("[Skewers #{0}] The swords will be at: {2}{3}{4}{5}", moduleId, "0123456789ABCDEF"[SwordPositions[1]], "0123456789ABCDEF"[SwordPositions[2]], "0123456789ABCDEF"[SwordPositions[3]], "0123456789ABCDEF"[SwordPositions[4]]);
    }
 
    void PermissibleGems () {
@@ -453,7 +449,6 @@ public class Skewers : MonoBehaviour {
          Module.OnHighlight();
          yield return new WaitForSeconds(2.5f);
       }
-      Calculate(Bomb.GetSolvedModuleNames().Count(), false);
       PermissibleGems();
       Gems[ValidSpots[Random.Range(0, ValidSpots.Count())]].OnInteract();
       while (!moduleSolved) yield return true;
