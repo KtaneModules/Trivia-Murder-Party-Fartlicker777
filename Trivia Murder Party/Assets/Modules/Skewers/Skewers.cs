@@ -311,7 +311,7 @@ public class Skewers : MonoBehaviour {
       while (SwordPositions[4] == SwordPositions[0] || SwordPositions[4] == SwordPositions[1] || SwordPositions[4] == SwordPositions[2] || SwordPositions[4] == SwordPositions[3]) {
          SwordPositions[4] = StabSpots[Modulo(Array.IndexOf(StabSpots, SwordPositions[4]) + 1, 16)];
       }
-      Debug.LogFormat("[Skewers #{0}] The swords will be at: {2}{3}{4}{5}", moduleId, "0123456789ABCDEF"[SwordPositions[1]], "0123456789ABCDEF"[SwordPositions[2]], "0123456789ABCDEF"[SwordPositions[3]], "0123456789ABCDEF"[SwordPositions[4]]);
+      Debug.LogFormat("[Skewers #{0}] The swords will be at: {1}{2}{3}{4}", moduleId, "0123456789ABCDEF"[SwordPositions[1]], "0123456789ABCDEF"[SwordPositions[2]], "0123456789ABCDEF"[SwordPositions[3]], "0123456789ABCDEF"[SwordPositions[4]]);
    }
 
    void PermissibleGems () {
