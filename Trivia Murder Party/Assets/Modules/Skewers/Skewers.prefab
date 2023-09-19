@@ -898,6 +898,7 @@ GameObject:
   - component: {fileID: 114853960920223876}
   - component: {fileID: 114949059805340958}
   - component: {fileID: 114838612365262482}
+  - component: {fileID: 114419096030236510}
   m_Layer: 0
   m_Name: Skewers
   m_TagString: Untagged
@@ -4970,6 +4971,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderNames:
   - KT/Mobile/DiffuseTint
+--- !u!114 &114419096030236510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1676409040304040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c270f0b19f8ca9747a26df3749bb9560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bomb: {fileID: 114454383462897410}
 --- !u!114 &114435176918142752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5622,7 +5635,7 @@ MonoBehaviour:
   LeftSwords: {fileID: 1870917208895070}
   RightSwords: {fileID: 1070239102432120}
   Module: {fileID: 114949059805340958}
-  VMR: {fileID: 0}
+  VMR: {fileID: 114419096030236510}
 --- !u!114 &114853960920223876
 MonoBehaviour:
   m_ObjectHideFlags: 1
