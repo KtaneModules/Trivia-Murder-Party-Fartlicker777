@@ -946,9 +946,12 @@ public class TheArena : MonoBehaviour {
                   else {
                      DefButtons[1].OnInteract();
                   }
-                  yield return new WaitForSeconds(.1f);
+                  yield return new WaitForSecondsRealtime(.1f);
                   if (TPStrikes > Temp) {
                      yield return "sendtochaterror A strike has been detecting. Ending operation.";
+                     yield break;
+                  }
+                  if (TPModeClarifier == "") {
                      yield break;
                   }
                }
