@@ -316,7 +316,6 @@ public class PixelArt : MonoBehaviour {
          yield break;
       }
       if (Parameters[0].ToString().ToLower() == "start" || Parameters[0].ToString().ToLower() == "submit") {
-         StatusLightButton.OnInteract();
          if (Active[1]) {
             bool weed = true;
             for (int i = 0; i < 24; i++) {
@@ -326,6 +325,7 @@ public class PixelArt : MonoBehaviour {
             }
             yield return weed ? "solve" : "strike";
          }
+         StatusLightButton.OnInteract();
       }
       else if (Parameters[0].ToString().ToLower() == "toggle") {
          for (int i = 1; i < Parameters.Length; i++) {
