@@ -15,34 +15,33 @@ MonoBehaviour:
   title: Trivia Murder Party Pack
   author: Me
   description: "Modules based on the Trivia Murder Party minigames from both packs
-    one and two. This pack is incomplete, but more modules will be added eventually.\r\n\nWhile
+    one and two. This pack is incomplete, but more modules will be added eventually.\r\n\r\nWhile
     not included in this pack, and also has no relation to this modpack, for a full
     experience I would highly recommend the TMP Gameplay room at https://steamcommunity.com/sharedfiles/filedetails/?id=2409797804
-    made by TheDarkSid3r.\n\r\nThe modules included (In chronological order of me
-    adding them):\r\n\r\nMental Math (Math):\r\nSolve simple math equations consecutively.
-    The amount you need to answer is based on your progress in the bomb.\r\n\r\nThe
-    Arena (Rock-Paper-Scissors, implementation by Blananas2):\r\nDetermine the order
-    of the attack/defend/grab minigames and complete all of them perfectly.\r\n\r\nDictation:\r\nWrite
-    down the phrase as it's being read out. Submit a specific word once the phrase
-    is done.\r\n\r\nJailbreak (Password):\r\nGuess the four letter password in 90
-    seconds, invalid words will not give you any hints.\r\n\r\nDumb Waiters (Implemented
-    by TasThing):\r\nChoose which elevator you should bunker in, and try to live based
-    on who chose what.\r\n\r\nChalices:\r\nFollow a flow chart to determine which
-    chalice you should drink from.\r\n\r\nPixel Art (Memory):\r\nRecreate the pattern
-    shown exactly when it was shown for 7 seconds.\r\n\r\nRules:\r\nFollow the rules
-    shown correctly, the amount you need to follow corresponds to how much time is
-    left on the bomb.\r\n\r\nSkewers:\r\nDetermine the position of five skewers based
-    on the colors of gems shown and find a safe spot to hide in. \rManual by Vincology.\n\r\nWords:\nCreate
-    valid words from a grid of letters. Longer words score more points.\n\nScratch-Off
-    (Implemented by tandyCake):\nPermute dollar signs on a scratch off ticket, potentially
-    gambling more money to do fewer stages.\n\nMind Meld (Implemented by EpicToast):\nCorrectly
+    made by TheDarkSid3r.\r\n\r\nThe modules included (In chronological order):\r\n\r\nMental
+    Math (Math):\r\nSolve simple math equations consecutively. The amount you need
+    to answer is based on your progress in the bomb.\r\n\r\nThe Arena (Rock-Paper-Scissors,
+    implementation by Blananas2):\r\nDetermine the order of the attack/defend/grab
+    minigames and complete all of them perfectly.\r\n\r\nDictation:\r\nWrite down
+    the phrase as it's being read out. Submit a specific word once the phrase is done.\r\n\r\nJailbreak
+    (Password):\r\nGuess the four letter password in 90 seconds, invalid words will
+    not give you any hints.\r\n\r\nDumb Waiters (Implemented by TasThiluna):\r\nChoose
+    which elevator you should bunker in, and try to live based on who chose what.\r\n\r\nChalices:\r\nFollow
+    a flow chart to determine which chalice you should drink from.\r\n\r\nPixel Art
+    (Memory):\r\nRecreate the pattern shown exactly when it was shown for 7 seconds.\r\n\r\nRules:\r\nFollow
+    the rules shown correctly, the amount you need to follow corresponds to how much
+    time is left on the bomb.\r\n\r\nSkewers:\r\nDetermine the position of five skewers
+    based on the colors of gems shown and find a safe spot to hide in. Manual by Vincology.\r\n\r\nWords:\r\nCreate
+    valid words from a grid of letters. Longer words score more points.\r\n\r\nScratch-Off
+    (Implemented by tandyCake):\r\nPermute dollar signs on a scratch off ticket, potentially
+    gambling more money to do fewer stages.\r\n\r\nMind Meld (Implemented by EpicToast):\r\nCorrectly
     choose from a category that no other player chose, with decisions being determined
-    by Zener cards.\n\nMirror (Implemented by Tasthing):\nIdentify the correct ghost's
-    handwriting and submit a word depending on the original word.\n\nPhones (Implemented
-    by TasThing):\nDial a number that no one else has dialed.\n\nPatterns:\nFind a
-    sequence of cards in a grid of cards and press them in the correct order.\n\nManuals
+    by Zener cards.\r\n\r\nMirror (Implemented by TasThiluna):\r\nIdentify the correct
+    ghost's handwriting and submit a word depending on the original word.\r\n\r\nPhones
+    (Implemented by TasThiluna):\r\nDial a number that no one else has dialed.\r\n\r\nPatterns:\r\nFind
+    a sequence of cards in a grid of cards and press them in the correct order.\r\n\r\nManuals
     can be found at https://ktane.timwi.de/ or in the manuals folder of your game.\r\n\r\nIf
-    there are any bugs, contact Fartlicker777#9169 on Discord."
+    there are any bugs, contact blananas2 on Discord."
   version: 
   outputFolder: build
   previewImage: {fileID: 2800000, guid: bbaa999b7fe7ab54690ec6c1a5df6941, type: 3}
